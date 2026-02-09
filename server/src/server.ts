@@ -15,8 +15,6 @@ if (!MONGODB_URI) {
 }
 
 await connectToDatabase(MONGODB_URI)
-    // await connectToDatabase(`${MONGODB_URI}`)
-
     .then(() => {
         const app = express();
         app.use(cors());
