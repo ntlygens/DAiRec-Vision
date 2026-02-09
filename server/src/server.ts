@@ -24,7 +24,6 @@ await connectToDatabase(MONGODB_URI)
         app.use("/userInterface", uiRouter);
         app.use("/srvcscrnInterface", ssiRouter);
         // app.use("/userInterface", uiRouter);
-        // app.use("/employees", employeeRouter);
 
         app.listen(5200, () => {
             console.log("Server is running on port 5200");
