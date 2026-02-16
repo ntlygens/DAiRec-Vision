@@ -15,7 +15,7 @@ export interface ServiceScreenInterface {
   _id?: mongodb.ObjectId;
   name?: string;
   title?: string;
-  subTitle?: string;
+  subtitle?: string;
   desc?: string;    
   content?: Blob;
   img?: string;

@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePg } from './home-pg';
+import { DRVRouteInterface } from '../../models/ui-x';
 
-export const routes: Routes = [
+export const routes: DRVRouteInterface[] = [
   {
     path: '',
     component: HomePg,

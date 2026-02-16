@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { NgMatModule } from '../../ng-mat/ng-mat.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LandingPg } from './landing-pg';
+import { CoreCompsModule } from "../../core-comps/core-comps-module";
 
 
 
@@ -18,9 +19,9 @@ import { LandingPg } from './landing-pg';
     RouterModule,
     NgMatModule,
     FormsModule,
-    ReactiveFormsModule
-    
-  ],
+    ReactiveFormsModule,
+    CoreCompsModule
+],
   exports: [  ]
 })
 export class LandingModule { }

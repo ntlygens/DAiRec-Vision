@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing-module';
 import { RouterModule } from '@angular/router';
 import { NgMatModule } from '../../ng-mat/ng-mat.module';
+import { CoreCompsModule } from '../../core-comps/core-comps-module';
 import { HomePg } from './home-pg';
 
 
@@ -16,6 +17,7 @@ import { HomePg } from './home-pg';
     HomeRoutingModule,
     RouterModule,
     NgMatModule,
+    CoreCompsModule
   ]
 })
 export class HomeModule { }
