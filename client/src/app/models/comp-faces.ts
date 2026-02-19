@@ -11,6 +11,12 @@ export enum Orientation {
     SQUARE = 'square' as any,
 }
 
+export enum CompSize {
+    SMALL = 'small' as any,
+    MEDIUM = 'medium' as any,
+    LARGE = 'large' as any,
+}
+
 export enum CompType {
     ARTICLE = 'article' as any,
     PRODUCT = 'product' as any,
@@ -33,6 +39,7 @@ export interface CardItem {
   orientation?: Orientation;
   metadata?: any;
   compType?: CompType;
+  compSize?: CompSize;
 }
 
 export interface GridItem {

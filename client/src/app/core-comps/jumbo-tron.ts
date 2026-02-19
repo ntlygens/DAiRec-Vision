@@ -23,6 +23,7 @@ export interface JumbotronDataModel {
   buttons?: JumbotronButton[];
   theme?: 'primary' | 'accent' | 'warn' | 'light' | 'dark';
   imagePosition?: 'left' | 'right' | 'top' | 'bottom' | 'background';
+  compSize?: 'small' | 'medium' | 'large';
   compType?: CompType | string;
   backgroundColor?: string;
   height?: string;
@@ -71,6 +72,9 @@ export class JumbotronActionsComponent {}
       [class.isFeature]="data.compType === 'feature'"
       [class.isTestimonial]="data.compType === 'testimonial'"
       [class.isBanner]="data.compType === 'banner'"
+      [class.isSmall]="data.compSize === 'small'"
+      [class.isMedium]="data.compSize === 'medium'"
+      [class.isLarge]="data.compSize === 'large'"
       [class.theme-primary]="data.theme === 'primary'"
       [class.theme-accent]="data.theme === 'accent'"
       [class.theme-warn]="data.theme === 'warn'"
@@ -80,7 +84,7 @@ export class JumbotronActionsComponent {}
       [class.layout-right]="data.imagePosition === 'right'"
       [class.layout-top]="data.imagePosition === 'top'"
       [class.layout-bottom]="data.imagePosition === 'bottom'"
-      [style.height]="data.height || 'auto'"
+      [style.height]="data.compSize || 'auto'"
       [style.background-color]="data.imagePosition === 'background' ? data.backgroundColor : null"
       [style.background-image]="data.imagePosition === 'background' ? 'url(' + data.imageUrl + ')' : null">
 
@@ -174,6 +178,16 @@ export class JumbotronActionsComponent {}
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       transition: all 0.3s ease;
+      
+      &.isSmall {
+        min-height: 200px;
+      }
+      &.isMedium {
+        min-height: 450px;
+      }
+      &.isLarge {
+        min-height: 600px;
+      }
     }
 
     .jumbotron-container:hover {
@@ -193,8 +207,7 @@ export class JumbotronActionsComponent {}
       background-attachment: unset;
     }
     .jumbotron-container.isFeature {
-      min-height: 500px;
-      background-attachment: fixed;
+      background-attachment: cover;
       button {
         color: white;
         background: rgba(250, 250, 250, 0.25);
@@ -205,7 +218,12 @@ export class JumbotronActionsComponent {}
       background-attachment: unset;
     }
     .jumbotron-container.isBanner {
-      background-attachment: unset;
+      background-attachment: fixed;
+      button {
+        color: white;
+        background: rgba(250, 250, 250, 0.25);
+
+      }
     }
 
     .background-overlay {

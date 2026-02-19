@@ -2,7 +2,7 @@
 import { Component, Input, ContentChild } from '@angular/core';
 import { CardItem } from '../models/comp-faces';
 import { ServiceScreenInterface } from '../models/ui-x';
-import { CompType } from '../models/comp-faces';
+import { CompType, CompSize } from '../models/comp-faces';
 
 // Data model for card
 export interface CardData {
@@ -14,6 +14,10 @@ export interface CardData {
   imageAlt?: string;
   backgroundColor?: string;
   borderColor?: string;
+  compType?: string;
+  compSize?: string;
+  clickable?: boolean;
+  elevated?: boolean;
   metadata?: any;
 }
 
@@ -86,15 +90,19 @@ export class CardActionsComponent {}
       [class.isFeature]="cardData?.compType === CompType.FEATURE || srvcData?.compType === CompType.FEATURE || compType === 'feature'"
       [class.isTestimonial]="cardData?.compType === CompType.TESTIMONIAL || srvcData?.compType === CompType.TESTIMONIAL || compType === 'testimonial'"
       [class.isBanner]="cardData?.compType === CompType.BANNER || srvcData?.compType === CompType.BANNER || compType === 'banner'"
+      [class.isSmall]="cardData?.compSize === CompSize.SMALL || srvcData?.compSize === CompSize.SMALL || compSize === 'small'"
+      [class.isMedium]="cardData?.compSize === CompSize.MEDIUM || srvcData?.compSize === CompSize.MEDIUM || compSize === 'medium'"
+      [class.isLarge]="cardData?.compSize === CompSize.LARGE || srvcData?.compSize === CompSize.LARGE || compSize === 'large'"
+
       [style.background]="backgroundColor"
       [style.border-color]="borderColor"
       matRipple
       [matRippleDisabled]="clickable">
     
       <!-- Image Section -->
-      @if (cardData?.imageUrl || srvcData?.img) {
+      @if (cardData?.imageUrl || srvcData?.img || imageUrl) {
         <div class="card-image">
-          <img mat-card-image [src]="cardData?.imageUrl || srvcData?.img" [alt]="cardData?.title || srvcData?.title || 'Card image'" />
+          <img mat-card-image [src]="cardData?.imageUrl || srvcData?.img || imageUrl" [alt]="cardData?.title || srvcData?.title || imageAlt" />
           @if (imageOverlay) {
             <div class="image-overlay">
               <ng-content select="drv-card-header"></ng-content>
@@ -112,21 +120,20 @@ export class CardActionsComponent {}
 
       <!-- Content Section -->      
       <mat-card-content>
-    
         <div class="card-body">
-          @if ((cardData?.title || cardData?.subtitle) || (srvcData?.title || srvcData?.subtitle)) {
+          @if ((cardData?.title || cardData?.subtitle) || (srvcData?.title || srvcData?.subtitle || title || subtitle)) {
             <div class="card-title">
-              <h3>{{ cardData?.title || srvcData?.title }}</h3>
-              @if (cardData?.subtitle || srvcData?.subtitle) {
-                <span class="card-subtitle">{{ cardData?.subtitle || srvcData?.subtitle }}</span>
+              <h3>{{ cardData?.title || srvcData?.title || title}}</h3>
+              @if (cardData?.subtitle || srvcData?.subtitle || subtitle) {
+                <span class="card-subtitle">{{ cardData?.subtitle || srvcData?.subtitle || subtitle}}</span>
               }
             </div>
           }
       
           <div class="card-content">
             <ng-content select="drv-card-content"></ng-content>
-            @if (cardData?.content || srvcData?.content) {
-              <p>{{ cardData?.content || srvcData?.content }}</p>
+            @if (cardData?.content || srvcData?.content || content) {
+              <p>{{ cardData?.content || srvcData?.content || content }}</p>
             }
           </div>
         </div>
@@ -152,6 +159,7 @@ export class CardActionsComponent {}
       display: block;
       height: 100%;
       width: 100%;
+
     }
 
     .custom-card {
@@ -170,13 +178,22 @@ export class CardActionsComponent {}
         0 1px 3px rgba(100, 150, 200, 0.08),
         0 1px 2px rgba(100, 150, 200, 0.06);
       cursor: pointer;
+
+      &.isSmall {
+        height: 250px;
+      }
+      &.isMedium {
+        height: 450px;
+      }
+      &.isLarge {
+        height: 600px;
+      }
+      
     }
 
     .custom-card.isArticle {
       background: linear-gradient(135deg, #fefefe 0%, #e0e0e0 100%);
       // background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-      height: 400px;
-
     }
     
     .custom-card.isProduct {
@@ -194,8 +211,8 @@ export class CardActionsComponent {}
     .custom-card.isBanner {
       background: linear-gradient(135deg, #ede7f6 0%, #d1c4e9 100%);
     }
-
-
+    
+    // *********************************** // 
 
     .custom-card.elevated {
       box-shadow: 
@@ -375,6 +392,7 @@ export class CardActionsComponent {}
 })
 export class CustomCardComponent {
   CompType = CompType;
+  CompSize = CompSize;
 
   @Input() cardData?: CardItem | null = null;
   @Input() srvcData?: ServiceScreenInterface | null = null;
@@ -387,6 +405,7 @@ export class CustomCardComponent {
   @Input() imageAlt?: string;
   @Input() imageOverlay = false;
   @Input() compType?: string;
+  @Input() compSize?: string;
   @Input() clickable = false;
   @Input() elevated = false;
   @Input() backgroundColor?: string;

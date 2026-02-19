@@ -1,7 +1,7 @@
 import { Component, OnInit, WritableSignal } from '@angular/core';
 import { GuiDataService } from '../../services/gui-data-service';
 import { Router } from '@angular/router';
-import { UserInterface, ServiceScreenInterface } from '../../models/ui-x';
+import { ServiceScreenInterface, CompSize } from '../../models/ui-x';
 import { CardItem } from '../../models/comp-faces';
 
 @Component({
@@ -30,7 +30,8 @@ import { CardItem } from '../../models/comp-faces';
                 imageAlt: 'Service Display Illustration',
                 backgroundColor: '#f0f0f0',
                 imagePosition: 'background',
-                compType: 'feature',
+                compSize: 'medium',
+                compType: 'banner',
                 buttons: [
                     { label: 'Get Started', action: 'start', icon: 'rocket_launch', style: 'raised', color: 'primary' },
                     { label: 'Learn More', action: 'learn', icon: 'info', style: 'stroked', color: 'accent' }
@@ -41,18 +42,44 @@ import { CardItem } from '../../models/comp-faces';
         
         />
       </div>
+      <div class=promoBanner>
+        <drv-custom-card
+            title="Special Promotion"
+            subtitle="Limited Time Offer"
+            content="Get 20% off on all our services! Use code PROMO20 at checkout. Don't miss out on this exclusive deal to elevate your experience with us."
+            imageAlt="Promotion Banner"
+            compSize="small"
+            compType="banner">
+        </drv-custom-card>
+      </div>
       <div class="whyUsData">
         @for (dsply of srvcDsplys$; track dsply._id; let idx = $index, e = $even, last = $last, first = $first) {
-            @if ( idx === 1 || idx === 0 ) {
+            @if ( idx < 2 ) {
                 <drv-custom-card
                     [id]="dsply._id"
                     class="article-card"
                     [elevated]= false
                     [compType]="dsply.compType?.toString() || 'article'"
+                    compSize="medium"
                     [srvcData]= dsply>
                 </drv-custom-card>
             }
-
+        }
+      </div>
+      <div class="testimonialsData">
+        @for (i of generateArray(8); track i; let idx = $index, e = $even, last = $last, first = $first) {
+            @if (i < virtualLimit) {
+                <drv-custom-card
+                    class="testimonial-card"
+                    title="title.idx"
+                    subtitle="subtitle.idx"
+                    content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                    [elevated]= false
+                    [isPlaceholder]="false"
+                    compSize="small"
+                    [compType]="'testimonial'">
+                </drv-custom-card>
+            }
         }
       </div>
       <button id="button" (click)="goHome('home')" mat-button>Go to Home</button>
@@ -65,6 +92,10 @@ import { CardItem } from '../../models/comp-faces';
         flex-direction: column;
         justify-content:  space-between;
         text-align: center;
+        h1:first-child {
+            margin: 0 0 10px;
+            text-align: left;
+        }
     }
     div {
         margin: 0 0 20px;
@@ -88,18 +119,37 @@ import { CardItem } from '../../models/comp-faces';
         display: unset;
     }
 
+    .promoBanner {
+        display: flex;
+        justify-content: center;
+        .promo-banner {
+            width: 100%;
+        }
+    }
+
     // .whyUsData windows for about and service display
     .whyUsData {
         display: flex;
         justify-content: space-between;
         .article-card:first-child {
             // background-color: green;
+            text-align: left;
             flex: 2;
         }
         .article-card:not(:first-child) {
             // background-color: orange;
             margin-left: 10px;
+            text-align: right;
             flex: 1;
+        }
+    }
+    .testimonialsData {
+        display: flex;
+        justify-content: space-between;
+        .testimonial-card:not(:first-child) {
+            // width: 23%;
+            margin-left: 10px;
+            // flex: 1;
         }
     }
     
@@ -107,6 +157,7 @@ import { CardItem } from '../../models/comp-faces';
   `],
 })
 export class LandingPg implements OnInit {
+    virtualLimit = 4;
     call2ActionBtns$ = {} as WritableSignal<CardItem[]>
     srvcDataDsplys$ = {} as WritableSignal<ServiceScreenInterface[]>
     // slctdSrvcCards$ = {} as WritableSignal<ServiceScreenInterface[]>;
@@ -126,6 +177,10 @@ export class LandingPg implements OnInit {
     ngOnInit(): void {
         // this.getCall2ActionData();
         this.getAllSrvcScrnData();
+    }
+
+    generateArray(n: number): number[] {
+        return [...Array(n).keys()];
     }
 
     goHome(data?: any) {

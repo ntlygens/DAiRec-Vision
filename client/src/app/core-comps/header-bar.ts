@@ -17,6 +17,8 @@ import { Component, signal } from '@angular/core';
         imageAlt: 'AI Vision Illustration',
         backgroundColor: '#d1eeff',
         imagePosition: 'background',
+        compSize: 'small',
+        compType: 'feature',
         overlay: true,
       }"
       (buttonClick)="handleJumbotronButtonClick($event)"

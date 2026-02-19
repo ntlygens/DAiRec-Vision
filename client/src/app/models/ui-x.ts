@@ -13,6 +13,12 @@ export enum CompType {
     BANNER = 'banner' as any,
 }
 
+export enum CompSize {
+    SMALL = 'small' as any,
+    MEDIUM = 'medium' as any,
+    LARGE = 'large' as any,
+}
+
 export interface UserInterface {
     _id?: string;
     name: string;
@@ -33,6 +39,7 @@ export interface ServiceScreenInterface {
   rte?: string;
   num?: number;
   compType?: CompType;
+  compSize?: CompSize;
 
 }
 
