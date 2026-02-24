@@ -1,4 +1,5 @@
 import { Component, OnInit, WritableSignal } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { GuiDataService } from '../../services/gui-data-service';
 import { Router } from '@angular/router';
 import { ServiceScreenInterface, CompSize } from '../../models/ui-x';
@@ -14,33 +15,41 @@ import { CardItem } from '../../models/comp-faces';
             <drv-custom-card
                 [id]="c2a_btn._id"
                 class="c2a_btn"
-                (click)="goHome('home')"
+                (click)="showDisjointedData('data' + idx)"
                 [elevated]= false
                 [cardData]= c2a_btn>
             </drv-custom-card>
         }
       </div>
       <div class="srvcDataDsply">
-        <drv-jumbotron-component
-            [data]="{
-                title: 'My Title here',
-                subtitle: 'Article Sub-Title here',
-                description: 'Discover the various services we offer to help you achieve your goals. From AI-driven insights to personalized recommendations, our services are designed to empower you with the tools and knowledge you need to succeed.',
-                imageUrl: '/assets/backgrounds/collage-image-1.jpg',
-                imageAlt: 'Service Display Illustration',
-                backgroundColor: '#f0f0f0',
-                imagePosition: 'background',
-                compSize: 'medium',
-                compType: 'banner',
-                buttons: [
-                    { label: 'Get Started', action: 'start', icon: 'rocket_launch', style: 'raised', color: 'primary' },
-                    { label: 'Learn More', action: 'learn', icon: 'info', style: 'stroked', color: 'accent' }
+        @for (dsjntData of srvcDsplys$; track dsjntData._id; let idx = $index, e = $even, last = $last, first = $first) {
+            @if (idx < 5) {
+                @if (data2bDsplyd$ === 'data' + idx) {
+                    <drv-jumbotron-component
+                        [data]="{
+                            title: dsjntData.title,
+                            subtitle: dsjntData.subtitle,
+                            description: dsjntData.desc,
+                            content: dsjntData.content || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                            imageUrl: dsjntData.img || '/assets/backgrounds/collage-image-1.jpg',
+                            imageAlt: dsjntData.name || 'Service Display Illustration',
+                            backgroundColor: '#424040',
+                            imagePosition: 'background',
+                            compSize: 'medium',
+                            compType: 'banner',
+                            buttons: [
+                                { label: 'Get Started', action: 'start', icon: 'rocket_launch', style: 'raised', color: 'primary' },
+                                { label: 'Learn More', action: 'learn', icon: 'info', style: 'stroked', color: 'accent' }
+                                
+                            ],
+                            overlay: true,
+                        }"
                     
-                ],
-                overlay: true,
-            }"
-        
-        />
+                    />
+                }
+                
+            }
+        }
       </div>
       <div class=promoBanner>
         <drv-custom-card
@@ -81,6 +90,16 @@ import { CardItem } from '../../models/comp-faces';
                 </drv-custom-card>
             }
         }
+      </div>
+      <div class=promoBanner>
+        <drv-custom-card
+            title="Special Promotion"
+            subtitle="Limited Time Offer"
+            content="Get 20% off on all our services! Use code PROMO20 at checkout. Don't miss out on this exclusive deal to elevate your experience with us."
+            imageAlt="Promotion Banner"
+            compSize="medium"
+            compType="banner">
+        </drv-custom-card>
       </div>
       <button id="button" (click)="goHome('home')" mat-button>Go to Home</button>
   `,
@@ -157,6 +176,9 @@ import { CardItem } from '../../models/comp-faces';
   `],
 })
 export class LandingPg implements OnInit {
+    private subscription: Subscription = new Subscription();
+    // data2bDsplyd$ = {} as WritableSignal<string | null>;
+    data2bDsplyd$: string | null = null;
     virtualLimit = 4;
     call2ActionBtns$ = {} as WritableSignal<CardItem[]>
     srvcDataDsplys$ = {} as WritableSignal<ServiceScreenInterface[]>
@@ -175,7 +197,13 @@ export class LandingPg implements OnInit {
 
 
     ngOnInit(): void {
-        // this.getCall2ActionData();
+        this.subscription = this.uis.currentDisjointedData$.subscribe(data => {
+           data = data ? data : 'data0'; // Default to 'data0' if null
+           this.data2bDsplyd$ = data;
+       
+           console.log('Received disjointed data in LandingPg:', data);
+        });
+
         this.getAllSrvcScrnData();
     }
 
@@ -187,6 +215,11 @@ export class LandingPg implements OnInit {
         // Navigate to the home page
         // window.location.href = 'home';
         this.router.navigate([`${data}`]);
+    }
+
+    showDisjointedData(dataName: string) {
+        console.log('Button clicked, showing disjointed data:', dataName);
+        this.uis.updateDisjointedData(dataName);
     }
     
     private getAllSrvcScrnData() {
@@ -201,5 +234,6 @@ export class LandingPg implements OnInit {
 
         // this.sntzeBackgroundImgs(this.srvcScrnInterface$());
     } 
+    
 
 }

@@ -1,4 +1,5 @@
 import { Injectable, signal } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { UserInterface, ServiceScreenInterface } from '../models/ui-x';
 
@@ -7,6 +8,18 @@ import { UserInterface, ServiceScreenInterface } from '../models/ui-x';
 })
 export class GuiDataService {
   private apiUrl = 'http://localhost:5200';
+  private disjointedData$ = new BehaviorSubject<string | null>(null);
+
+  // Observable for disjointed data
+  public currentDisjointedData$: Observable<string | null> = this.disjointedData$.asObservable();
+  
+  // Method to update disjointed data
+  updateDisjointedData(newData: string | null) {
+    this.disjointedData$.next(newData);
+
+  }
+
+
   allUserData$ = signal<UserInterface[]>([]);
   allSrvcScrnData$ = signal<ServiceScreenInterface[]>([]);
   uiData$ = signal<UserInterface>({} as UserInterface);

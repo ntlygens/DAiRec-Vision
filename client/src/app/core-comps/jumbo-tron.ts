@@ -25,6 +25,7 @@ export interface JumbotronDataModel {
   imagePosition?: 'left' | 'right' | 'top' | 'bottom' | 'background';
   compSize?: 'small' | 'medium' | 'large';
   compType?: CompType | string;
+  content?: Blob | string;
   backgroundColor?: string;
   height?: string;
   margin?: string;
