@@ -9,9 +9,6 @@ import { CardItem } from '../../models/comp-faces';
   selector: 'dvz-home-pg',
   standalone: false,
   template: `
-    <p>
-      home-pg works!
-    </p>
     <div class="call2action-cards">
         @for (c2a_btn of c2a_btns$; track c2a_btn._id; let idx = $index, e = $even) {
             <drv-custom-card
@@ -193,15 +190,16 @@ export class HomePg implements OnInit {
       private router: Router,
       private uis: GuiDataService
     ) { 
+      this.getAllSrvcScrnData();
+      this.getDisjointedData();
     }
 
     ngOnInit() {
-      this.subscription = this.uis.currentDisjointedData$.subscribe(data => {
-        data = data ? data : 'data0'; // Default to 'data0' if null
-        this.data2bDsplyd$ = data;
-      });
+    //   this.subscription = this.uis.currentDisjointedData$.subscribe(data => {
+    //     data = data ? data : 'data0'; // Default to 'data0' if null
+    //     this.data2bDsplyd$ = data;
+    //   });
 
-      this.getAllSrvcScrnData();
         // this.uis.getAllSrvcScrnData().subscribe(data => {
         //     this.srvcDataDsplys$.set(data);
         //     this.srvcDsplys$ = data;
@@ -210,6 +208,13 @@ export class HomePg implements OnInit {
         //     this.call2ActionBtns$.set(data);
         //     this.c2a_btns$ = data;
         // });
+    }
+
+    getDisjointedData() {
+        this.subscription = this.uis.currentDisjointedData$.subscribe(data => {
+        data = data ? data : 'data0'; // Default to 'data0' if null
+        this.data2bDsplyd$ = data;
+      });
     }
 
     showDisjointedData(dataId: string) {

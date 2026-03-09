@@ -7,6 +7,9 @@ export const routes: DRVRouteInterface[] = [
   {
     path: '',
     component: HomePg,
+    data: {
+      breadcrumb: 'Home'
+    }
     // loadChildren: () => import('../home/home-module')
     //   .then(m => m.HomeModule)
 

@@ -7,6 +7,9 @@ export const routes: DRVRouteInterface[] = [
   {
     path: '',
     component: LandingPg,
+    data: {
+      breadcrumb: 'Landing'
+    }
     
   }
 ];

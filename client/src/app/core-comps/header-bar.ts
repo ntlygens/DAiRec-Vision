@@ -1,4 +1,13 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, OnInit } from '@angular/core';
+import { BreadcrumbService } from '../services/breadcrumb.service';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/internal/operators/filter';
+import { last } from 'rxjs';
+
+interface Breadcrumb {
+  label: string;
+  url: string;
+}
 
 @Component({
   selector: 'drv-header-bar',
@@ -38,9 +47,52 @@ import { Component, signal } from '@angular/core';
 
   `],
 })
-export class HeaderBar {
+export class HeaderBar implements OnInit{
+  
   protected readonly title = signal('DAiRec-Vision Client');
-  protected readonly imageUrl = signal('/assets/backgrounds/collage-image-1.jpg');
+  protected readonly imageUrl = signal('');
+  protected brdCrumb: Breadcrumb[] = [];
+  protected brdCrumbLabel: string = '';
+
+  constructor(
+    private bCrumbSrvc: BreadcrumbService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+  
+  ){}
+
+  ngOnInit(): void {
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.brdCrumb = this.bCrumbSrvc.createBreadcrumbs(this.activatedRoute.root);
+        this.brdCrumbLabel = this.brdCrumb[0].url || '';
+        this.setPgBnrImg();
+        console.log('Updated Breadcrumbs hdr:', this.brdCrumbLabel);
+    });
+  }
+
+  setPgBnrImg() {
+    switch (this.brdCrumbLabel) {
+      case '':
+        this.imageUrl.set('/assets/backgrounds/landing-Bnr.png');
+        break;
+      case '/home':
+        this.imageUrl.set('/assets/backgrounds/home-Bnr.png');
+        break;
+      case '/protect':
+        this.imageUrl.set('/assets/backgrounds/install-Bnr.png');
+        break;
+      case '/surveil':
+        this.imageUrl.set('/assets/backgrounds/surveil-Bnr.png');
+        break;
+      case '/access':
+        this.imageUrl.set('/assets/backgrounds/access-Bnr.png');
+        break;
+      default:
+        this.imageUrl.set('/assets/backgrounds/home-Bnr.png');
+    }
+  }
 
   handleJumbotronButtonClick(event: any) {
     console.log('Jumbotron button clicked:', event);

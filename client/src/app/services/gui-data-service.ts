@@ -25,7 +25,10 @@ export class GuiDataService {
   uiData$ = signal<UserInterface>({} as UserInterface);
   ssiData$ = signal<ServiceScreenInterface>({} as ServiceScreenInterface);
   
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.getAllUserData();
+    this.getAllSrvcScrnData();
+  }
 
   private refreshAllUserData() {
     this.http.get<UserInterface[]>(`${this.apiUrl}/userInterface`)

@@ -5,6 +5,16 @@ export enum UiXpType {
     SERVICES = 'services' as any,
 
 }
+
+export enum PgLocs {
+    LANDING = 'landing' as any,
+    HOME = 'home' as any,
+    PROTECT = 'protect' as any,
+    SURVEIL = 'surveil' as any,
+    ACCESS = 'access' as any,
+    CONTACT = 'contact' as any,
+}
+
 export enum CompType {
     ARTICLE = 'article' as any,
     PRODUCT = 'product' as any,
@@ -25,7 +35,7 @@ export interface UserInterface {
     img: string;
     desc?: string;
     content?: string;
-    pgLoc: "Landing" | "Home" | "About" | "Services"
+    pgLoc?: PgLocs | string;
 }
 
 export interface ServiceScreenInterface {
@@ -40,6 +50,7 @@ export interface ServiceScreenInterface {
   num?: number;
   compType?: CompType;
   compSize?: CompSize;
+  pgLoc?: PgLocs | string
 
 }
 
@@ -60,4 +71,5 @@ export interface DRVRouteInterface {
     outlets?: any;
     outlet?: string;
     formType?: UiXpType;
+    pgLoc?: PgLocs | string;
 }

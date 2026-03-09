@@ -17,6 +17,7 @@ export enum CompType {
 export interface JumbotronDataModel {
   title?: string;
   subtitle?: string;
+  pgLoc?: 'landing' | 'home' | 'protect' | 'surveil' | 'access' | 'contact' | string;
   description?: string;
   imageUrl?: string;
   imageAlt?: string;
@@ -181,7 +182,7 @@ export class JumbotronActionsComponent {}
       transition: all 0.3s ease;
       
       &.isSmall {
-        min-height: 200px;
+        min-height: 350px;
       }
       &.isMedium {
         min-height: 450px;
@@ -209,6 +210,7 @@ export class JumbotronActionsComponent {}
     }
     .jumbotron-container.isFeature {
       background-attachment: cover;
+      background-position: 50% 75%;
       button {
         color: white;
         background: rgba(250, 250, 250, 0.25);

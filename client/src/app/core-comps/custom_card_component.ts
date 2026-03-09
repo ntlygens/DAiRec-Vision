@@ -251,21 +251,6 @@ export class CardActionsComponent {}
       background-size: 20px 20px;
       cursor: default;
     }
-    /* from dynamic card below */
-    // .dynamic-card {
-    //   height: 100%;
-    //   display: flex;
-    //   flex-direction: column;
-    //   overflow: hidden;
-    //   transition: transform 0.3s ease, box-shadow 0.3s ease;
-    //   cursor: pointer;
-    // }
-
-
-    // .custom-card:hover:not(.placeholder) {
-    //   transform: translateY(-4px);
-    //   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    // }
 
    
 
@@ -397,6 +382,10 @@ export class CustomCardComponent {
   @Input() cardData?: CardItem | null = null;
   @Input() srvcData?: ServiceScreenInterface | null = null;
   @Input() isPlaceholder: boolean = false;
+  @Input() clickable = false;
+  @Input() elevated = false;
+  @Input() compType?: string;
+  @Input() compSize?: string;
 
   @Input() title?: string;
   @Input() subtitle?: string;
@@ -404,10 +393,7 @@ export class CustomCardComponent {
   @Input() imageUrl?: string;
   @Input() imageAlt?: string;
   @Input() imageOverlay = false;
-  @Input() compType?: string;
-  @Input() compSize?: string;
-  @Input() clickable = false;
-  @Input() elevated = false;
+
   @Input() backgroundColor?: string;
   @Input() borderColor?: string;
 
