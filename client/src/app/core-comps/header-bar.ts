@@ -14,14 +14,13 @@ interface Breadcrumb {
   standalone: false,
   template: `
     <mat-toolbar color="primary">
-      <h1>Welcome to {{ title() }}!</h1>
+      <img src="/assets/core/logo/iLogo@0.1x.png" /><h1>DAiRec Vision Security Systems & Services</h1>
     </mat-toolbar>
     <drv-jumbotron-component
       class="jumbo-tron"
       [data]="{
         title: title(),
-        subtitle: 'Your gateway to AI-driven insights',
-        description: 'Explore the power of AI with our intuitive interface. Get started by navigating through the features and tools designed to help you harness the full potential of your data.',
+        subtitle: subtitle(),
         imageUrl: imageUrl(),
         imageAlt: 'AI Vision Illustration',
         backgroundColor: '#d1eeff',
@@ -42,14 +41,18 @@ interface Breadcrumb {
       z-index: 1000;
       opacity: 0.95;
       justify-content: center;
+
+      img {
+        max-height: 45px;
+      }
     }  
-    .jumbo-tron { }
 
   `],
 })
 export class HeaderBar implements OnInit{
   
   protected readonly title = signal('DAiRec-Vision Client');
+  protected readonly subtitle = signal('our gateway to AI-driven insights');
   protected readonly imageUrl = signal('');
   protected brdCrumb: Breadcrumb[] = [];
   protected brdCrumbLabel: string = '';
@@ -67,27 +70,37 @@ export class HeaderBar implements OnInit{
       .subscribe(() => {
         this.brdCrumb = this.bCrumbSrvc.createBreadcrumbs(this.activatedRoute.root);
         this.brdCrumbLabel = this.brdCrumb[0].url || '';
-        this.setPgBnrImg();
+        this.setPgBnrImg(this.brdCrumbLabel);
         console.log('Updated Breadcrumbs hdr:', this.brdCrumbLabel);
     });
   }
 
-  setPgBnrImg() {
-    switch (this.brdCrumbLabel) {
+  setPgBnrImg(uri: string): void {
+    switch (uri) {
       case '':
         this.imageUrl.set('/assets/backgrounds/landing-Bnr.png');
+        this.title.set('DAiRec-Vision Security');
+        this.subtitle.set('Your gateway to AI-driven insights!');
         break;
       case '/home':
         this.imageUrl.set('/assets/backgrounds/home-Bnr.png');
+        this.title.set('Protect What Matters Most');
+        this.subtitle.set('Advanced Security Solutions for Your Home & Business');
         break;
       case '/protect':
         this.imageUrl.set('/assets/backgrounds/install-Bnr.png');
+        this.title.set('CCTV & IP Camera Service');
+        this.subtitle.set('See Everything. Miss Nothing. Protect What Matters.');
         break;
       case '/surveil':
         this.imageUrl.set('/assets/backgrounds/surveil-Bnr.png');
+        this.title.set('Video Surveillance & Remote Monitoring');
+        this.subtitle.set('Never Be In The Dark. Always Be In Control.');
         break;
       case '/access':
         this.imageUrl.set('/assets/backgrounds/access-Bnr.png');
+        this.title.set('Access Control Systems');
+        this.subtitle.set('Control Who Enters. Track Who Leaves. Secure Every Access Point.');
         break;
       default:
         this.imageUrl.set('/assets/backgrounds/home-Bnr.png');

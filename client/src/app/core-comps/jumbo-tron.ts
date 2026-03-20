@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { Router, ActivatedRoute } from '@angular/router';
 
 // Interface for Jumbotron data
 export enum CompType {
@@ -12,6 +13,7 @@ export enum CompType {
     FEATURE = 'feature' as any,
     TESTIMONIAL = 'testimonial' as any,
     BANNER = 'banner' as any,
+    BUTTON = 'button' as any,
 }
 
 export interface JumbotronDataModel {
@@ -40,6 +42,7 @@ export interface JumbotronButton {
   icon?: string;
   color?: 'primary' | 'accent' | 'warn';
   style?: 'flat' | 'raised' | 'stroked';
+  url?: string;
 }
 
 // Template directive for custom content
@@ -215,6 +218,9 @@ export class JumbotronActionsComponent {}
         color: white;
         background: rgba(250, 250, 250, 0.25);
 
+      }
+      .default-content {
+        margin-bottom: auto;
       }
     }
     .jumbotron-container.isTestimonial {
@@ -415,6 +421,12 @@ export class JumboTronComponent {
   @ContentChild(JumbotronContentComponent) customContent?: JumbotronContentComponent;
   @ContentChild(JumbotronActionsComponent) customActions?: JumbotronActionsComponent;
 
+  signUp? = '/landing';
+
+  constructor(
+    private router: Router
+  ) {  }
+
   get hasCustomContent(): boolean {
     return !!this.customContent;
   }
@@ -425,6 +437,9 @@ export class JumboTronComponent {
 
   onButtonClick(button: JumbotronButton): void {
     this.buttonClick.emit(button);
+  
+    this.router.navigate([button.url])
+    console.log('thisi: ', button);
   }
 
   onImageLoad(): void {

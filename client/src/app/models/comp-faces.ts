@@ -11,6 +11,15 @@ export enum Orientation {
     SQUARE = 'square' as any,
 }
 
+export interface CardButtonModel {
+  label: string;
+  action: string;
+  icon?: string;
+  color?: 'primary' | 'accent' | 'warn';
+  style?: 'flat' | 'raised' | 'stroked';
+  url?: string;
+}
+
 export enum CompSize {
     SMALL = 'small' as any,
     MEDIUM = 'medium' as any,
@@ -23,6 +32,7 @@ export enum CompType {
     FEATURE = 'feature' as any,
     TESTIMONIAL = 'testimonial' as any,
     BANNER = 'banner' as any,
+    BUTTON = 'button' as any,
 }
 
 // card-item.interface.ts
@@ -35,6 +45,7 @@ export interface CardItem {
   imageUrl?: string;
   imageAlt?: string;
   backgroundColor?: string;
+  buttons?: CardButtonModel[];
   borderColor?: string;    
   orientation?: Orientation;
   metadata?: any;

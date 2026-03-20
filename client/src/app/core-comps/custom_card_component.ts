@@ -1,21 +1,35 @@
 // custom-card.component.ts
-import { Component, Input, ContentChild } from '@angular/core';
+import { Component, Input, ContentChild, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { CardItem } from '../models/comp-faces';
 import { ServiceScreenInterface } from '../models/ui-x';
 import { CompType, CompSize } from '../models/comp-faces';
+import { JumbotronButton } from './jumbo-tron';
+
+
+export interface CardButtonModel {
+  label: string;
+  action: string;
+  icon?: string;
+  color?: 'primary' | 'accent' | 'warn';
+  style?: 'flat' | 'raised' | 'stroked';
+  url?: string;
+}
 
 // Data model for card
 export interface CardData {
+  _id?: string;
   id?: string | number;
   title?: string;
   subtitle?: string;
   content?: string;
   imageUrl?: string;
   imageAlt?: string;
+  buttons?: CardButtonModel[];
   backgroundColor?: string;
   borderColor?: string;
-  compType?: string;
-  compSize?: string;
+  compType?: CompType | string;
+  compSize?: CompSize | string;
   clickable?: boolean;
   elevated?: boolean;
   metadata?: any;
@@ -88,6 +102,7 @@ export class CardActionsComponent {}
       [class.isArticle]="cardData?.compType === CompType.ARTICLE || srvcData?.compType === CompType.ARTICLE || compType === 'article'"
       [class.isProduct]="cardData?.compType === CompType.PRODUCT || srvcData?.compType === CompType.PRODUCT || compType === 'product'"
       [class.isFeature]="cardData?.compType === CompType.FEATURE || srvcData?.compType === CompType.FEATURE || compType === 'feature'"
+      [class.isButton]="cardData?.compType === CompType.BUTTON || srvcData?.compType === CompType.BUTTON || compType === 'button'"
       [class.isTestimonial]="cardData?.compType === CompType.TESTIMONIAL || srvcData?.compType === CompType.TESTIMONIAL || compType === 'testimonial'"
       [class.isBanner]="cardData?.compType === CompType.BANNER || srvcData?.compType === CompType.BANNER || compType === 'banner'"
       [class.isSmall]="cardData?.compSize === CompSize.SMALL || srvcData?.compSize === CompSize.SMALL || compSize === 'small'"
@@ -136,6 +151,26 @@ export class CardActionsComponent {}
               <p>{{ cardData?.content || srvcData?.content || content }}</p>
             }
           </div>
+
+          <!-- Default Buttons -->
+          <!-- @if (cardData?.buttons && cardData?.buttons.length > 0 && !hasActions) {
+            <div class="jumbotron-actions">
+              @for (btn of cardData?.buttons; track btn) {
+                <button
+                  mat-button
+                  [class.mat-raised-button]="btn.style === 'raised'"
+                  [class.mat-stroked-button]="btn.style === 'stroked'"
+                  [class.mat-flat-button]="btn.style === 'flat'"
+                  [color]="btn.color || 'primary'"
+                  (click)="onButtonClick(btn)">
+                  @if (btn.icon) {
+                    <mat-icon>{{ btn.icon }}</mat-icon>
+                  }
+                  {{ btn.label }}
+                </button>
+              }
+            </div>
+          } -->
         </div>
       </mat-card-content>
 
@@ -147,7 +182,7 @@ export class CardActionsComponent {}
       }
     
       <!-- Actions Section -->
-      @if (hasActions) {
+      @if (haveActions || hasActions) {
         <div class="card-actions">
           <ng-content select="drv-card-actions"></ng-content>
         </div>
@@ -209,7 +244,17 @@ export class CardActionsComponent {}
     }
     
     .custom-card.isBanner {
-      background: linear-gradient(135deg, #ede7f6 0%, #d1c4e9 100%);
+      /* background: linear-gradient(135deg, #ede7f6 0%, #d1c4e9 100%); */
+      background: linear-gradient( 135deg, #d0e5bb 0%, #2ecc71 100%);
+      color: #fefefe;
+      h3 { font-size: x-large; color: #fefefe}
+    }
+    
+    .custom-card.isButton {
+      background: linear-gradient(135deg, #d3bcf5 0%, #70b0f5 100%);
+      font-weight: bold;
+      font-size: 21px;
+      color: #fefefe;
     }
     
     // *********************************** // 
@@ -348,8 +393,6 @@ export class CardActionsComponent {}
     }
 
     .card-content {
-      color: #37474f;
-      font-size: 14px;
       line-height: 1.6;
       letter-spacing: 0.25px;
       flex-shrink: 0;
@@ -379,7 +422,7 @@ export class CustomCardComponent {
   CompType = CompType;
   CompSize = CompSize;
 
-  @Input() cardData?: CardItem | null = null;
+  @Input() cardData?: CardData | null = null;
   @Input() srvcData?: ServiceScreenInterface | null = null;
   @Input() isPlaceholder: boolean = false;
   @Input() clickable = false;
@@ -394,12 +437,24 @@ export class CustomCardComponent {
   @Input() imageAlt?: string;
   @Input() imageOverlay = false;
 
+  @Input() haveActions = false;
+
   @Input() backgroundColor?: string;
   @Input() borderColor?: string;
+  @Output() buttonClick = new EventEmitter<CardButtonModel>();
 
   @ContentChild(CardHeaderComponent) hasHeader?: CardHeaderComponent;
   @ContentChild(CardHeaderComponent) hasFooter?: CardFooterComponent;
   @ContentChild(CardActionsComponent) hasActions?: CardActionsComponent;
+
+  constructor(private router: Router ){}
+
+  onButtonClick(button: CardButtonModel): void {
+      this.buttonClick.emit(button);
+    
+      this.router.navigate([button.url])
+      console.log('thisi: ', button);
+    }
 }
 
 

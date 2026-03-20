@@ -21,6 +21,7 @@ export enum CompType {
     FEATURE = 'feature' as any,
     TESTIMONIAL = 'testimonial' as any,
     BANNER = 'banner' as any,
+    BUTTON = 'button' as any,
 }
 
 export enum CompSize {

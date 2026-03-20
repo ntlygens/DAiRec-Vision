@@ -34,7 +34,11 @@ interface Breadcrumb {
       }
     </nav>
   `,
-  styles: ``, 
+  styles: `
+    nav {
+      display: none;
+    }
+  `, 
 })
 export class BreadcrumbComponent implements OnInit {
   breadcrumbs: Breadcrumb[] = [];
