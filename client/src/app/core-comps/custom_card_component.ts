@@ -153,7 +153,7 @@ export class CardActionsComponent {}
           </div>
 
           <!-- Default Buttons -->
-          <!-- @if (cardData?.buttons && cardData?.buttons.length > 0 && !hasActions) {
+          @if (cardData?.buttons && cardData?.buttons!.length > 0 && !hasActions) {
             <div class="jumbotron-actions">
               @for (btn of cardData?.buttons; track btn) {
                 <button
@@ -170,7 +170,7 @@ export class CardActionsComponent {}
                 </button>
               }
             </div>
-          } -->
+          }
         </div>
       </mat-card-content>
 
