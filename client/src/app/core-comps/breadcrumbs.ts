@@ -14,7 +14,7 @@ interface Breadcrumb {
   standalone: false,
   template: `
     <nav>
-      @for (breadcrumb of breadcrumbs; track breadcrumb.url + idx; let idx = $index; let last = $last) {
+      @for (breadcrumb of breadcrumbs; track breadcrumb.label + idx; let idx = $index; let last = $last) {
         <ng-container>
           @if (!last ) {
             @if (breadcrumb.url !== '/home' && breadcrumb.url !== '') {

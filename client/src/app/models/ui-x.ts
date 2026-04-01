@@ -30,6 +30,12 @@ export enum CompSize {
     LARGE = 'large' as any,
 }
 
+export enum Orientation {
+    LANDSCAPE = 'landscape' as any,
+    PORTRAIT = 'portrait' as any,
+    SQUARE = 'square' as any,
+}
+
 export interface UserInterface {
     _id?: string;
     name: string;
@@ -53,6 +59,34 @@ export interface ServiceScreenInterface {
   compSize?: CompSize;
   pgLoc?: PgLocs | string
 
+}
+
+export interface CardButtonModel {
+  label: string;
+  action: string;
+  icon?: string;
+  color?: 'primary' | 'accent' | 'warn';
+  style?: 'flat' | 'raised' | 'stroked';
+  url?: string;
+}
+
+export interface CardItemInterface {
+  _id?: string;
+  id?: string | number;   
+  name?: string; 
+  title?: string;
+  subtitle?: string;
+  desc?: string;
+  content?: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  backgroundColor?: string;
+  buttons?: CardButtonModel[];
+  borderColor?: string;    
+  orientation?: Orientation;
+  metadata?: any;
+  compType?: CompType;
+  compSize?: CompSize;
 }
 
 export interface DRVRouteInterface {

@@ -41,6 +41,7 @@ export interface CardItem {
   id?: string | number;    
   title?: string;
   subtitle?: string;
+  desc?: string;
   content?: string;
   imageUrl?: string;
   imageAlt?: string;

@@ -1,10 +1,8 @@
 // custom-card.component.ts
-import { Component, Input, ContentChild, EventEmitter, Output } from '@angular/core';
+import { Component, Input, ContentChild, EventEmitter, Output, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CardItem } from '../models/comp-faces';
 import { ServiceScreenInterface } from '../models/ui-x';
 import { CompType, CompSize } from '../models/comp-faces';
-import { JumbotronButton } from './jumbo-tron';
 
 
 export interface CardButtonModel {
@@ -109,8 +107,8 @@ export class CardActionsComponent {}
       [class.isMedium]="cardData?.compSize === CompSize.MEDIUM || srvcData?.compSize === CompSize.MEDIUM || compSize === 'medium'"
       [class.isLarge]="cardData?.compSize === CompSize.LARGE || srvcData?.compSize === CompSize.LARGE || compSize === 'large'"
 
-      [style.background]="backgroundColor"
-      [style.border-color]="borderColor"
+      [style.background]="cardData?.backgroundColor || null"
+      [style.border-color]="cardData?.borderColor || null"
       matRipple
       [matRippleDisabled]="clickable">
     
@@ -153,8 +151,9 @@ export class CardActionsComponent {}
           </div>
 
           <!-- Default Buttons -->
-          @if (cardData?.buttons && cardData?.buttons!.length > 0 && !hasActions) {
-            <div class="jumbotron-actions">
+          <!-- @if (cardData?.buttons && cardData?.buttons!.length > 0 && hasActions) { -->
+            <div class="custom-card-actions">
+              <ng-content select="drv-card-actions"></ng-content>
               @for (btn of cardData?.buttons; track btn) {
                 <button
                   mat-button
@@ -170,7 +169,7 @@ export class CardActionsComponent {}
                 </button>
               }
             </div>
-          }
+          <!-- } -->
         </div>
       </mat-card-content>
 
@@ -183,7 +182,7 @@ export class CardActionsComponent {}
     
       <!-- Actions Section -->
       @if (haveActions || hasActions) {
-        <div class="card-actions">
+        <div class="custom-card-actions">
           <ng-content select="drv-card-actions"></ng-content>
         </div>
       }
@@ -263,6 +262,23 @@ export class CardActionsComponent {}
       box-shadow: 
         0 4px 6px rgba(100, 150, 200, 0.1),
         0 2px 4px rgba(100, 150, 200, 0.08);
+    }
+
+    .custom-card-actions {
+      display: flex;
+      gap: 8px;
+
+      padding: 8px 16px 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .custom-card-actions button {
+      min-width: 120px;
+    }
+
+    .custom-card-actions button mat-icon {
+      margin-right: 8px;
     }
 
     .custom-card.clickable {
@@ -418,7 +434,7 @@ export class CardActionsComponent {}
     }
   `]
 })
-export class CustomCardComponent {
+export class CustomCardComponent implements OnInit {
   CompType = CompType;
   CompSize = CompSize;
 
@@ -447,7 +463,12 @@ export class CustomCardComponent {
   @ContentChild(CardHeaderComponent) hasFooter?: CardFooterComponent;
   @ContentChild(CardActionsComponent) hasActions?: CardActionsComponent;
 
-  constructor(private router: Router ){}
+  constructor(private router: Router ){  }
+
+  ngOnInit(): void {
+    console.log('cards: ', this.cardData?.buttons!);
+
+  }
 
   onButtonClick(button: CardButtonModel): void {
       this.buttonClick.emit(button);

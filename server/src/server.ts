@@ -4,6 +4,7 @@ import cors from "cors";
 import { connectToDatabase } from "./database.ts";
 import { uiRouter } from "./ui-interface.routes.ts";
 import { ssiRouter } from "./ss-interface.routes.ts";
+import { prtctRouter } from "./prtct-interface.routes.ts";
 
 dotenv.config();
 
@@ -21,7 +22,7 @@ await connectToDatabase(MONGODB_URI)
 
         app.use("/userInterface", uiRouter);
         app.use("/srvcscrnInterface", ssiRouter);
-        // app.use("/userInterface", uiRouter);
+        app.use("/protectPgData", prtctRouter);
 
         app.listen(5200, () => {
             console.log("Server is running on port 5200");

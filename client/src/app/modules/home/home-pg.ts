@@ -11,7 +11,7 @@ import { CardItem } from '../../models/comp-faces';
   template: `
 
 
-    <div class="dData">
+    <div class="dTextData">
         <h2>DAiRec Vision Security</h2>
         <p>
             Dairec Vision Security delivers comprehensive security system integration for residential and commercial 
@@ -140,7 +140,7 @@ import { CardItem } from '../../models/comp-faces';
           margin: 0 0 20px;
       }
 
-      .dData {
+      .dTextData {
         text-align: left;
         margin-bottom: 3rem;
         h2 { 

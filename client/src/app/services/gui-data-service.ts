@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { UserInterface, ServiceScreenInterface } from '../models/ui-x';
+import { UserInterface, ServiceScreenInterface, CardItemInterface } from '../models/ui-x';
 
 @Injectable({
   providedIn: 'root',
@@ -22,12 +22,19 @@ export class GuiDataService {
 
   allUserData$ = signal<UserInterface[]>([]);
   allSrvcScrnData$ = signal<ServiceScreenInterface[]>([]);
+  allProtectedSrvcsData$ = signal<CardItemInterface[]>([]);
+  allProtectedPrdctsData$ = signal<CardItemInterface[]>([]);
+
   uiData$ = signal<UserInterface>({} as UserInterface);
   ssiData$ = signal<ServiceScreenInterface>({} as ServiceScreenInterface);
+  prtctData$ = signal<CardItemInterface>({} as CardItemInterface);
   
+
   constructor(private http: HttpClient) {
     this.getAllUserData();
     this.getAllSrvcScrnData();
+    this.getAllProtectedSrvcsData();
+    this.getAllProtectedPrdctsData();
   }
 
   private refreshAllUserData() {
@@ -44,6 +51,20 @@ export class GuiDataService {
     });
   }
 
+  private refreshAllProtectedSrvcsData() {
+    this.http.get<CardItemInterface[]>(`${this.apiUrl}/protectPgData`)
+      .subscribe((data) => {
+        this.allProtectedSrvcsData$.set(data);
+    });
+  }
+
+  private refreshAllProtectedPrdctsData() {
+    this.http.get<CardItemInterface[]>(`${this.apiUrl}/protectPgData`)
+      .subscribe((data) => {
+        this.allProtectedPrdctsData$.set(data);
+    });
+  }
+
   getAllUserData() {
     this.refreshAllUserData();
     return this.allUserData$;
@@ -52,6 +73,16 @@ export class GuiDataService {
   getAllSrvcScrnData() {
     this.refreshAllSrvcScrnData();
     return this.allSrvcScrnData$;
+  }
+
+  getAllProtectedSrvcsData() {
+    this.refreshAllProtectedSrvcsData();
+    return this.allProtectedSrvcsData$;
+  }
+
+  getAllProtectedPrdctsData() {
+    this.refreshAllProtectedPrdctsData();
+    return this.allProtectedPrdctsData$;
   }
 
   getUserFieldUIData(id: string) {
@@ -72,6 +103,24 @@ export class GuiDataService {
     });
   }
 
+  getProtectedSrvcsFieldIData(id: string) {
+    this.http.get<CardItemInterface>(`${this.apiUrl}/protectPgData/${id}`)
+      .subscribe(data => {
+        this.prtctData$.set(data);
+        return this.prtctData$();
+
+    });
+  }
+
+  getProtectedPrdctsFieldIData(id: string) {
+    this.http.get<CardItemInterface>(`${this.apiUrl}/protectPgData/${id}`)
+      .subscribe(data => {
+        this.prtctData$.set(data);
+        return this.prtctData$();
+
+    });
+  }
+
   createUIData(newData: UserInterface) {
     return this.http.post<UserInterface>(
       `${this.apiUrl}/userInterface`, 
@@ -83,6 +132,14 @@ export class GuiDataService {
   createSSIData(newData: ServiceScreenInterface) {
     return this.http.post<ServiceScreenInterface>(
       `${this.apiUrl}/srvcscrnInterface`, 
+      newData,
+      {responseType: 'text' as 'json'}
+    );
+  }
+
+  createPRTCTData(newData: CardItemInterface) {
+    return this.http.post<CardItemInterface>(
+      `${this.apiUrl}/protectPgData`, 
       newData,
       {responseType: 'text' as 'json'}
     );
@@ -102,6 +159,13 @@ export class GuiDataService {
       {responseType: 'text' as 'json' });
   }
 
+  updatePRTCTData(id: string, updatedData: CardItemInterface) {
+    return this.http.put<CardItemInterface>(
+      `${this.apiUrl}/protectPgData/${id}`, 
+      updatedData,
+      {responseType: 'text' as 'json' });
+  }
+
   deleteUIData(id: string) {
     return this.http.delete<void>(
       `${this.apiUrl}/userInterface/${id}`,
@@ -111,6 +175,12 @@ export class GuiDataService {
   deleteSSIData(id: string) {
     return this.http.delete<void>(
       `${this.apiUrl}/srvcscrnInterface/${id}`,
+      {responseType: 'text' as 'json' });
+  }
+
+  deletePRTCTData(id: string) {
+    return this.http.delete<void>(
+      `${this.apiUrl}/protectPgData/${id}`,
       {responseType: 'text' as 'json' });
   }
 }
