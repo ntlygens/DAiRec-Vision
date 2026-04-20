@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { UserInterface, ServiceScreenInterface, CardItemInterface } from '../models/ui-x';
+import { UserInterface, ServiceScreenInterface, CardItemInterface, CompType } from '../models/ui-x';
 
 @Injectable({
   providedIn: 'root',
@@ -24,17 +24,21 @@ export class GuiDataService {
   allSrvcScrnData$ = signal<ServiceScreenInterface[]>([]);
   allProtectedSrvcsData$ = signal<CardItemInterface[]>([]);
   allProtectedPrdctsData$ = signal<CardItemInterface[]>([]);
+  allSurveilSrvcsData$ = signal<CardItemInterface[]>([]);
+  allSurveilPrdctsData$ = signal<CardItemInterface[]>([]);
 
   uiData$ = signal<UserInterface>({} as UserInterface);
   ssiData$ = signal<ServiceScreenInterface>({} as ServiceScreenInterface);
   prtctData$ = signal<CardItemInterface>({} as CardItemInterface);
-  
+  srvlData = signal<CardItemInterface>({} as CardItemInterface);
 
   constructor(private http: HttpClient) {
     this.getAllUserData();
     this.getAllSrvcScrnData();
     this.getAllProtectedSrvcsData();
     this.getAllProtectedPrdctsData();
+    // this.getAllSurveilSrvcsData();
+    this.getAllSurveilPrdctsData();
   }
 
   private refreshAllUserData() {
@@ -65,6 +69,20 @@ export class GuiDataService {
     });
   }
 
+  private refreshAllSurveilSrvcsData() {
+    this.http.get<CardItemInterface[]>(`${this.apiUrl}/surveilPgData}`)
+      .subscribe((data) => {
+        this.allSurveilSrvcsData$.set(data);
+    });
+  }
+
+  private refreshAllSurveilPrdctsData() {
+    this.http.get<CardItemInterface[]>(`${this.apiUrl}/surveilPgData`)
+      .subscribe((data) => {
+        this.allSurveilPrdctsData$.set(data);
+    });
+  }
+
   getAllUserData() {
     this.refreshAllUserData();
     return this.allUserData$;
@@ -85,12 +103,21 @@ export class GuiDataService {
     return this.allProtectedPrdctsData$;
   }
 
+  getAllSurveilSrvcsData() {
+    this.refreshAllSurveilSrvcsData();
+    return this.allSurveilSrvcsData$;
+  }
+
+  getAllSurveilPrdctsData() {
+    this.refreshAllSurveilPrdctsData();
+    return this.allSurveilPrdctsData$;
+  }
+
   getUserFieldUIData(id: string) {
     this.http.get<UserInterface>(`${this.apiUrl}/userInterface/${id}`)
       .subscribe(data => {
         this.uiData$.set(data);
         return this.uiData$();
-
     });
   }
 
@@ -99,7 +126,6 @@ export class GuiDataService {
       .subscribe(data => {
         this.ssiData$.set(data);
         return this.ssiData$();
-
     });
   }
 
@@ -108,7 +134,6 @@ export class GuiDataService {
       .subscribe(data => {
         this.prtctData$.set(data);
         return this.prtctData$();
-
     });
   }
 
@@ -117,7 +142,6 @@ export class GuiDataService {
       .subscribe(data => {
         this.prtctData$.set(data);
         return this.prtctData$();
-
     });
   }
 

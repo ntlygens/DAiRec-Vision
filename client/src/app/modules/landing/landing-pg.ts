@@ -31,7 +31,7 @@ import { CardItem } from '../../models/comp-faces';
                             subtitle: dsjntData.subtitle,
                             description: dsjntData.desc,
                             content: dsjntData.content || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                            imageUrl: dsjntData.img || '/assets/backgrounds/collage-image-1.jpg',
+                            img: dsjntData.img || '/assets/backgrounds/collage-image-1.jpg',
                             imageAlt: dsjntData.name || 'Service Display Illustration',
                             backgroundColor: '#424040',
                             imagePosition: 'background',

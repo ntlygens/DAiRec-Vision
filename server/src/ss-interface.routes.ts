@@ -11,7 +11,7 @@ ssiRouter.use(express.json());
 ssiRouter.get("/", async (_req, res) => {
     try {
         const srvcscrnInterface = await ssiDataCollections?.srvcscrnInterface?.find({}).toArray();
-        console.log('statusss: ', srvcscrnInterface?.length)
+        console.log('srvc-scrn: ', srvcscrnInterface?.length)
         res.status(200).send(srvcscrnInterface);
     } catch (error) {
         const message = error instanceof Error ? error.message : "unknown error";

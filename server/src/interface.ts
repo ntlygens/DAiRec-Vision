@@ -42,3 +42,21 @@ export interface ProtectSrvcsInterface {
 
 }
 
+export interface SurveilSrvcsInterface {
+  _id?: mongodb.ObjectId;
+  name?: string;
+  title?: string;
+  subtitle?: string;
+  desc?: string;    
+  content?: Blob;
+  img?: string;
+  imgAlt?: string;
+  rte?: string;
+  num?: number;
+  backgroundColor?: string;
+  borderColor?: string;
+  compSize?: string;
+  compType?: string;
+
+}
+

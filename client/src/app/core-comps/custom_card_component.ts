@@ -21,7 +21,7 @@ export interface CardData {
   title?: string;
   subtitle?: string;
   content?: string;
-  imageUrl?: string;
+  img?: string;
   imageAlt?: string;
   buttons?: CardButtonModel[];
   backgroundColor?: string;
@@ -113,9 +113,9 @@ export class CardActionsComponent {}
       [matRippleDisabled]="clickable">
     
       <!-- Image Section -->
-      @if (cardData?.imageUrl || srvcData?.img || imageUrl) {
+      @if (cardData?.img || srvcData?.img || img) {
         <div class="card-image">
-          <img mat-card-image [src]="cardData?.imageUrl || srvcData?.img || imageUrl" [alt]="cardData?.title || srvcData?.title || imageAlt" />
+          <img mat-card-image [src]="cardData?.img || srvcData?.img || img" [alt]="cardData?.title || srvcData?.title || imageAlt" />
           @if (imageOverlay) {
             <div class="image-overlay">
               <ng-content select="drv-card-header"></ng-content>
@@ -125,7 +125,7 @@ export class CardActionsComponent {}
       }
     
       <!-- Header Section (when no image) -->
-      @if (!imageUrl && hasHeader) {
+      @if (!img && hasHeader) {
         <div class="card-header">
           <ng-content select="drv-card-header"></ng-content>
         </div>
@@ -151,7 +151,7 @@ export class CardActionsComponent {}
           </div>
 
           <!-- Default Buttons -->
-          <!-- @if (cardData?.buttons && cardData?.buttons!.length > 0 && hasActions) { -->
+          @if (cardData?.buttons && cardData?.buttons!.length > 0 && hasActions) {
             <div class="custom-card-actions">
               <ng-content select="drv-card-actions"></ng-content>
               @for (btn of cardData?.buttons; track btn) {
@@ -169,12 +169,12 @@ export class CardActionsComponent {}
                 </button>
               }
             </div>
-          <!-- } -->
+          }
         </div>
       </mat-card-content>
 
       <!-- Footer Section (when no image) -->
-      @if (!imageUrl && hasFooter) {
+      @if (!img && hasFooter) {
         <div class="card-footer">
           <ng-content select="drv-card-footer"></ng-content>
         </div>
@@ -449,7 +449,7 @@ export class CustomCardComponent implements OnInit {
   @Input() title?: string;
   @Input() subtitle?: string;
   @Input() content?: string;
-  @Input() imageUrl?: string;
+  @Input() img?: string;
   @Input() imageAlt?: string;
   @Input() imageOverlay = false;
 

@@ -43,7 +43,7 @@ export interface CardItem {
   subtitle?: string;
   desc?: string;
   content?: string;
-  imageUrl?: string;
+  img?: string;
   imageAlt?: string;
   backgroundColor?: string;
   buttons?: CardButtonModel[];

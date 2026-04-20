@@ -2,7 +2,6 @@ import { Component, signal, OnInit } from '@angular/core';
 import { BreadcrumbService } from '../services/breadcrumb.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/internal/operators/filter';
-import { last } from 'rxjs';
 
 interface Breadcrumb {
   label: string;
@@ -21,7 +20,7 @@ interface Breadcrumb {
       [data]="{
         title: title(),
         subtitle: subtitle(),
-        imageUrl: imageUrl(),
+        img: img(),
         imageAlt: 'AI Vision Illustration',
         backgroundColor: '#d1eeff',
         imagePosition: 'background',
@@ -53,7 +52,7 @@ export class HeaderBar implements OnInit{
   
   protected readonly title = signal('DAiRec-Vision Client');
   protected readonly subtitle = signal('our gateway to AI-driven insights');
-  protected readonly imageUrl = signal('');
+  protected readonly img = signal('');
   protected brdCrumb: Breadcrumb[] = [];
   protected brdCrumbLabel: string = '';
 
@@ -78,32 +77,32 @@ export class HeaderBar implements OnInit{
   setPgBnrImg(uri: string): void {
     switch (uri) {
       case '':
-        this.imageUrl.set('/assets/backgrounds/landing-Bnr.png');
+        this.img.set('/assets/backgrounds/landing-Bnr.png');
         this.title.set('DAiRec-Vision Security');
         this.subtitle.set('Your gateway to AI-driven insights!');
         break;
       case '/home':
-        this.imageUrl.set('/assets/backgrounds/home-Bnr.png');
+        this.img.set('/assets/backgrounds/home-Bnr.png');
         this.title.set('Protect What Matters Most');
         this.subtitle.set('Advanced Security Solutions for Your Home & Business');
         break;
       case '/protect':
-        this.imageUrl.set('/assets/backgrounds/install-Bnr.png');
+        this.img.set('/assets/backgrounds/install-Bnr.png');
         this.title.set('CCTV & IP Camera Service');
         this.subtitle.set('See Everything. Miss Nothing. Protect What Matters.');
         break;
       case '/surveil':
-        this.imageUrl.set('/assets/backgrounds/surveil-Bnr.png');
+        this.img.set('/assets/backgrounds/surveil-Bnr.png');
         this.title.set('Video Surveillance & Remote Monitoring');
         this.subtitle.set('Never Be In The Dark. Always Be In Control.');
         break;
       case '/access':
-        this.imageUrl.set('/assets/backgrounds/access-Bnr.png');
+        this.img.set('/assets/backgrounds/access-Bnr.png');
         this.title.set('Access Control Systems');
         this.subtitle.set('Control Who Enters. Track Who Leaves. Secure Every Access Point.');
         break;
       default:
-        this.imageUrl.set('/assets/backgrounds/home-Bnr.png');
+        this.img.set('/assets/backgrounds/home-Bnr.png');
     }
   }
 

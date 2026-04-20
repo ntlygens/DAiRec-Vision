@@ -11,6 +11,7 @@ uiRouter.use(express.json());
 uiRouter.get("/", async (_req, res) => {
     try {
         const userInterface = await uiDataCollections?.userInterface?.find({}).toArray();
+        console.log('user-success: ', userInterface?.length);
         res.status(200).send(userInterface);
     } catch (error) {
         const message = error instanceof Error ? error.message : "unknown error";

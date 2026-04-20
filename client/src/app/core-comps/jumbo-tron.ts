@@ -21,7 +21,7 @@ export interface JumbotronDataModel {
   subtitle?: string;
   pgLoc?: 'landing' | 'home' | 'protect' | 'surveil' | 'access' | 'contact' | string;
   description?: string;
-  imageUrl?: string;
+  img?: string;
   imageAlt?: string;
   buttons?: JumbotronButton[];
   theme?: 'primary' | 'accent' | 'warn' | 'light' | 'dark';
@@ -90,8 +90,8 @@ export class JumbotronActionsComponent {}
       [class.layout-top]="data.imagePosition === 'top'"
       [class.layout-bottom]="data.imagePosition === 'bottom'"
       [style.height]="data.compSize || 'auto'"
-      [style.background-color]="data.imagePosition === 'background' ? data.backgroundColor : null"
-      [style.background-image]="data.imagePosition === 'background' ? 'url(' + data.imageUrl + ')' : null">
+      [style.background-color]="data.imagePosition !== 'background' ? data.backgroundColor : null"
+      [style.background-image]="data.imagePosition === 'background' ? 'url(' + data.img + ')' : null">
 
       <!-- Background Overlay -->
       @if (data.imagePosition === 'background' && data.overlay) {
@@ -108,11 +108,11 @@ export class JumbotronActionsComponent {}
     </div> -->
     
     <!-- Image Section (non-background) -->
-    @if (data.imageUrl && data.imagePosition !== 'background') {
+    @if (data.img && data.imagePosition !== 'background') {
       <div
         class="jumbotron-image">
         <img
-          [src]="data.imageUrl"
+          [src]="data.img"
           [alt]="data.imageAlt || 'Jumbotron image'"
           (load)="onImageLoad()"
           (error)="onImageError($event)">
@@ -608,7 +608,7 @@ export class JumbotronDemoComponent {
     title: 'Welcome to Our Platform',
     subtitle: 'The best solution for your business',
     description: 'Discover how our innovative platform can help you achieve your goals faster and more efficiently than ever before.',
-    imageUrl: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop',
+    img: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop',
     imageAlt: 'Team collaboration',
     imagePosition: 'left',
     theme: 'light',
@@ -622,7 +622,7 @@ export class JumbotronDemoComponent {
     title: 'Experience the Future',
     subtitle: 'Innovation meets excellence',
     description: 'Join thousands of satisfied customers who have transformed their business with our cutting-edge solutions.',
-    imageUrl: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=600&fit=crop',
+    img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&h=600&fit=crop',
     imagePosition: 'background',
     overlay: true,
     overlayOpacity: 0.6,
@@ -633,7 +633,7 @@ export class JumbotronDemoComponent {
   };
 
   customData: JumbotronDataModel = {
-    imageUrl: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop',
+    img: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop',
     imagePosition: 'right',
     theme: 'light'
   };
@@ -642,7 +642,7 @@ export class JumbotronDemoComponent {
     title: 'Top Image Layout',
     subtitle: 'Perfect for showcasing products',
     description: 'This layout places the image at the top, creating a card-like appearance ideal for product displays or featured content.',
-    imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=400&fit=crop',
+    img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=400&fit=crop',
     imagePosition: 'top',
     theme: 'light',
     buttons: [

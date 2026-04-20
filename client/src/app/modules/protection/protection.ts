@@ -2,13 +2,14 @@ import { Component, OnInit, WritableSignal } from '@angular/core';
 import { Router } from '@angular/router';
 import { CardItemInterface } from '../../models/ui-x';
 import { GuiDataService } from '../../services/gui-data-service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'drv-protection',
   standalone: false,
   template: `
     <div class="dTextData">
-        <h2>Why Choose Professional Camera Installation?</h2>
+        <h2>Why Choose Professional Installation?</h2>
         <p>
             Your property deserves eyes that never blink. DaiRec Vision Security transforms blind spots into complete visibility 
             with state-of-the-art CCTV installation and IP camera systems engineered for crystal-clear surveillance, day or night.
@@ -130,8 +131,13 @@ import { GuiDataService } from '../../services/gui-data-service';
   `,
 })
 export class Protection implements OnInit {
+  private subscription: Subscription = new Subscription();
+
+  data2bDsplyd$: string | null = null;
+
   protectSrvcsData$ = {} as WritableSignal<CardItemInterface[]>
   protectPrdctsData$ = {} as WritableSignal<CardItemInterface[]>
+  
   protectedSrvcs$: CardItemInterface[] = [];
   protectedPrdcts$: CardItemInterface[] = [];
 
@@ -139,11 +145,18 @@ export class Protection implements OnInit {
     private router: Router,
     private uis: GuiDataService
   ) {
-    this.getAllSrvcsData();
+    
   }
 
   ngOnInit(): void {
-    
+    this.subscription = this.uis.currentDisjointedData$.subscribe(data => {
+      data = data ? data : 'data0';
+      this.data2bDsplyd$ = data;
+
+      console.log('prtct data: ', data);
+    })
+
+    this.getAllSrvcsData();
   }
 
   private getAllSrvcsData() {
@@ -152,6 +165,6 @@ export class Protection implements OnInit {
     // this.protectedSrvcs$ = this.protectSrvcsData$();
     this.protectedPrdcts$ = this.protectPrdctsData$();
     // console.log('amt: ', this.protectedSrvcs$.length);
-    console.log('amt: ', this.protectedPrdcts$.length);
+    // console.log('amt: ', this.protectedPrdcts$.length);
   }
 }
