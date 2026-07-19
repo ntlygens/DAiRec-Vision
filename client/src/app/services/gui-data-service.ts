@@ -26,11 +26,14 @@ export class GuiDataService {
   allProtectedPrdctsData$ = signal<CardItemInterface[]>([]);
   allSurveilSrvcsData$ = signal<CardItemInterface[]>([]);
   allSurveilPrdctsData$ = signal<CardItemInterface[]>([]);
+  allAccessSrvcsData$ = signal<CardItemInterface[]>([]);
+  allAccessPrdctsData$ = signal<CardItemInterface[]>([]);
 
   uiData$ = signal<UserInterface>({} as UserInterface);
   ssiData$ = signal<ServiceScreenInterface>({} as ServiceScreenInterface);
   prtctData$ = signal<CardItemInterface>({} as CardItemInterface);
   srvlData = signal<CardItemInterface>({} as CardItemInterface);
+  accsData = signal<CardItemInterface>({} as CardItemInterface);
 
   constructor(private http: HttpClient) {
     this.getAllUserData();
@@ -39,6 +42,8 @@ export class GuiDataService {
     this.getAllProtectedPrdctsData();
     // this.getAllSurveilSrvcsData();
     this.getAllSurveilPrdctsData();
+    // this.getAllAccessSrvcsData();
+    this.getAllAccessPrdctsData();
   }
 
   private refreshAllUserData() {
@@ -83,6 +88,20 @@ export class GuiDataService {
     });
   }
 
+  private refreshAllAccessSrvcsData() {
+    this.http.get<CardItemInterface[]>(`${this.apiUrl}/accessPgData}`)
+      .subscribe((data) => {
+        this.allAccessSrvcsData$.set(data);
+    });
+  }
+
+  private refreshAllAccessPrdctsData() {
+    this.http.get<CardItemInterface[]>(`${this.apiUrl}/accessPgData`)
+      .subscribe((data) => {
+        this.allAccessPrdctsData$.set(data);
+    });
+  }
+
   getAllUserData() {
     this.refreshAllUserData();
     return this.allUserData$;
@@ -111,6 +130,16 @@ export class GuiDataService {
   getAllSurveilPrdctsData() {
     this.refreshAllSurveilPrdctsData();
     return this.allSurveilPrdctsData$;
+  }
+
+  getAllAccessSrvcsData() {
+    this.refreshAllAccessSrvcsData();
+    return this.allAccessSrvcsData$;
+  }
+
+  getAllAccessPrdctsData() {
+    this.refreshAllAccessPrdctsData();
+    return this.allAccessPrdctsData$;
   }
 
   getUserFieldUIData(id: string) {

@@ -9,7 +9,7 @@ import { CardItem } from '../../models/comp-faces';
   selector: 'dvz-landing-pg',
   standalone: false,
   template: `
-      <h1>Primary Services</h1>
+      <!-- <h1>Primary Services</h1>
       <div class="call2action-cards">
         @for (c2a_btn of c2a_btns$; track c2a_btn._id; let idx = $index, e = $even) {
             <drv-custom-card
@@ -19,6 +19,20 @@ import { CardItem } from '../../models/comp-faces';
                 [elevated]= false
                 [cardData]= c2a_btn>
             </drv-custom-card>
+        }
+      </div> -->
+      <div class="whyUsData">
+        @for (dsply of srvcDsplys$; track dsply._id; let idx = $index, e = $even, last = $last, first = $first) {
+            @if ( idx < 2 ) {
+                <drv-custom-card
+                    [id]="dsply._id"
+                    class="article-card"
+                    [elevated]= false
+                    [compType]="dsply.compType?.toString() || 'article'"
+                    compSize="medium"
+                    [srvcData]= dsply>
+                </drv-custom-card>
+            }
         }
       </div>
       <div class="srvcDataDsply">
@@ -31,15 +45,15 @@ import { CardItem } from '../../models/comp-faces';
                             subtitle: dsjntData.subtitle,
                             description: dsjntData.desc,
                             content: dsjntData.content || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                            img: dsjntData.img || '/assets/backgrounds/collage-image-1.jpg',
+                            img: dsjntData.img || '/assets/backgrounds/collage-image-11.jpg',
                             imageAlt: dsjntData.name || 'Service Display Illustration',
                             backgroundColor: '#424040',
                             imagePosition: 'background',
-                            compSize: 'medium',
+                            compSize: 'large',
                             compType: 'banner',
                             buttons: [
-                                { label: 'Get Started', action: 'start', icon: 'rocket_launch', style: 'raised', color: 'primary' },
-                                { label: 'Learn More', action: 'learn', icon: 'info', style: 'stroked', color: 'accent' }
+                                { label: 'Get Started', url: '/', action: 'start', icon: 'rocket_launch', style: 'raised', color: 'primary' },
+                                { label: 'Learn More', url: 'home', action: 'learn', icon: 'info', style: 'stroked', color: 'accent' }
                                 
                             ],
                             overlay: true,
@@ -61,20 +75,7 @@ import { CardItem } from '../../models/comp-faces';
             compType="banner">
         </drv-custom-card>
       </div>
-      <div class="whyUsData">
-        @for (dsply of srvcDsplys$; track dsply._id; let idx = $index, e = $even, last = $last, first = $first) {
-            @if ( idx < 2 ) {
-                <drv-custom-card
-                    [id]="dsply._id"
-                    class="article-card"
-                    [elevated]= false
-                    [compType]="dsply.compType?.toString() || 'article'"
-                    compSize="medium"
-                    [srvcData]= dsply>
-                </drv-custom-card>
-            }
-        }
-      </div>
+      
       <div class="testimonialsData">
         @for (i of generateArray(8); track i; let idx = $index, e = $even, last = $last, first = $first) {
             @if (i < virtualLimit) {
@@ -101,7 +102,6 @@ import { CardItem } from '../../models/comp-faces';
             compType="banner">
         </drv-custom-card>
       </div>
-      <button id="button" (click)="goHome('home')" mat-button>Go to Home</button>
   `,
   styles: [`
     :host {

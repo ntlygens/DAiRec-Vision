@@ -24,7 +24,7 @@ interface Breadcrumb {
         imageAlt: 'AI Vision Illustration',
         backgroundColor: '#d1eeff',
         imagePosition: 'background',
-        compSize: 'small',
+        compSize: 'medium',
         compType: 'feature',
         overlay: true,
       }"

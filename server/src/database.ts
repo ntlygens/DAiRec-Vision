@@ -4,6 +4,7 @@ import type {
     ServiceScreenInterface, 
     ProtectSrvcsInterface,
     SurveilSrvcsInterface,
+    AccessSrvcsInterface,
  } from "./interface.ts"
 
 export const uiDataCollections: {
@@ -17,6 +18,9 @@ export const prtctDataCollections: {
 } = {};
 export const srvlDataCollections: {
     srvlSrvcsInterface?: mongodb.Collection<SurveilSrvcsInterface>;
+} = {};
+export const accsDataCollections: {
+    accsSrvcsInterface?: mongodb.Collection<AccessSrvcsInterface>;
 } = {};
 
 export async function connectToDatabase(uri: string) {
@@ -35,20 +39,23 @@ export async function connectToDatabase(uri: string) {
     const srvcScrnCollection = db.collection<ServiceScreenInterface>("srvcscrnInterface");
     const prtctSrvcsCollection = db2.collection<ProtectSrvcsInterface>("protectPgData");
     const srvlSrvcsCollection = db2.collection<SurveilSrvcsInterface>("surveilPgData");
+    const accsSrvcsCollection = db2.collection<AccessSrvcsInterface>("accessPgData");
 
     uiDataCollections.userInterface = userInterfaceCollction;
     ssiDataCollections.srvcscrnInterface = srvcScrnCollection;
     prtctDataCollections.prtctSrvcsInterface = prtctSrvcsCollection;
     srvlDataCollections.srvlSrvcsInterface = srvlSrvcsCollection;
+    accsDataCollections.accsSrvcsInterface = accsSrvcsCollection;
 
     
     console.log(`Successfully connected to database:
          ${db.databaseName} and ${db2.databaseName} collections:
            ${userInterfaceCollction.collectionName},           
            ${srvcScrnCollection.collectionName},
-           ${prtctSrvcsCollection.collectionName}
-            and
-            ${srvlSrvcsCollection.collectionName}!!
+           ${prtctSrvcsCollection.collectionName},
+           ${srvlSrvcsCollection.collectionName},
+             and
+           ${accsSrvcsCollection.collectionName}!!
            `
         );
 }
