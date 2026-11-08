@@ -51,6 +51,7 @@ import {
     <p class="plan-note">
       Prices shown are starting prices. Final pricing depends on property size, equipment, and site survey.
       Equipment financing and warranty on selected equipment available with a plan (financing excludes drone programs).
+      Prices exclude applicable sales tax.
     </p>
 
     <div class="dTextData">
