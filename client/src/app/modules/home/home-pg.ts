@@ -84,6 +84,7 @@ import { CardItem } from '../../models/comp-faces';
       </div>
 
       
+      @if (showPromo) {
       <div #promoBnr id=promoBnr class=promoBanner>
         <drv-custom-card
             title="Ready to Secure Your Property?"
@@ -94,6 +95,7 @@ import { CardItem } from '../../models/comp-faces';
             compType="banner">
         </drv-custom-card>
       </div>
+      }
     
       <div class="testimonialsData">
         @for (i of generateArray(8); track i; let idx = $index, e = $even, last = $last, first = $first) {
@@ -111,6 +113,7 @@ import { CardItem } from '../../models/comp-faces';
             }
         }
       </div>
+      @if (showPromo) {
       <div class=promoBanner>
         <drv-custom-card
             title="Special Promotion"
@@ -121,6 +124,7 @@ import { CardItem } from '../../models/comp-faces';
             compType="banner">
         </drv-custom-card>
       </div>
+      }
     <button mat-button (click)="onButtonClick()">Go to Landing</button>
   `,
   styles: [`
@@ -243,6 +247,8 @@ export class HomePg implements OnInit {
   
     data2bDsplyd$: string | null = null;
     virtualLimit = 4;
+    /** Promotional banners are hidden until there is a real, dated offer. Set true to show. */
+    showPromo = false;
     call2ActionBtns$ = {} as WritableSignal<CardItem[]>
     srvcDataDsplys$ = {} as WritableSignal<ServiceScreenInterface[]>
       // slctdSrvcCards$ = {} as WritableSignal<ServiceScreenInterface[]>;
