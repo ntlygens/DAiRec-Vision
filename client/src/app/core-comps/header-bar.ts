@@ -83,9 +83,6 @@ interface Breadcrumb {
       }
     </header>
 
-    @if (showHero()) {
-      <drv-hero-banner />
-    } @else {
     <drv-jumbotron-component
       class="jumbo-tron"
       [data]="{
@@ -102,7 +99,6 @@ interface Breadcrumb {
       (buttonClick)="handleJumbotronButtonClick($event)"
       (imageLoad)="handleJumbotronImageLoad()">
     </drv-jumbotron-component>
-    }
   `,
   styles: [`
     /* contents: lets .site-nav stick relative to the whole page, not just this host */
@@ -242,8 +238,6 @@ export class HeaderBar implements OnInit {
   protected readonly menuOpen = signal(false);
   protected readonly scrolled = signal(false);
   protected readonly servicesActive = signal(false);
-  /** Landing and home use the animated hero banner; other pages keep their image jumbotron. */
-  protected readonly showHero = signal(true);
 
   protected readonly mainLinks = MAIN_LINKS;
   protected readonly serviceLinks = SERVICE_LINKS;
@@ -267,7 +261,6 @@ export class HeaderBar implements OnInit {
         this.brdCrumbLabel = this.brdCrumb[0]?.url || '';
         this.servicesActive.set(SERVICE_LINKS.some(s => this.router.url.startsWith(s.route!)));
         const path = this.router.url.split(/[?#]/)[0];
-        this.showHero.set(path === '/' || path === '' || path === '/home');
         this.setPgBnrImg(path === '/surveil/monitor' ? path : this.brdCrumbLabel);
       });
   }

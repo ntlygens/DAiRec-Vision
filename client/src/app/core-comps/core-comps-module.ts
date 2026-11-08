@@ -8,7 +8,6 @@ import { HeaderBar } from './header-bar';
 import { FooterBar } from './footer-bar';
 import { JumboTronComponent } from './jumbo-tron';
 import { BreadcrumbComponent } from './breadcrumbs';
-import { HeroBanner } from './hero-banner';
 
 
 
@@ -24,7 +23,6 @@ import { HeroBanner } from './hero-banner';
     NgMatModule,
     RouterModule,
     JumboTronComponent,
-    HeroBanner,
   ],
   exports: [
     CustomCardComponent,
@@ -32,7 +30,6 @@ import { HeroBanner } from './hero-banner';
     FooterBar,
     JumboTronComponent,
     BreadcrumbComponent,
-    HeroBanner,
   ]
 })
 export class CoreCompsModule { }
