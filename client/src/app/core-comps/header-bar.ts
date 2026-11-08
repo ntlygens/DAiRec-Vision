@@ -29,7 +29,7 @@ interface Breadcrumb {
           </button>
           <mat-menu #servicesMenu="matMenu" class="drv-services-menu" xPosition="after">
             @for (s of serviceLinks; track s.route) {
-              <a mat-menu-item [routerLink]="s.route" routerLinkActive="menu-active">
+              <a mat-menu-item [routerLink]="s.route" routerLinkActive="menu-active" [routerLinkActiveOptions]="{ exact: true }">
                 <mat-icon>{{ s.icon }}</mat-icon>
                 <span class="menu-text">
                   <span class="menu-label">{{ s.label }}</span>
@@ -67,7 +67,7 @@ interface Breadcrumb {
           </a>
           <span class="mobile-group">Services</span>
           @for (s of serviceLinks; track s.route) {
-            <a class="sub" [routerLink]="s.route" routerLinkActive="active" (click)="closeMenu()">
+            <a class="sub" [routerLink]="s.route" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">
               <mat-icon>{{ s.icon }}</mat-icon>{{ s.label }}
             </a>
           }
@@ -260,7 +260,8 @@ export class HeaderBar implements OnInit {
         this.brdCrumb = this.bCrumbSrvc.createBreadcrumbs(this.activatedRoute.root);
         this.brdCrumbLabel = this.brdCrumb[0]?.url || '';
         this.servicesActive.set(SERVICE_LINKS.some(s => this.router.url.startsWith(s.route!)));
-        this.setPgBnrImg(this.brdCrumbLabel);
+        const path = this.router.url.split(/[?#]/)[0];
+        this.setPgBnrImg(path === '/surveil/monitor' ? path : this.brdCrumbLabel);
       });
   }
 
@@ -300,6 +301,11 @@ export class HeaderBar implements OnInit {
         this.img.set('/assets/backgrounds/access-Bnr.png');
         this.title.set('Access Control Systems');
         this.subtitle.set('Control Who Enters. Track Who Leaves. Secure Every Access Point.');
+        break;
+      case '/surveil/monitor':
+        this.img.set('/assets/backgrounds/surveil-Bnr.png');
+        this.title.set('Remote Monitoring');
+        this.subtitle.set('Your Property, Live. Anytime, Anywhere.');
         break;
       case '/drone':
         this.img.set('/assets/backgrounds/surveil-Bnr.png');

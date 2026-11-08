@@ -95,7 +95,14 @@ import { Subscription } from 'rxjs';
             designed to keep you constantly connected to what matters most.
         </p>
     </div>
-    <a routerLink="monitor">Go to Remote Monitoring</a>
+    <a class="monitor-cta" routerLink="monitor">
+      <span class="monitor-icon"><mat-icon>live_tv</mat-icon></span>
+      <span class="monitor-text">
+        <strong>Remote Monitoring</strong>
+        <span>Live feeds on any device, encrypted cloud video, instant alerts and optional 24/7 professional monitoring.</span>
+      </span>
+      <span class="monitor-go">Explore <mat-icon>arrow_forward</mat-icon></span>
+    </a>
   `,
   styles: `
       :host {
@@ -174,6 +181,50 @@ import { Subscription } from 'rxjs';
               margin-left: 10px;
               // flex: 1;
           }
+      }
+
+      .monitor-cta {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        padding: 1.5rem 1.75rem;
+        margin: 0 0 2rem;
+        text-align: left;
+        text-decoration: none;
+        color: #fff;
+        background: linear-gradient(135deg, #1a2332, #2c3e50);
+        border-radius: 14px;
+        border-left: 6px solid #2ecc71;
+        box-shadow: 0 8px 24px rgba(26, 35, 50, 0.25);
+        transition: transform 0.2s, box-shadow 0.2s;
+        .monitor-icon {
+          flex: none;
+          display: flex; align-items: center; justify-content: center;
+          width: 56px; height: 56px;
+          border-radius: 50%;
+          background: rgba(46, 204, 113, 0.15);
+          mat-icon { color: #2ecc71; font-size: 30px; width: 30px; height: 30px; }
+        }
+        .monitor-text {
+          flex: 1;
+          display: flex; flex-direction: column; gap: 0.3rem;
+          strong { font-size: 1.4rem; }
+          span { color: rgba(255, 255, 255, 0.75); line-height: 1.5; }
+        }
+        .monitor-go {
+          flex: none;
+          display: inline-flex; align-items: center; gap: 0.35rem;
+          padding: 0.65rem 1.2rem;
+          border-radius: 999px;
+          background: #2ecc71;
+          font-weight: 600;
+          mat-icon { font-size: 20px; width: 20px; height: 20px; transition: transform 0.2s; }
+        }
+        &:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(26, 35, 50, 0.35); }
+        &:hover .monitor-go mat-icon { transform: translateX(3px); }
+      }
+      @media (max-width: 700px) {
+        .monitor-cta { flex-direction: column; align-items: flex-start; }
       }
 
       .srvlSrvcType {
