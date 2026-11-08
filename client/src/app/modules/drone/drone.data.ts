@@ -32,24 +32,24 @@ export const DRONE_FALLBACK_DATA: CardItemInterface[] = [
     _id: 'drone-f1', compType: CompType.FEATURE, compSize: CompSize.SMALL,
     name: 'Industrial & Logistics', title: 'Industrial & Logistics', subtitle: 'Yards, warehouses & loading areas',
     desc: 'Sites too large for fixed cameras alone get fast aerial response across the whole property.',
-    img: '/assets/backgrounds/surveil-Bnr.png', backgroundColor: '#d1eeff',
+    img: '/assets/backgrounds/surveil-Bnr.webp', backgroundColor: '#d1eeff',
   },
   {
     _id: 'drone-f2', compType: CompType.FEATURE, compSize: CompSize.SMALL,
     name: 'Construction Sites', title: 'Construction Sites', subtitle: 'After-hours theft deterrence',
     desc: 'Deter equipment and material theft overnight and document daily site progress from the air.',
-    img: '/assets/backgrounds/install-Bnr.png', backgroundColor: '#d1eeff',
+    img: '/assets/backgrounds/install-Bnr.webp', backgroundColor: '#d1eeff',
   },
   {
     _id: 'drone-f3', compType: CompType.FEATURE, compSize: CompSize.SMALL,
     name: 'Energy & Utilities', title: 'Energy & Utilities', subtitle: 'Long fence lines, remote assets',
     desc: 'Solar farms, substations, and long perimeters patrolled on schedule without sending guards on foot.',
-    img: '/assets/backgrounds/landing-Bnr.png', backgroundColor: '#d1eeff',
+    img: '/assets/backgrounds/landing-Bnr.webp', backgroundColor: '#d1eeff',
   },
   {
     _id: 'drone-f4', compType: CompType.FEATURE, compSize: CompSize.SMALL,
     name: 'Large Private Estates', title: 'Large Private Estates', subtitle: 'Acreage, ranches & gated estates',
     desc: 'Perimeter patrols that cover ground a camera network cannot, for private clients with large properties.',
-    img: '/assets/backgrounds/home-Bnr.png', backgroundColor: '#d1eeff',
+    img: '/assets/backgrounds/home-Bnr.webp', backgroundColor: '#d1eeff',
   },
 ];

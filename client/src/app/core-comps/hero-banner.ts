@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { ASSESSMENT_HREF } from './nav-links';
 
 /**
- * Animated hero for landing/home, built on the photorealistic landing-Bnr.png.
+ * Animated hero for landing/home, built on the photorealistic landing-Bnr.webp.
  * SVG overlays share the image's 1536x1024 coordinate space, so glows, scan lines and
  * data pulses stay locked to the photo's own HUD at any screen size.
  * Animations are CSS/SMIL and are disabled for prefers-reduced-motion.
@@ -29,7 +29,7 @@ import { ASSESSMENT_HREF } from './nav-links';
     </defs>
 
     <g class="kenburns">
-      <image href="/assets/backgrounds/landing-Bnr.png" x="0" y="0" width="1536" height="1024" preserveAspectRatio="xMidYMid slice"/>
+      <image href="/assets/backgrounds/landing-Bnr.webp" x="0" y="0" width="1536" height="1024" preserveAspectRatio="xMidYMid slice"/>
 
       <!-- glows on the photo's own HUD elements -->
       <rect class="glow lock" x="584" y="564" width="190" height="234" rx="14" fill="#38c8ff" filter="url(#blur12)"/>

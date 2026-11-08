@@ -285,47 +285,47 @@ export class HeaderBar implements OnInit {
   setPgBnrImg(uri: string): void {
     switch (uri) {
       case '':
-        this.img.set('/assets/backgrounds/landing-Bnr.png');
+        this.img.set('/assets/backgrounds/landing-Bnr.webp');
         this.title.set('DAiRec-Vision Security');
         this.subtitle.set('Your gateway to AI-driven insights!');
         break;
       case '/home':
-        this.img.set('/assets/backgrounds/home-Bnr.png');
+        this.img.set('/assets/backgrounds/home-Bnr.webp');
         this.title.set('Protect What Matters Most');
         this.subtitle.set('Advanced Security Solutions for Your Home & Business');
         break;
       case '/protect':
-        this.img.set('/assets/backgrounds/install-Bnr.png');
+        this.img.set('/assets/backgrounds/install-Bnr.webp');
         this.title.set('CCTV & IP Camera Service');
         this.subtitle.set('See Everything. Miss Nothing. Protect What Matters.');
         break;
       case '/surveil':
-        this.img.set('/assets/backgrounds/surveil-Bnr.png');
+        this.img.set('/assets/backgrounds/surveil-Bnr.webp');
         this.title.set('Video Surveillance & Remote Monitoring');
         this.subtitle.set('Never Be In The Dark. Always Be In Control.');
         break;
       case '/access':
-        this.img.set('/assets/backgrounds/access-Bnr.png');
+        this.img.set('/assets/backgrounds/access-Bnr.webp');
         this.title.set('Access Control Systems');
         this.subtitle.set('Control Who Enters. Track Who Leaves. Secure Every Access Point.');
         break;
       case '/surveil/monitor':
-        this.img.set('/assets/backgrounds/surveil-Bnr.png');
+        this.img.set('/assets/backgrounds/surveil-Bnr.webp');
         this.title.set('Remote Monitoring');
         this.subtitle.set('Your Property, Live. Anytime, Anywhere.');
         break;
       case '/drone':
-        this.img.set('/assets/backgrounds/surveil-Bnr.png');
+        this.img.set('/assets/backgrounds/surveil-Bnr.webp');
         this.title.set('Automated Drone Surveillance');
         this.subtitle.set('Eyes in the Sky. On Patrol Before You Ask.');
         break;
       case '/plans':
-        this.img.set('/assets/backgrounds/home-Bnr.png');
+        this.img.set('/assets/backgrounds/home-Bnr.webp');
         this.title.set('Plans & Pricing');
         this.subtitle.set('Security for Homes, Businesses & Enterprise Sites');
         break;
       default:
-        this.img.set('/assets/backgrounds/home-Bnr.png');
+        this.img.set('/assets/backgrounds/home-Bnr.webp');
     }
   }
 
