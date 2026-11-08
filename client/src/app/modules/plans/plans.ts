@@ -50,7 +50,7 @@ import {
     </div>
     <p class="plan-note">
       Prices shown are starting prices. Final pricing depends on property size, equipment, and site survey.
-      Equipment financing available.
+      Equipment financing and warranty on selected equipment available with a plan (financing excludes drone programs).
     </p>
 
     <div class="dTextData">

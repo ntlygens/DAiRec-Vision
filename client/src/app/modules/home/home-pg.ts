@@ -97,6 +97,7 @@ import { CardItem } from '../../models/comp-faces';
       </div>
       }
     
+      @if (showTestimonials) {
       <div class="testimonialsData">
         @for (i of generateArray(8); track i; let idx = $index, e = $even, last = $last, first = $first) {
             @if (i < virtualLimit) {
@@ -113,6 +114,22 @@ import { CardItem } from '../../models/comp-faces';
             }
         }
       </div>
+      }
+
+      <section class="whyUs" aria-labelledby="whyUsTitle">
+        <h2 id="whyUsTitle">Why DaiRec Vision</h2>
+        <div class="whyUs-grid">
+          @for (f of trustFacts; track f.title) {
+            <div class="whyUs-item">
+              <mat-icon>{{ f.icon }}</mat-icon>
+              <div>
+                <h3>{{ f.title }}</h3>
+                <p>{{ f.text }}</p>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
       @if (showPromo) {
       <div class=promoBanner>
         <drv-custom-card
@@ -239,7 +256,45 @@ import { CardItem } from '../../models/comp-faces';
           }
       }
     
-  `],
+  
+      .whyUs {
+        text-align: left;
+        margin: 3rem 0 2rem;
+        h2 {
+          color: #2c3e50;
+          font-size: 2.5rem;
+          margin: 0 0 1.5rem 0.5rem;
+          border-left: 15px double #2ecc71;
+          padding-left: 0.5rem;
+          line-height: initial;
+        }
+      }
+      .whyUs-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+        margin: 0;
+      }
+      .whyUs-item {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+        margin: 0;
+        padding: 1.4rem 1.5rem;
+        background: #fff;
+        border-radius: 12px;
+        border-top: 3px solid #2ecc71;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+        mat-icon { flex: none; color: #2ecc71; font-size: 32px; width: 32px; height: 32px; }
+        h3 { margin: 0 0 0.3rem; color: #2c3e50; font-size: 1.1rem; }
+        p { margin: 0; color: #555; line-height: 1.45; font-size: 0.95rem; }
+      }
+      @media (max-width: 960px) { .whyUs-grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 600px) {
+        .whyUs-grid { grid-template-columns: 1fr; }
+        .whyUs h2 { font-size: 1.8rem; }
+      }
+`],
 })
 
 export class HomePg implements OnInit {
@@ -249,6 +304,17 @@ export class HomePg implements OnInit {
     virtualLimit = 4;
     /** Promotional banners are hidden until there is a real, dated offer. Set true to show. */
     showPromo = false;
+    /** Placeholder testimonials stay hidden until there are real client reviews. */
+    showTestimonials = false;
+    /** Verified with the owner on 2026-11-08. Only list claims the business can back up. */
+    trustFacts = [
+      { icon: 'verified_user', title: 'Licensed & Insured', text: 'Fully licensed and insured for residential, commercial and enterprise work.' },
+      { icon: 'engineering', title: 'Certified Technicians', text: 'Professional design and installation by certified technicians.' },
+      { icon: 'security', title: '10 Years in Systems Security', text: 'A decade of IT and Microsoft 365 security experience behind every system.' },
+      { icon: 'location_on', title: 'Locally Owned', text: 'Proudly serving homes and businesses across the Tri-State area.' },
+      { icon: 'support_agent', title: '24/7 Professional Monitoring', text: 'Round-the-clock monitoring and dispatch with a monitoring plan.' },
+      { icon: 'flight', title: 'FAA-Certified Drone Pilots', text: 'Aerial patrols managed by FAA Part 107 certified remote pilots.' },
+    ];
     call2ActionBtns$ = {} as WritableSignal<CardItem[]>
     srvcDataDsplys$ = {} as WritableSignal<ServiceScreenInterface[]>
       // slctdSrvcCards$ = {} as WritableSignal<ServiceScreenInterface[]>;
