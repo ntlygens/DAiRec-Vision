@@ -3,6 +3,7 @@ import { BreadcrumbService } from '../services/breadcrumb.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/internal/operators/filter';
 import { ASSESSMENT_HREF, MAIN_LINKS, SERVICE_LINKS } from './nav-links';
+import { HERO_PAGES, HeroPage } from './hero-scenes';
 
 interface Breadcrumb {
   label: string;
@@ -83,8 +84,8 @@ interface Breadcrumb {
       }
     </header>
 
-    @if (showHero()) {
-      <drv-hero-banner />
+    @if (heroPage(); as hp) {
+      <drv-hero-banner [page]="hp" />
     } @else {
     <drv-jumbotron-component
       class="jumbo-tron"
@@ -242,8 +243,8 @@ export class HeaderBar implements OnInit {
   protected readonly menuOpen = signal(false);
   protected readonly scrolled = signal(false);
   protected readonly servicesActive = signal(false);
-  /** Landing and home use the animated hero banner; other pages keep their image jumbotron. */
-  protected readonly showHero = signal(true);
+  /** Pages listed in HERO_PAGES get the animated photo banner; others keep the image jumbotron. */
+  protected readonly heroPage = signal<HeroPage | null>(HERO_PAGES['/']);
 
   protected readonly mainLinks = MAIN_LINKS;
   protected readonly serviceLinks = SERVICE_LINKS;
@@ -267,7 +268,7 @@ export class HeaderBar implements OnInit {
         this.brdCrumbLabel = this.brdCrumb[0]?.url || '';
         this.servicesActive.set(SERVICE_LINKS.some(s => this.router.url.startsWith(s.route!)));
         const path = this.router.url.split(/[?#]/)[0];
-        this.showHero.set(path === '/' || path === '' || path === '/home');
+        this.heroPage.set(HERO_PAGES[path || '/'] ?? null);
         this.setPgBnrImg(path === '/surveil/monitor' ? path : this.brdCrumbLabel);
       });
   }
