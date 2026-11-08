@@ -78,3 +78,20 @@ export interface AccessSrvcsInterface {
 
 }
 
+export interface DroneSrvcsInterface {
+  _id?: mongodb.ObjectId;
+  name?: string;
+  title?: string;
+  subtitle?: string;
+  desc?: string;
+  content?: string;
+  img?: string;
+  imgAlt?: string;
+  rte?: string;
+  num?: number;
+  backgroundColor?: string;
+  borderColor?: string;
+  compSize?: string;
+  compType?: string;
+
+}

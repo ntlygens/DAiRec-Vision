@@ -7,6 +7,7 @@ import { ssiRouter } from "./ss-interface.routes.ts";
 import { prtctRouter } from "./prtct-interface.routes.ts";
 import { srvlRouter } from "./srvl-interface.routes.ts";
 import { accsRouter } from "./accs-interface.routes.ts";
+import { droneRouter } from "./drone-interface.routes.ts";
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ await connectToDatabase(MONGODB_URI)
         app.use("/protectPgData", prtctRouter);
         app.use("/surveilPgData", srvlRouter);
         app.use("/accessPgData", accsRouter);
+        app.use("/dronePgData", droneRouter);
 
         app.listen(5200, () => {
             console.log("Server is running on port 5200");

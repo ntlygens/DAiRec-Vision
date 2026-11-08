@@ -37,3 +37,16 @@ body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* ---- Services dropdown (Material menu renders in an overlay, so it's styled globally) ---- */
+.drv-services-menu.mat-mdc-menu-panel {
+  min-width: 300px;
+  border-radius: 12px;
+  padding: 6px 0;
+  .mat-mdc-menu-item { min-height: 60px; }
+  .mat-mdc-menu-item .mat-icon { color: #2ecc71; }
+  .menu-text { display: flex; flex-direction: column; line-height: 1.25; }
+  .menu-label { font-weight: 600; color: #2c3e50; }
+  .menu-desc { font-size: 0.82rem; color: #6b7785; }
+  .menu-active { background: rgba(46, 204, 113, 0.08); }
+}

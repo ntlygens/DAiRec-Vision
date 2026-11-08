@@ -43,6 +43,24 @@ export const MAINROUTES: DRVRouteInterface[] = [
             breadcrumb: 'Home',
         }
     },
+    {
+        path: 'drone',
+        loadChildren: () => import('./modules/drone/drone-module')
+            .then(m => m.DroneModule
+        ),
+        data: {
+            breadcrumb: 'Home',
+        }
+    },
+    {
+        path: 'plans',
+        loadChildren: () => import('./modules/plans/plans-module')
+            .then(m => m.PlansModule
+        ),
+        data: {
+            breadcrumb: 'Home',
+        }
+    },
     
 ];
 

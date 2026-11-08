@@ -24,15 +24,14 @@ import { CoreCompsModule } from './core-comps/core-comps-module';
       align-items: center;
       gap: 1rem;
 
-      padding: 10px 20px;
-      margin: 0 0 3rem;
+      padding: 10px 20px 0;
+      margin: 0;
     }
-    drv-header-bar, drv-footer-bar {
-      width: 100%;
-    }
+    /* Header host uses display: contents (see header-bar.ts) so its nav can stick to the top of the page. */
     drv-footer-bar {
-      position: sticky;
-      bottom: 0;
+      /* full-bleed: cancel .app side padding */
+      width: calc(100% + 40px);
+      margin: 3rem -20px 0;
     }
 
     router-outlet {

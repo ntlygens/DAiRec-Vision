@@ -28,6 +28,7 @@ export class GuiDataService {
   allSurveilPrdctsData$ = signal<CardItemInterface[]>([]);
   allAccessSrvcsData$ = signal<CardItemInterface[]>([]);
   allAccessPrdctsData$ = signal<CardItemInterface[]>([]);
+  allDronePrdctsData$ = signal<CardItemInterface[]>([]);
 
   uiData$ = signal<UserInterface>({} as UserInterface);
   ssiData$ = signal<ServiceScreenInterface>({} as ServiceScreenInterface);
@@ -44,6 +45,7 @@ export class GuiDataService {
     this.getAllSurveilPrdctsData();
     // this.getAllAccessSrvcsData();
     this.getAllAccessPrdctsData();
+    this.getAllDronePrdctsData();
   }
 
   private refreshAllUserData() {
@@ -100,6 +102,20 @@ export class GuiDataService {
       .subscribe((data) => {
         this.allAccessPrdctsData$.set(data);
     });
+  }
+
+  private refreshAllDronePrdctsData() {
+    this.http.get<CardItemInterface[]>(`${this.apiUrl}/dronePgData`)
+      .subscribe({
+        next: (data) => this.allDronePrdctsData$.set(data ?? []),
+        // Drone page falls back to bundled content when the API/collection is unavailable.
+        error: (err) => console.warn('dronePgData unavailable, using fallback content', err?.message),
+      });
+  }
+
+  getAllDronePrdctsData() {
+    this.refreshAllDronePrdctsData();
+    return this.allDronePrdctsData$;
   }
 
   getAllUserData() {

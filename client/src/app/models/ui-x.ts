@@ -12,6 +12,8 @@ export enum PgLocs {
     PROTECT = 'protect' as any,
     SURVEIL = 'surveil' as any,
     ACCESS = 'access' as any,
+    DRONE = 'drone' as any,
+    PLANS = 'plans' as any,
     CONTACT = 'contact' as any,
 }
 

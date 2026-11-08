@@ -1,0 +1,70 @@
+[
+  {
+    "compType": "product",
+    "compSize": "small",
+    "title": "Thermal & Night Imaging",
+    "subtitle": "See what fixed cameras miss",
+    "content": "Dual HD and thermal cameras detect people and vehicles in total darkness, fog, or across open ground where fixed cameras cannot reach."
+  },
+  {
+    "compType": "product",
+    "compSize": "small",
+    "title": "Alarm-Triggered Response",
+    "subtitle": "Launches in seconds",
+    "content": "Integrates with your CCTV and access control, so a fence breach or forced door sends the drone straight to the location."
+  },
+  {
+    "compType": "product",
+    "compSize": "small",
+    "title": "Geofenced Patrol Routes",
+    "subtitle": "Your property only",
+    "content": "Routes, altitudes, and no-fly areas are mapped to your property lines, so the drone covers your site and only your site."
+  },
+  {
+    "compType": "product",
+    "compSize": "small",
+    "title": "Logged Flight Records",
+    "subtitle": "Evidence on demand",
+    "content": "Every flight is recorded with time, route, and footage, giving you documented evidence and patrol reports for insurers and audits."
+  },
+  {
+    "compType": "feature",
+    "compSize": "small",
+    "name": "Industrial & Logistics",
+    "title": "Industrial & Logistics",
+    "subtitle": "Yards, warehouses & loading areas",
+    "desc": "Sites too large for fixed cameras alone get fast aerial response across the whole property.",
+    "img": "/assets/backgrounds/surveil-Bnr.png",
+    "backgroundColor": "#d1eeff"
+  },
+  {
+    "compType": "feature",
+    "compSize": "small",
+    "name": "Construction Sites",
+    "title": "Construction Sites",
+    "subtitle": "After-hours theft deterrence",
+    "desc": "Deter equipment and material theft overnight and document daily site progress from the air.",
+    "img": "/assets/backgrounds/install-Bnr.png",
+    "backgroundColor": "#d1eeff"
+  },
+  {
+    "compType": "feature",
+    "compSize": "small",
+    "name": "Energy & Utilities",
+    "title": "Energy & Utilities",
+    "subtitle": "Long fence lines, remote assets",
+    "desc": "Solar farms, substations, and long perimeters patrolled on schedule without sending guards on foot.",
+    "img": "/assets/backgrounds/landing-Bnr.png",
+    "backgroundColor": "#d1eeff"
+  },
+  {
+    "compType": "feature",
+    "compSize": "small",
+    "name": "Large Private Estates",
+    "title": "Large Private Estates",
+    "subtitle": "Acreage, ranches & gated estates",
+    "desc": "Perimeter patrols that cover ground a camera network cannot, for private clients with large properties.",
+    "img": "/assets/backgrounds/home-Bnr.png",
+    "backgroundColor": "#d1eeff"
+  }
+]

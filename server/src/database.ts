@@ -5,6 +5,7 @@ import type {
     ProtectSrvcsInterface,
     SurveilSrvcsInterface,
     AccessSrvcsInterface,
+    DroneSrvcsInterface,
  } from "./interface.ts"
 
 export const uiDataCollections: {
@@ -21,6 +22,10 @@ export const srvlDataCollections: {
 } = {};
 export const accsDataCollections: {
     accsSrvcsInterface?: mongodb.Collection<AccessSrvcsInterface>;
+} = {};
+
+export const droneDataCollections: {
+    droneSrvcsInterface?: mongodb.Collection<DroneSrvcsInterface>;
 } = {};
 
 export async function connectToDatabase(uri: string) {
@@ -40,12 +45,14 @@ export async function connectToDatabase(uri: string) {
     const prtctSrvcsCollection = db2.collection<ProtectSrvcsInterface>("protectPgData");
     const srvlSrvcsCollection = db2.collection<SurveilSrvcsInterface>("surveilPgData");
     const accsSrvcsCollection = db2.collection<AccessSrvcsInterface>("accessPgData");
+    const droneSrvcsCollection = db2.collection<DroneSrvcsInterface>("dronePgData");
 
     uiDataCollections.userInterface = userInterfaceCollction;
     ssiDataCollections.srvcscrnInterface = srvcScrnCollection;
     prtctDataCollections.prtctSrvcsInterface = prtctSrvcsCollection;
     srvlDataCollections.srvlSrvcsInterface = srvlSrvcsCollection;
     accsDataCollections.accsSrvcsInterface = accsSrvcsCollection;
+    droneDataCollections.droneSrvcsInterface = droneSrvcsCollection;
 
     
     console.log(`Successfully connected to database:
@@ -54,8 +61,9 @@ export async function connectToDatabase(uri: string) {
            ${srvcScrnCollection.collectionName},
            ${prtctSrvcsCollection.collectionName},
            ${srvlSrvcsCollection.collectionName},
+           ${accsSrvcsCollection.collectionName},
              and
-           ${accsSrvcsCollection.collectionName}!!
+           ${droneSrvcsCollection.collectionName}!!
            `
         );
 }
