@@ -14,14 +14,12 @@ import { CardItem } from '../../models/comp-faces';
     <div class="dTextData">
         <h2>DAiRec Vision Security</h2>
         <p>
-            Dairec Vision Security delivers comprehensive security system integration for residential and commercial 
-            properties. Specializing in advanced surveillance infrastructure, access control solutions, and 24/7 alarm 
-            monitoring, we provide end-to-end installation and maintenance services tailored to each client's risk profile.
+            End-to-end security for homes and businesses. We design, install and monitor systems built around
+            your property's risks.
         </p>
         <p>
-            Our expertise spans IP-based camera systems, CCTV networks, biometric and card-based access control, intrusion 
-            detection, and remote monitoring platforms. From single-location deployments to multi-site enterprise installations, 
-                we engineer scalable security architectures that protect assets, personnel, and property.
+            4K cameras, biometric and card access, intrusion detection, 24/7 remote monitoring and automated
+            drone patrols, from a single home to multi-site enterprises.
         </p>
     </div>
     <div class="whyUsData">
