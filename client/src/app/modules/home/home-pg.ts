@@ -142,7 +142,6 @@ import { CardItem } from '../../models/comp-faces';
         </drv-custom-card>
       </div>
       }
-    <button mat-button (click)="onButtonClick()">Go to Landing</button>
   `,
   styles: [`
     :host {
