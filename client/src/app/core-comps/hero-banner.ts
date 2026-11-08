@@ -91,6 +91,7 @@ import { HERO_SCENES, HeroPage } from './hero-scenes';
       <a class="btn ghost" [routerLink]="page().secondary.route"
          [queryParams]="page().secondary.audience ? { for: page().secondary.audience } : null">{{ page().secondary.label }}</a>
     </div>
+    <p class="fine">Free · No obligation · Tri-State area · <a routerLink="/plans" fragment="assessment-terms">Terms apply</a></p>
   </div>
 </section>
 `,
@@ -120,6 +121,8 @@ import { HERO_SCENES, HeroPage } from './hero-scenes';
 .drv-hero .btn.primary { background: #2ecc71; color: #fff; box-shadow: 0 8px 30px rgba(46,204,113,.35); }
 .drv-hero .btn.primary:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(46,204,113,.5); }
 .drv-hero .btn.ghost { color: #fff; border: 1px solid rgba(255,255,255,.4); background: rgba(255,255,255,.08); backdrop-filter: blur(6px); }
+.drv-hero .fine { max-width: none; margin: .9rem 0 0; font-size: .82rem; color: rgba(255,255,255,.7); text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+.drv-hero .fine a { white-space: nowrap; color: #9fffc9; text-decoration: underline; text-underline-offset: 2px; }
 .drv-hero .btn.ghost:hover { background: rgba(255,255,255,.16); }
 
 .drv-hero .status-chip { position: absolute; z-index: 3; top: 22px; right: clamp(16px, 3vw, 48px); display: flex; align-items: center; gap: .6rem; padding: .5rem .9rem; border-radius: 10px; font: 500 .74rem/1 'Roboto Mono', monospace; letter-spacing: .06em; color: #d8ecff; background: rgba(8,18,40,.55); border: 1px solid rgba(120,200,255,.3); backdrop-filter: blur(8px); box-shadow: 0 8px 24px rgba(0,0,0,.3); }

@@ -122,8 +122,21 @@ export const PLAN_ADDONS: PlanAddOn[] = [
 export const PLAN_FAQS: PlanFaq[] = [
   { q: 'Is there a long-term contract?', a: 'Private plans are month-to-month after a 12-month minimum. Enterprise plans are typically 24- or 36-month agreements with volume pricing.' },
   { q: 'Do I own the equipment?', a: 'You can buy equipment outright or lease it as part of your plan. Leased equipment is maintained and replaced by us at no extra cost.' },
+  { q: "What's included in the free assessment?", a: 'A certified technician visits your property, reviews coverage, entry points and risks, and you receive a written recommendation and quote within 3–5 business days. See the assessment terms below.' },
   { q: 'Can I upgrade later?', a: 'Yes. Add cameras, doors, or drone coverage any time; your plan is adjusted from the next billing cycle.' },
   { q: 'Is drone surveillance legal on my property?', a: 'In most cases, yes, with the right setup. We review airspace, local rules, and privacy considerations during your site survey and handle FAA requirements before any drone flies.' },
+];
+
+/** Free assessment terms, confirmed with the owner 2026-11-08. Shown on the Plans page (#assessment-terms). */
+export const ASSESSMENT_TERMS: { label: string; text: string }[] = [
+  { label: 'Who it\'s for', text: 'Residential and commercial properties within the Tri-State area. Enterprise and multi-site projects receive a scoped consultation.' },
+  { label: 'No obligation', text: 'One free assessment per property, with no obligation to buy.' },
+  { label: 'On-site', text: 'The property owner or an authorized representative must be present. A video call can help us identify and pre-screen the location, but an on-site visit is required before any job is accepted.' },
+  { label: 'Scheduling', text: 'Visits are by appointment, generally within 2–3 business days of your request, depending on distance from our base and technician availability.' },
+  { label: 'What you get', text: 'A written recommendation and quote within 3–5 business days of the visit. Quotes are valid for 15 days.' },
+  { label: 'Rescheduling', text: 'Please give 48 hours\' notice to reschedule or cancel.' },
+  { label: 'Drone site surveys', text: 'Scheduled separately, because they require an airspace and FAA review.' },
+  { label: 'Privacy', text: 'Photos are taken only with your permission, and all findings are kept confidential.' },
 ];
 
 export const CONTACT_EMAIL = 'info@dairecvision.com';

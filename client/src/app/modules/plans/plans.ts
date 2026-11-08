@@ -1,7 +1,7 @@
 import { Component, OnInit, computed, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
-  CONTACT_EMAIL, PLAN_ADDONS, PLAN_FAQS, PLAN_TIERS, PlanAudience, PlanTier,
+  ASSESSMENT_TERMS, CONTACT_EMAIL, PLAN_ADDONS, PLAN_FAQS, PLAN_TIERS, PlanAudience, PlanTier,
 } from './plans.data';
 
 @Component({
@@ -80,6 +80,15 @@ import {
         </mat-expansion-panel>
       }
     </mat-accordion>
+
+    <section id="assessment-terms" class="terms" aria-labelledby="termsTitle">
+      <h2 id="termsTitle"><mat-icon>assignment_turned_in</mat-icon> Free Security Assessment: Terms</h2>
+      <dl>
+        @for (t of assessmentTerms; track t.label) {
+          <div class="term"><dt>{{ t.label }}</dt><dd>{{ t.text }}</dd></div>
+        }
+      </dl>
+    </section>
 
     <div class="dTextData">
       <h1 style="border-left: 0; padding-left: 0; text-align: center;">Not Sure Which Plan Fits?</h1>
@@ -185,6 +194,26 @@ import {
 
     .faq { text-align: left; p { color: #555; } }
 
+    .terms {
+      scroll-margin-top: 90px;   /* clear the sticky header when linked to */
+      margin: 2.5rem 0 1rem;
+      padding: 1.75rem 2rem;
+      text-align: left;
+      background: #f8f9fa;
+      border-left: 4px solid #2ecc71;
+      border-radius: 10px;
+      h2 { display: flex; align-items: center; gap: 0.5rem; margin: 0 0 1rem; color: #2c3e50; font-size: 1.35rem; }
+      h2 mat-icon { color: #2ecc71; }
+      dl { margin: 0; display: grid; gap: 0.6rem; }
+      .term { display: grid; grid-template-columns: 170px 1fr; gap: 1rem; margin: 0; }
+      dt { font-weight: 600; color: #2c3e50; }
+      dd { margin: 0; color: #555; line-height: 1.5; }
+    }
+    @media (max-width: 600px) {
+      .terms { padding: 1.25rem; }
+      .terms .term { grid-template-columns: 1fr; gap: 0.15rem; }
+    }
+
     .cta-row {
       display: flex;
       justify-content: center;
@@ -206,6 +235,7 @@ export class Plans implements OnInit {
   );
   protected readonly addOns = PLAN_ADDONS;
   protected readonly faqs = PLAN_FAQS;
+  protected readonly assessmentTerms = ASSESSMENT_TERMS;
   protected readonly assessmentMailto =
     `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Free security assessment request')}`;
 
