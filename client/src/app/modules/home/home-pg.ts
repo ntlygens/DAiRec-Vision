@@ -24,20 +24,24 @@ import { CardItem } from '../../models/comp-faces';
                 we engineer scalable security architectures that protect assets, personnel, and property.
         </p>
     </div>
-    <div class="whyUsData">
-        @for (dsply of srvcDsplys$; track dsply._id; let idx = $index, e = $even, last = $last, first = $first) {
-            @if ( idx < 2 ) {
-                <drv-custom-card
-                    [id]="dsply._id"
-                    class="article-card"
-                    [elevated]= false
-                    [compType]="dsply.compType?.toString() || 'article'"
-                    compSize="medium"
-                    [srvcData]= dsply>
-                </drv-custom-card>
+    <section class="whyUsData" aria-label="Our services">
+        @for (dsply of srvcDsplys$; track dsply._id; let idx = $index) {
+            @if (idx < 2) {
+                <article class="svc-card" [class.svc-card--dark]="idx === 1">
+                    <h3>{{ dsply.title }}</h3>
+                    @if (dsply.subtitle) {
+                        <p class="svc-sub">{{ dsply.subtitle }}</p>
+                    }
+                    @if (dsply.content) {
+                        <p class="svc-body">{{ dsply.content }}</p>
+                    }
+                    @if (dsply.rte) {
+                        <a class="svc-link" [routerLink]="dsply.rte">Learn more <span aria-hidden="true">→</span></a>
+                    }
+                </article>
             }
         }
-    </div>
+    </section>
 
     <div class="call2action-cards">
         @for (c2a_btn of c2a_btns$; track c2a_btn._id; let idx = $index, e = $even) {
@@ -224,26 +228,66 @@ import { CardItem } from '../../models/comp-faces';
           }
       }
 
-      // .whyUsData windows for about and service display
       .whyUsData {
-          display: flex;
-          justify-content: space-between;
-          .article-card:first-child {
-              // background-color: green;
-              text-align: left;
-              font-size: 18px;
-              flex: 2;
-              line-height: 1rem;
-
-
-          }
-          .article-card:not(:first-child) {
-              // background-color: orange;
-              margin-left: 10px;
-              text-align: right;
-              color: #000;
-              flex: 1;
-          }
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 1.25rem;
+        margin: 0 0 2.5rem;
+        text-align: left;
+      }
+      .svc-card {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 2rem 2.25rem;
+        border-radius: 14px;
+        background: linear-gradient(135deg, #ffffff 0%, #f1faf4 100%);
+        border-left: 5px solid #2ecc71;
+        box-shadow: 0 4px 14px rgba(26, 35, 50, 0.08);
+        h3 {
+          margin: 0 0 0.6rem;
+          color: #2c3e50;
+          font-size: 1.6rem;
+          font-weight: 700;
+          line-height: 1.25;
+        }
+        .svc-sub {
+          margin: 0 0 1rem;
+          color: #6b7785;
+          font-size: 1rem;
+          font-style: italic;
+          line-height: 1.5;
+        }
+        .svc-body {
+          margin: 0 0 1.25rem;
+          color: #444;
+          font-size: 1.05rem;
+          line-height: 1.7;
+          white-space: pre-line;   /* keep the paragraph breaks from the content */
+          text-indent: 0;
+        }
+        .svc-link {
+          margin-top: auto;
+          align-self: flex-start;
+          color: #27ae60;
+          font-weight: 600;
+          text-decoration: none;
+          span { display: inline-block; transition: transform 0.2s; }
+          &:hover span { transform: translateX(4px); }
+        }
+      }
+      .svc-card--dark {
+        background: linear-gradient(135deg, #1a2332 0%, #2c3e50 100%);
+        border-left-color: #2ecc71;
+        h3 { color: #ffffff; font-size: 1.35rem; }
+        .svc-sub { color: #9fffc9; font-style: normal; }
+        .svc-body { color: rgba(255, 255, 255, 0.82); font-size: 1rem; }
+        .svc-link { color: #2ecc71; }
+      }
+      @media (max-width: 900px) {
+        .whyUsData { grid-template-columns: 1fr; }
+        .svc-card { padding: 1.5rem; }
+        .svc-card h3 { font-size: 1.35rem; }
       }
       .testimonialsData {
           display: flex;
