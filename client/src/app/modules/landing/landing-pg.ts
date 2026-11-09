@@ -28,37 +28,6 @@ const SERVICE_BLURBS: Record<string, string> = {
             </drv-custom-card>
         }
       </div> -->
-      <div class="srvcDataDsply">
-        @for (dsjntData of srvcDsplys$; track dsjntData._id; let idx = $index, e = $even, last = $last, first = $first) {
-            @if (idx < 5) {
-                @if (data2bDsplyd$ === 'data' + idx) {
-                    <drv-jumbotron-component
-                        [data]="{
-                            title: dsjntData.title,
-                            subtitle: dsjntData.subtitle,
-                            description: dsjntData.desc,
-                            content: dsjntData.content || 'Professional security design, installation and monitoring for homes and businesses across the Tri-State area.',
-                            img: dsjntData.img && !dsjntData.img.includes('collage-image') ? dsjntData.img : '/assets/backgrounds/install-Bnr.webp',
-                            imageAlt: dsjntData.name || 'Service Display Illustration',
-                            backgroundColor: '#424040',
-                            imagePosition: 'background',
-                            compSize: 'large',
-                            compType: 'banner',
-                            buttons: [
-                                { label: 'Get Started', url: '/plans', action: 'start', icon: 'rocket_launch', style: 'raised', color: 'primary' },
-                                { label: 'Learn More', url: 'home', action: 'learn', icon: 'info', style: 'stroked', color: 'accent' }
-                                
-                            ],
-                            overlay: true,
-                        }"
-                    
-                    />
-                }
-                
-            }
-        }
-      </div>
-
       <section class="lp-services" aria-labelledby="lpServicesTitle">
         <p class="lp-eyebrow">Licensed &middot; Insured &middot; Serving the Tri-State area</p>
         <h2 id="lpServicesTitle">One local team to design, install and watch over your security.</h2>
@@ -97,6 +66,36 @@ const SERVICE_BLURBS: Record<string, string> = {
             }
         }
     </section>
+      <div class="srvcDataDsply">
+        @for (dsjntData of srvcDsplys$; track dsjntData._id; let idx = $index, e = $even, last = $last, first = $first) {
+            @if (idx < 5) {
+                @if (data2bDsplyd$ === 'data' + idx) {
+                    <drv-jumbotron-component
+                        [data]="{
+                            title: dsjntData.title,
+                            subtitle: dsjntData.subtitle,
+                            description: dsjntData.desc,
+                            content: dsjntData.content || 'Professional security design, installation and monitoring for homes and businesses across the Tri-State area.',
+                            img: dsjntData.img && !dsjntData.img.includes('collage-image') ? dsjntData.img : '/assets/backgrounds/install-Bnr.webp',
+                            imageAlt: dsjntData.name || 'Service Display Illustration',
+                            backgroundColor: '#424040',
+                            imagePosition: 'background',
+                            compSize: 'large',
+                            compType: 'banner',
+                            buttons: [
+                                { label: 'Get Started', url: '/plans', action: 'start', icon: 'rocket_launch', style: 'raised', color: 'primary' },
+                                { label: 'Learn More', url: 'home', action: 'learn', icon: 'info', style: 'stroked', color: 'accent' }
+                                
+                            ],
+                            overlay: true,
+                        }"
+                    
+                    />
+                }
+                
+            }
+        }
+      </div>
 
       <section class="lp-steps" aria-labelledby="lpStepsTitle">
         <p class="lp-eyebrow">How it works</p>
