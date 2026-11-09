@@ -129,7 +129,7 @@ export const PLAN_FAQS: PlanFaq[] = [
   { q: 'Do I own the equipment?', a: 'All equipment is leased as part of your plan. We maintain, update and replace it at no extra cost for as long as you are a customer.' },
   { q: "What's included in the free assessment?", a: 'A certified technician visits your property, reviews coverage, entry points and risks, and you receive a written recommendation and quote within 3–5 business days. See the assessment terms below.' },
   { q: 'Can I upgrade later?', a: 'Yes. Add cameras, doors, or drone coverage any time; your plan is adjusted from the next billing cycle.' },
-  { q: 'Is drone surveillance legal on my property?', a: 'It depends on where your property is. Drone patrols are offered wherever federal, state and local rules permit them; many suburban, industrial and private sites qualify, while some areas, including much of New York City, restrict drone takeoff and landing. Your site survey reviews airspace, local rules and privacy, and we handle FAA requirements before any drone flies.' },
+  { q: 'Is drone surveillance legal on my property?', a: 'It depends on where your property is. Drone patrols are offered wherever federal, state and local rules permit them; many suburban, industrial and private sites qualify, while some areas, including much of New York City, currently restrict drone takeoff and landing. Your site survey reviews airspace, local rules and privacy, and we handle FAA requirements before any drone flies.' },
 ];
 
 /** Free assessment terms, confirmed with the owner 2026-11-08. Shown on the Plans page (#assessment-terms). */
