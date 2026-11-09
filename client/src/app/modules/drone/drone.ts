@@ -53,22 +53,7 @@ import { DRONE_FALLBACK_DATA } from './drone.data';
     <div class="srvlSrvcType">
       @for (srvcT of droneData(); track srvcT._id) {
         @if (srvcT.compType?.toString() === 'feature') {
-          <drv-jumbotron-component
-            class="srvlSrvcType-tron"
-            [data]="{
-              title: srvcT.title,
-              subtitle: srvcT.subtitle,
-              description: srvcT.desc,
-              content: srvcT.content,
-              img: srvcT.img,
-              imageAlt: srvcT.name,
-              imagePosition: 'right',
-              compSize: 'small',
-              compType: srvcT.compType,
-              backgroundColor: srvcT.backgroundColor,
-              overlay: false,
-            }">
-          </drv-jumbotron-component>
+          <drv-property-type [data]="srvcT" />
         }
       }
     </div>
@@ -166,12 +151,10 @@ import { DRONE_FALLBACK_DATA } from './drone.data';
     }
 
     .srvlSrvcType {
-      display: inline-flex;
-      overflow-x: scroll;
-      width: auto;
-      justify-content: space-between;
-      .srvlSrvcType-tron { min-width: 600px; }
-      .srvlSrvcType-tron:not(:first-child) { margin-left: 20px; }
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin: 0 0 3rem;
     }
 
     .compliance {
@@ -204,7 +187,6 @@ import { DRONE_FALLBACK_DATA } from './drone.data';
     @media (max-width: 768px) {
       .dTextData h1 { font-size: 2.5rem; }
       .dTextData h2 { font-size: 1.8rem; }
-      .srvlSrvcType .srvlSrvcType-tron { min-width: 85vw; }
       .compliance { padding: 1.5rem; }
     }
   `,

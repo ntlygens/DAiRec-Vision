@@ -8,6 +8,7 @@ import { HeaderBar } from './header-bar';
 import { FooterBar } from './footer-bar';
 import { JumboTronComponent } from './jumbo-tron';
 import { HeroBanner } from './hero-banner';
+import { PropertyTypeCard } from './property-type-card';
 
 
 
@@ -23,6 +24,7 @@ import { HeroBanner } from './hero-banner';
     RouterModule,
     JumboTronComponent,
     HeroBanner,
+    PropertyTypeCard,
   ],
   exports: [
     CustomCardComponent,
@@ -30,6 +32,7 @@ import { HeroBanner } from './hero-banner';
     FooterBar,
     JumboTronComponent,
     HeroBanner,
+    PropertyTypeCard,
   ]
 })
 export class CoreCompsModule { }

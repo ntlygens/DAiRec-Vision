@@ -44,12 +44,12 @@ export const DRONE_FALLBACK_DATA: CardItemInterface[] = [
     _id: 'drone-f3', compType: CompType.FEATURE, compSize: CompSize.SMALL,
     name: 'Energy & Utilities', title: 'Energy & Utilities', subtitle: 'Long fence lines, remote assets',
     desc: 'Solar farms, substations, and long perimeters patrolled on schedule without sending guards on foot.',
-    img: '/assets/backgrounds/landing-Bnr.webp', backgroundColor: '#d1eeff',
+    img: '/assets/backgrounds/surveil-Bnr.webp', backgroundColor: '#d1eeff',
   },
   {
     _id: 'drone-f4', compType: CompType.FEATURE, compSize: CompSize.SMALL,
     name: 'Large Private Estates', title: 'Large Private Estates', subtitle: 'Acreage, ranches & gated estates',
     desc: 'Perimeter patrols that cover ground a camera network cannot, for private clients with large properties.',
-    img: '/assets/backgrounds/home-Bnr.webp', backgroundColor: '#d1eeff',
+    img: '/assets/backgrounds/landing-Bnr.webp', backgroundColor: '#d1eeff',
   },
 ];

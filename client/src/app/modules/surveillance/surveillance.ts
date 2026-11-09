@@ -49,24 +49,9 @@ import { GuiDataService } from '../../services/gui-data-service';
       <h1>For Every Property Type</h1>
     </div>
     <div class="srvlSrvcType">
-      @for (srvcT of srvlPrdcts$; track srvcT._id; let idx = $index;) {
-        @if (srvcT.compType?.toString() === "feature") {
-          <drv-jumbotron-component
-            class="srvlSrvcType-tron"
-              [data]="{
-                title: srvcT.title,
-                subtitle: srvcT.subtitle,
-                description: srvcT.desc,
-                content: srvcT.content,
-                img: srvcT.img,
-                imageAlt: srvcT.name,
-                imagePosition: 'right',
-                compSize: 'small',
-                compType: srvcT.compType,
-                backgroundColor: srvcT.backgroundColor,
-                overlay: false,
-              }">
-          </drv-jumbotron-component>
+      @for (srvcT of srvlPrdcts$; track srvcT._id) {
+        @if (srvcT.compType?.toString() === 'feature') {
+          <drv-property-type [data]="srvcT" />
         }
       }
     </div>
@@ -210,18 +195,10 @@ import { GuiDataService } from '../../services/gui-data-service';
       }
 
       .srvlSrvcType {
-        display: inline-flex;
-        overflow-x: scroll;
-        width: auto;
-        justify-content: space-between;
-
-        .srvlSrvcType-tron {
-          min-width: 600px;
-
-        }
-        .srvlSrvcType-tron:not(:first-child) {
-          margin-left: 20px;
-        }
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+        margin: 0 0 3rem;
       }
   `,
 })
