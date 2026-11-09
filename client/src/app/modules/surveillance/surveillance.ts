@@ -31,10 +31,8 @@ import { GuiDataService } from '../../services/gui-data-service';
       }
     </div>
     <div class="srvlSrvcs">
-      <!-- <mat-grid-list cols="2"> -->
       @for(srvc of srvlPrdcts$; track srvc._id; let idx = $index; let e = $even) {
         @if (srvc.compType?.toString() === "product") {
-          <!-- <mat-grid-tile> -->
             <drv-custom-card 
               class="srvlSrvcs-card"
               [id]=srvc._id
@@ -44,10 +42,8 @@ import { GuiDataService } from '../../services/gui-data-service';
               [compType]?=srvc.compType
               [cardData]=srvc
               ></drv-custom-card>
-          <!-- </mat-grid-tile> -->
         }
       }
-    <!-- </mat-grid-list> -->
     </div>
     <div class="dTextData">
       <h1>For Every Property Type</h1>
@@ -162,13 +158,10 @@ import { GuiDataService } from '../../services/gui-data-service';
       }
 
       .srvlSrvcs {
-          display: flex;
-          justify-content: space-between;
-          .srvlSrvcs-card:not(:first-child) {
-              // width: 23%;
-              margin-left: 10px;
-              // flex: 1;
-          }
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+          gap: 20px;
+          text-align: left;
       }
 
       .monitor-cta {

@@ -17,22 +17,20 @@ import { GuiDataService } from '../../services/gui-data-service';
             and set up so you can watch live and review footage from any device.
         </p>
     </div>
-    <mat-grid-list cols="2">
-      @for(pPrdcts of protectedPrdcts$; track pPrdcts._id; let idx = $index; let e = $even) {
+    <div class="prdctGrid">
+      @for(pPrdcts of protectedPrdcts$; track pPrdcts._id) {
         @if (pPrdcts.compType?.toString() === "product") {
-          <mat-grid-tile>
-            <drv-custom-card 
-              [id]=pPrdcts._id
-              [clickable]="true"
-              [elevated]="true"
-              [compSize]?=pPrdcts.compSize
-              [compType]?=pPrdcts.compType
-              [cardData]=pPrdcts
-              ></drv-custom-card>
-          </mat-grid-tile>
+          <drv-custom-card
+            [id]="pPrdcts._id"
+            [clickable]="true"
+            [elevated]="true"
+            [compSize]="pPrdcts.compSize?.toString()"
+            [compType]="pPrdcts.compType?.toString()"
+            [cardData]="pPrdcts">
+          </drv-custom-card>
         }
       }
-    </mat-grid-list>
+    </div>
     @if (showPromo) {
     <div #promoBnr id=promoBnr class=promoBanner>
         <drv-custom-card
@@ -110,6 +108,14 @@ import { GuiDataService } from '../../services/gui-data-service';
             
         }
         p:not(:last-child ){ text-indent: 14px }
+      }
+
+      .prdctGrid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
+        margin: 0 0 3rem;
+        text-align: left;
       }
 
       .whyUsData {

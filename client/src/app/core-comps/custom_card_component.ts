@@ -22,6 +22,8 @@ export interface CardData {
   subtitle?: string;
   content?: string;
   img?: string;
+  /** Material icon name for the card illustration; inferred from the title when absent. */
+  icon?: string;
   imageAlt?: string;
   buttons?: CardButtonModel[];
   backgroundColor?: string;
@@ -87,6 +89,37 @@ export class CardContentComponent {}
 })
 export class CardActionsComponent {}
 
+/** Title keywords -> Material icon, most specific first. */
+const CARD_ICONS: [RegExp, string][] = [
+  [/stop wondering|assessment/i, 'fact_check'],
+  [/thermal|night imaging/i, 'nights_stay'],
+  [/alarm/i, 'campaign'],
+  [/geofenc|patrol route/i, 'share_location'],
+  [/logged|flight record|evidence/i, 'receipt_long'],
+  [/drone|aerial|eyes in the sky|sky/i, 'flight'],
+  [/construction site/i, 'construction'],
+  [/energy|utilit/i, 'bolt'],
+  [/estate/i, 'cottage'],
+  [/clarity|4k|high.definition|\bhd\b/i, 'hd'],
+  [/integration|nvr|dvr|recorder/i, 'hub'],
+  [/weather/i, 'thunderstorm'],
+  [/detection|analytic/i, 'radar'],
+  [/streaming/i, 'live_tv'],
+  [/live view|anywhere/i, 'devices'],
+  [/alert/i, 'notifications_active'],
+  [/recording|backup|cloud|storage/i, 'cloud_done'],
+  [/monitoring|watch so/i, 'support_agent'],
+  [/install/i, 'handyman'],
+  [/eyes|blink|visib/i, 'visibility'],
+  [/home|famil/i, 'home'],
+  [/business|retail|store/i, 'storefront'],
+  [/multi.site/i, 'domain'],
+  [/industrial|logistic|warehouse/i, 'factory'],
+  [/access|keycard|door|entry/i, 'key'],
+  [/surveillance|video/i, 'videocam'],
+  [/cctv|camera/i, 'camera_outdoor'],
+];
+
 // Main custom card component
 @Component({
   selector: 'drv-custom-card',
@@ -124,6 +157,18 @@ export class CardActionsComponent {}
         </div>
       }
     
+      <!-- Illustration (product / feature cards without a photo) -->
+      @if (showBand) {
+        <div class="card-illustration" aria-hidden="true">
+          <span class="ill-grid"></span>
+          <span class="ill-ring"></span>
+          <span class="ill-ring ill-ring--outer"></span>
+          <span class="ill-sweep"></span>
+          <mat-icon class="ill-icon">{{ iconName }}</mat-icon>
+          <span class="ill-tag"><span class="ill-dot"></span>{{ tagText }}</span>
+        </div>
+      }
+
       <!-- Header Section (when no image) -->
       @if (!img && hasHeader) {
         <div class="card-header">
@@ -134,6 +179,9 @@ export class CardActionsComponent {}
       <!-- Content Section -->      
       <mat-card-content>
         <div class="card-body">
+          @if (showBadge) {
+            <span class="card-badge" aria-hidden="true"><mat-icon>{{ iconName }}</mat-icon></span>
+          }
           @if ((cardData?.title || cardData?.subtitle) || (srvcData?.title || srvcData?.subtitle || title || subtitle)) {
             <div class="card-title">
               <h3>{{ cardData?.title || srvcData?.title || title}}</h3>
@@ -214,13 +262,13 @@ export class CardActionsComponent {}
       cursor: pointer;
 
       &.isSmall {
-        height: 250px;
+        min-height: 250px;
       }
       &.isMedium {
-        height: 450px;
+        min-height: 450px;
       }
       &.isLarge {
-        height: 600px;
+        min-height: 600px;
       }
       
     }
@@ -426,6 +474,102 @@ export class CardActionsComponent {}
       flex-wrap: wrap;
     }
 
+
+    /* ---------- Illustrations ---------- */
+    .card-illustration {
+      position: relative;
+      height: 132px;
+      flex-shrink: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 55%, var(--drv-navy) 0%, var(--drv-midnight) 70%);
+      border-bottom: 3px solid var(--drv-green);
+    }
+    .ill-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(159, 255, 201, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(159, 255, 201, 0.07) 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+    .ill-ring {
+      position: absolute;
+      width: 84px; height: 84px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(46, 204, 113, 0.55);
+      box-shadow: 0 0 24px rgba(46, 204, 113, 0.25), inset 0 0 18px rgba(46, 204, 113, 0.15);
+    }
+    .ill-ring--outer {
+      width: 124px; height: 124px;
+      border: 1px dashed rgba(56, 200, 255, 0.35);
+      box-shadow: none;
+      animation: ill-spin 28s linear infinite;
+    }
+    .ill-sweep {
+      position: absolute;
+      width: 124px; height: 124px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, rgba(46, 204, 113, 0.28), transparent 55deg, transparent 360deg);
+      animation: ill-spin 5s linear infinite;
+    }
+    .ill-icon {
+      position: relative;
+      width: 44px; height: 44px;
+      font-size: 44px;
+      color: var(--drv-mint);
+      filter: drop-shadow(0 0 8px rgba(46, 204, 113, 0.6));
+    }
+    .ill-tag {
+      position: absolute;
+      top: 10px; left: 12px;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(26, 35, 50, 0.75);
+      border: 1px solid rgba(159, 255, 201, 0.25);
+      color: var(--drv-mint);
+      font-size: 10px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase;
+      white-space: nowrap; max-width: calc(100% - 24px); overflow: hidden; text-overflow: ellipsis;
+    }
+    .ill-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--drv-green);
+      animation: ill-blink 2s ease-in-out infinite;
+    }
+    .custom-card.clickable:hover .ill-icon { transform: scale(1.08); transition: transform 0.3s ease; }
+    @keyframes ill-spin { to { transform: rotate(360deg); } }
+    @keyframes ill-blink { 50% { opacity: 0.25; } }
+    @media (prefers-reduced-motion: reduce) {
+      .ill-ring--outer, .ill-sweep, .ill-dot { animation: none; }
+    }
+
+    .card-badge {
+      display: inline-flex;
+      align-items: center; justify-content: center;
+      width: 46px; height: 46px;
+      margin-bottom: 10px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--drv-midnight) 0%, var(--drv-navy) 100%);
+      box-shadow: inset 0 -3px 0 var(--drv-green);
+      mat-icon { color: var(--drv-mint); font-size: 26px; width: 26px; height: 26px; }
+    }
+    .isBanner .card-badge {
+      width: 56px; height: 56px;
+      background: var(--drv-midnight);
+      box-shadow: none;
+      mat-icon { color: var(--drv-green); font-size: 32px; width: 32px; height: 32px; }
+    }
+    .isButton .card-body {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .isButton .card-badge {
+      width: auto; height: auto; margin: 0;
+      background: none; box-shadow: none;
+      mat-icon { color: var(--drv-green); font-size: 30px; width: 30px; height: 30px; }
+    }
+
     /* Responsive */
     @media (max-width: 600px) {
       .card-image {
@@ -463,7 +607,53 @@ export class CustomCardComponent {
   @ContentChild(CardHeaderComponent) hasFooter?: CardFooterComponent;
   @ContentChild(CardActionsComponent) hasActions?: CardActionsComponent;
 
+  /** Explicit icon for the illustration; otherwise inferred from the card's title. */
+  @Input() icon?: string;
+
   constructor(private router: Router ){  }
+
+  /** Normalised component type of this card. */
+  get kind(): string {
+    return String(this.cardData?.compType ?? this.srvcData?.compType ?? this.compType ?? '').toLowerCase();
+  }
+
+  get hasImage(): boolean {
+    return !!(this.cardData?.img || this.srvcData?.img || this.img);
+  }
+
+  /** Icon shown in the illustration band or badge. */
+  get iconName(): string {
+    const explicit = this.icon || this.cardData?.icon || this.cardData?.metadata?.icon;
+    if (explicit) return explicit;
+    const sources = [
+      this.cardData?.title || this.srvcData?.title || this.title,
+      this.cardData?.content || this.cardData?.subtitle,
+      (this.cardData as any)?.name || this.srvcData?.name,
+    ];
+    for (const src of sources) {
+      const hit = src ? CARD_ICONS.find(([re]) => re.test(src)) : undefined;
+      if (hit) return hit[1];
+    }
+    return 'shield';
+  }
+
+  /** Short label in the illustration's status tag. */
+  get tagText(): string {
+    const sub = this.cardData?.subtitle || this.srvcData?.subtitle || this.subtitle || '';
+    const name = (this.cardData as any)?.name || this.srvcData?.name || '';
+    const t = (name && name.length <= 26 ? name : '') || (sub.length <= 26 ? sub : '') || 'DaiRec Vision';
+    return t;
+  }
+
+  /** Full illustration band: product and feature cards without a photo. */
+  get showBand(): boolean {
+    return !this.hasImage && !this.isPlaceholder && (this.kind === 'product' || this.kind === 'feature');
+  }
+
+  /** Compact icon badge beside the title: articles, banners and button cards. */
+  get showBadge(): boolean {
+    return !this.hasImage && !this.isPlaceholder && ['article', 'banner', 'button'].includes(this.kind);
+  }
 
   onButtonClick(button: CardButtonModel): void {
       this.buttonClick.emit(button);

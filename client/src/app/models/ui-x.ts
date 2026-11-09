@@ -81,6 +81,8 @@ export interface CardItemInterface {
   desc?: string;
   content?: string;
   img?: string;
+  /** Material icon name for the card illustration. */
+  icon?: string;
   imageAlt?: string;
   backgroundColor?: string;
   buttons?: CardButtonModel[];

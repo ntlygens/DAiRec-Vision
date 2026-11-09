@@ -159,11 +159,10 @@ import { DRONE_FALLBACK_DATA } from './drone.data';
     }
 
     .srvlSrvcs {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 10px;
-      .srvlSrvcs-card { flex: 1 1 220px; }
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      text-align: left;
     }
 
     .srvlSrvcType {
