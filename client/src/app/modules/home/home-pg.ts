@@ -3,6 +3,14 @@ import { GuiDataService } from '../../services/gui-data-service';
 import { ServiceScreenInterface } from '../../models/ui-x';
 import { CardItem } from '../../models/comp-faces';
 
+/** Banner photo for a home service panel: the record's own image, else the matching service banner. */
+const PANEL_IMAGES: Record<string, string> = {
+  '/protect': '/assets/backgrounds/install-Bnr.webp',
+  '/surveil': '/assets/backgrounds/surveil-Bnr.webp',
+  '/access':  '/assets/backgrounds/access-Bnr.webp',
+  '/drone':   '/assets/backgrounds/landing-Bnr.webp',
+};
+
 @Component({
   selector: 'dvz-home-pg',
   standalone: false,
@@ -64,7 +72,7 @@ import { CardItem } from '../../models/comp-faces';
                             subtitle: dsjntData.subtitle,
                             description: dsjntData.desc,
                             content: dsjntData.content || 'Professional security design, installation and monitoring for homes and businesses across the Tri-State area.',
-                            img: dsjntData.img || '/assets/backgrounds/collage-image-1.jpg',
+                            img: panelImage(dsjntData),
                             imageAlt: dsjntData.name || 'Service Display Illustration',
                             backgroundColor: '#66f2ee',
                             imagePosition: 'background',
@@ -279,6 +287,10 @@ import { CardItem } from '../../models/comp-faces';
 })
 
 export class HomePg {
+    protected panelImage(d: { img?: string; rte?: string }): string {
+        return d.img && !d.img.includes('collage-image') ? d.img : PANEL_IMAGES[d.rte ?? ''] ?? '/assets/backgrounds/install-Bnr.webp';
+    }
+
     /** Which service panel is shown under the service buttons. */
     data2bDsplyd$ = 'data0';
     virtualLimit = 4;

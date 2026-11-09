@@ -14,8 +14,8 @@
     {
       "binding": "DB",
       "database_name": "dairec-content",
-      // Paste the id printed by: npx wrangler d1 create dairec-content
-      "database_id": "REPLACE_WITH_D1_DATABASE_ID"
+      // Created 2026-11-09 (region: eastern North America)
+      "database_id": "b0b98394-ffc0-4a43-9386-a1a7b0e8ab0f"
     }
   ],
   "routes": [

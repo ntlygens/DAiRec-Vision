@@ -19,7 +19,7 @@ All commands run on your Mac. Commands marked *(client)* run in `client/`.
    Add the domain in the Cloudflare dashboard and let it scan your records. Before switching nameservers,
    **check that the MX, SPF (TXT) and DKIM records for info@dairecvision.com were imported**, or email stops.
    Then change the nameservers at your registrar to the two Cloudflare gives you.
-2. **Export the current content from MongoDB** (MongoDB still running locally):
+2. **(Done 2026-11-09: D1 `dairec-content` created and loaded from content/content.json.) To re-import from MongoDB instead:** (MongoDB still running locally):
    ```
    cd server && npm run copy:pages:update && npm run copy:export && cd ..
    node scripts/import-mongo-export.mjs
@@ -31,7 +31,7 @@ All commands run on your Mac. Commands marked *(client)* run in `client/`.
    npm install -D wrangler
    npx wrangler login
    ```
-4. **Create the database** *(client)*:
+4. **Create the database** *(client)* (done: id is already in wrangler.jsonc):
    ```
    npx wrangler d1 create dairec-content
    ```
