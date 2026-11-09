@@ -71,7 +71,7 @@ import { CardItem } from '../../models/comp-faces';
                             compSize: 'medium',
                             compType: 'banner',
                             buttons: [
-                                { label: 'Get Started', url: '/', action: 'start', icon: 'rocket_launch', style: 'raised', color: 'primary' },
+                                { label: 'Get Started', url: '/plans', action: 'start', icon: 'rocket_launch', style: 'raised', color: 'primary' },
                                 { label: 'Learn More', url: dsjntData.rte, action: 'learn', icon: 'info', style: 'stroked', color: 'accent' }
                                 
                             ],
