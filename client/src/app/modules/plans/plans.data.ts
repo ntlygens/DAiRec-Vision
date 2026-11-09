@@ -1,7 +1,7 @@
 /**
  * Plans & Pricing content.
  * Prices approved by the owner 2026-11-08 (see the Competitive Pricing & Acquisition Strategy doc).
- * Feature lists, installation 'from' prices and the equipment FAQ still need owner confirmation.
+ * Plan features, install 'from' prices, extra-camera pricing and lease-only equipment confirmed by the owner 2026-11-09.
  */
 export type PlanAudience = 'private' | 'enterprise';
 
@@ -36,7 +36,7 @@ export const PLAN_TIERS: PlanTier[] = [
     forWho: 'Apartments, condos & smaller homes',
     price: '$24', per: '/mo', install: '+ installation from $499',
     features: [
-      'Up to 4 HD IP cameras',
+      '3 HD IP cameras included',
       'Self-monitored: live view & alerts in the app',
       'Motion alerts with person detection',
       '7 days of cloud video storage',
@@ -113,16 +113,15 @@ export const PLAN_TIERS: PlanTier[] = [
 ];
 
 export const PLAN_ADDONS: PlanAddOn[] = [
-  { name: 'Extra camera', detail: 'Additional 4K IP camera, installed and configured', price: '$15/mo' },
+  { name: 'Extra camera (home plans)', detail: 'Additional IP camera: $50 camera + $25 installation, configured to your plan', price: '$75 one-time' },
   { name: 'Extended storage', detail: 'Increase cloud retention by 30 days', price: '$10/mo' },
   { name: 'Extra access point', detail: 'Additional door, gate, or elevator reader', price: '$20/mo' },
   { name: 'On-demand drone patrol', detail: 'Scheduled patrol flights for events or short-term needs', price: 'By quote' },
-  { name: 'License plate recognition', detail: 'LPR camera and alerts at gates and entrances', price: '$35/mo' },
 ];
 
 export const PLAN_FAQS: PlanFaq[] = [
   { q: 'Is there a long-term contract?', a: 'No 3-year contracts. Every plan is month-to-month, or choose a 24-month agreement and get half off installation labor. Multi-site enterprise agreements can include volume pricing.' },
-  { q: 'Do I own the equipment?', a: 'You can buy equipment outright or lease it as part of your plan. Leased equipment is maintained and replaced by us at no extra cost.' },
+  { q: 'Do I own the equipment?', a: 'All equipment is leased as part of your plan. We maintain, update and replace it at no extra cost for as long as you are a customer.' },
   { q: "What's included in the free assessment?", a: 'A certified technician visits your property, reviews coverage, entry points and risks, and you receive a written recommendation and quote within 3–5 business days. See the assessment terms below.' },
   { q: 'Can I upgrade later?', a: 'Yes. Add cameras, doors, or drone coverage any time; your plan is adjusted from the next billing cycle.' },
   { q: 'Is drone surveillance legal on my property?', a: 'In most cases, yes, with the right setup. We review airspace, local rules, and privacy considerations during your site survey and handle FAA requirements before any drone flies.' },
@@ -141,3 +140,6 @@ export const ASSESSMENT_TERMS: { label: string; text: string }[] = [
 ];
 
 export const CONTACT_EMAIL = 'info@dairecvision.com';
+
+/** Referral credit, shown as a low-key note on the Plans page. */
+export const REFERRAL_CREDIT = '$100';

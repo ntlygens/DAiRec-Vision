@@ -1,7 +1,7 @@
 import { Component, OnInit, computed, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
-  ASSESSMENT_TERMS, CONTACT_EMAIL, PLAN_ADDONS, PLAN_FAQS, PLAN_TIERS, PlanAudience, PlanTier,
+  ASSESSMENT_TERMS, CONTACT_EMAIL, PLAN_ADDONS, PLAN_FAQS, PLAN_TIERS, PlanAudience, PlanTier, REFERRAL_CREDIT,
 } from './plans.data';
 
 @Component({
@@ -50,8 +50,13 @@ import {
     </div>
     <p class="plan-note">
       Prices shown are starting prices. Final pricing depends on property size, equipment, and site survey.
-      Equipment financing and warranty on selected equipment available with a plan (financing excludes drone programs).
-      Prices exclude applicable sales tax.
+      All equipment is leased, maintained and updated by DaiRec Vision as part of your plan.
+      Financing available with a plan (excludes drone programs). Prices exclude applicable sales tax.
+    </p>
+    <p class="referral-note">
+      <mat-icon>favorite_border</mat-icon>
+      Know someone who could use better security? Refer them and you'll each get {{ referralCredit }} off.
+      <a [href]="referralMailto">Share a referral</a>
     </p>
 
     <div class="dTextData">
@@ -180,6 +185,13 @@ import {
       letter-spacing: 0.03em; white-space: nowrap;
     }
     .plan-note { color: #777; font-size: 0.95rem; margin-top: 2rem; }
+    .referral-note {
+      display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.4rem;
+      margin: -0.5rem 0 1rem; color: #8a94a3; font-size: 0.88rem;
+      mat-icon { font-size: 16px; width: 16px; height: 16px; color: #2ecc71; }
+      a { color: #2c3e50; text-decoration: underline; text-underline-offset: 2px; }
+      a:hover { color: #2ecc71; }
+    }
 
     .addon-table {
       width: 100%;
@@ -237,6 +249,9 @@ export class Plans implements OnInit {
   protected readonly addOns = PLAN_ADDONS;
   protected readonly faqs = PLAN_FAQS;
   protected readonly assessmentTerms = ASSESSMENT_TERMS;
+  protected readonly referralCredit = REFERRAL_CREDIT;
+  protected readonly referralMailto =
+    `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Referral')}&body=${encodeURIComponent("Hi DaiRec Vision team,\n\nI'd like to refer:\nName:\nPhone or email:\n\nReferred by (your name):\n")}`;
   protected readonly assessmentMailto =
     `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Free security assessment request')}`;
 
