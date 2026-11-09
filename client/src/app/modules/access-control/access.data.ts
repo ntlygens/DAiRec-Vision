@@ -1,4 +1,5 @@
 import { CardItemInterface, CompSize, CompType } from '../../models/ui-x';
+import { JumbotronDataModel } from '../../core-comps/jumbo-tron';
 
 /**
  * Content for the Access Control page.
@@ -37,26 +38,23 @@ export const ACCESS_FALLBACK_DATA: CardItemInterface[] = [
     title: 'Schedules & Audit Trail', subtitle: 'Who, where and when', name: 'Audit trail',
     content: 'Set access by person, door and time, lock down remotely, and search a complete log of every entry and denied attempt.',
   },
-  // --- property types ---
-  {
-    _id: 'access-f1', compType: CompType.FEATURE, compSize: CompSize.SMALL, icon: 'home',
-    name: 'Keyless home', title: 'Homes & Residences', subtitle: 'Keyless entry for the whole family',
-    desc: 'Smart locks and keypads for front doors, garages and gates, with codes for family, sitters and contractors that expire when you say.',
-    content: 'Get a notification when the kids get home, and unlock remotely for deliveries or guests.',
-    img: '/assets/backgrounds/landing-Bnr.webp',
-  },
-  {
-    _id: 'access-f2', compType: CompType.FEATURE, compSize: CompSize.SMALL, icon: 'storefront',
-    name: 'Business access', title: 'Offices & Retail', subtitle: 'Doors that keep your hours',
-    desc: 'Card and mobile access for entrances, stockrooms, offices and server rooms, unlocking for business hours and locking themselves after close.',
-    content: 'Onboard or offboard staff in seconds and see exactly who opened which door, and when.',
-    img: '/assets/backgrounds/access-Bnr.webp',
-  },
-  {
-    _id: 'access-f3', compType: CompType.FEATURE, compSize: CompSize.SMALL, icon: 'apartment',
-    name: 'Multi-site access', title: 'Multi-Tenant & Multi-Site', subtitle: 'One system, every building',
-    desc: 'Lobbies, elevators, parking gates and amenity spaces for apartment buildings, campuses and companies with several locations.',
-    content: 'Manage every site from one dashboard, with separate permissions for tenants, staff and property managers.',
-    img: '/assets/backgrounds/surveil-Bnr.webp',
-  },
 ];
+
+/** Full-width banner panel (srvcDataDsply) on the Access Control page. */
+export const ACCESS_SHOWCASE: JumbotronDataModel = {
+  title: 'Access That Works the Way You Do',
+  subtitle: 'Keyless entry for homes, offices and multi-site properties',
+  description: 'From one smart lock on a front door to every lobby, elevator and parking gate across your buildings, DaiRec Vision designs, installs and maintains access control built around how your property runs.',
+  content: 'Grant or revoke access in seconds, schedule entry by person, door and time, and review every entry from one dashboard, with video verification when paired with our cameras.',
+  img: '/assets/backgrounds/access-Bnr.webp',
+  imageAlt: 'Keyless access reader with live entry log',
+  backgroundColor: '#424040',
+  imagePosition: 'background',
+  compSize: 'large',
+  compType: 'banner',
+  buttons: [
+    { label: 'See Plans & Pricing', url: '/plans', action: 'start', icon: 'sell', style: 'raised', color: 'primary' },
+    { label: 'Explore CCTV', url: '/protect', action: 'learn', icon: 'videocam', style: 'stroked', color: 'accent' },
+  ],
+  overlay: true,
+};

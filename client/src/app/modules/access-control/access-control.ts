@@ -1,7 +1,7 @@
 import { Component, computed } from '@angular/core';
 import { CardItemInterface } from '../../models/ui-x';
 import { GuiDataService } from '../../services/gui-data-service';
-import { ACCESS_FALLBACK_DATA } from './access.data';
+import { ACCESS_FALLBACK_DATA, ACCESS_SHOWCASE } from './access.data';
 
 @Component({
   selector: 'drv-access-control',
@@ -51,15 +51,8 @@ import { ACCESS_FALLBACK_DATA } from './access.data';
         }
       }
     </div>
-    <div class="dTextData">
-      <h1>For Every Property Type</h1>
-    </div>
-    <div class="accsSrvcType">
-      @for (item of accessData(); track item._id) {
-        @if (item.compType?.toString() === 'feature') {
-          <drv-property-type [data]="item" />
-        }
-      }
+    <div class="srvcDataDsply">
+      <drv-jumbotron-component [data]="showcase" />
     </div>
     <div class="dTextData">
       <h1 style="border-left: 0; padding-left: 0; text-align: center;">Your Doors, Under Control.</h1>
@@ -180,11 +173,8 @@ import { ACCESS_FALLBACK_DATA } from './access.data';
         .cta-link { flex-direction: column; align-items: flex-start; }
       }
 
-      .accsSrvcType {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 24px;
-        margin: 0 0 3rem;
+      .srvcDataDsply {
+          display: unset;
       }
   `,
 })
@@ -201,6 +191,9 @@ export class AccessControl {
   /** Article records for the "why us" panels. */
   protected readonly articles = computed(() =>
     this.accessData().filter(a => a.compType?.toString() === 'article'));
+
+  /** Full-width banner panel below the credential cards. */
+  readonly showcase = ACCESS_SHOWCASE;
 
   /** "Why us" panel links, in card order. */
   readonly links = [
