@@ -43,7 +43,7 @@ import { CONTACT_EMAIL, CONTACT_PHONE, MAIN_LINKS, SERVICE_LINKS } from './nav-l
 
       <div class="footer-bottom">
         <span>© {{ year }} DaiRec Vision Security. All rights reserved.</span>
-        <span>Licensed &amp; Insured</span>
+        <span class="legal-links"><a routerLink="/privacy">Privacy Policy</a> · <a routerLink="/terms">Terms of Service</a> · Licensed &amp; Insured</span>
       </div>
     </footer>
   `,
@@ -87,6 +87,8 @@ import { CONTACT_EMAIL, CONTACT_PHONE, MAIN_LINKS, SERVICE_LINKS } from './nav-l
       strong { color: var(--drv-green); }
     }
     .brand-col p { line-height: 1.6; margin: 0.25rem 0 0; max-width: 34ch; }
+    .legal-links a { color: inherit; text-decoration: none; }
+    .legal-links a:hover { color: var(--drv-green); }
     .footer-bottom {
       max-width: 1280px;
       margin: 2.5rem auto 0;

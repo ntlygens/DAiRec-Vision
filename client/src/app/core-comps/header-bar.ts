@@ -5,6 +5,8 @@ import { filter } from 'rxjs/operators';
 import { ASSESSMENT_HREF, MAIN_LINKS, SERVICE_LINKS } from './nav-links';
 import { HERO_PAGES, HeroPage } from './hero-scenes';
 
+const NO_HERO_PATHS = ['/privacy', '/terms'];
+
 @Component({
   selector: 'drv-header-bar',
   standalone: false,
@@ -79,7 +81,9 @@ import { HERO_PAGES, HeroPage } from './hero-scenes';
       }
     </header>
 
-    <drv-hero-banner [page]="heroPage()" />
+    @if (showHero()) {
+      <drv-hero-banner [page]="heroPage()" />
+    }
   `,
   styles: [`
     /* contents: lets .site-nav stick relative to the whole page, not just this host */
@@ -217,6 +221,8 @@ export class HeaderBar implements OnInit {
   protected readonly servicesActive = signal(false);
   /** Animated banner for the current page (falls back to the landing banner). */
   protected readonly heroPage = signal<HeroPage>(HERO_PAGES['/']);
+  /** Text-only pages (legal) skip the hero banner. */
+  protected readonly showHero = signal(true);
 
   protected readonly mainLinks = MAIN_LINKS;
   protected readonly serviceLinks = SERVICE_LINKS;
@@ -233,6 +239,7 @@ export class HeaderBar implements OnInit {
         const path = this.router.url.split(/[?#]/)[0] || '/';
         this.servicesActive.set(SERVICE_LINKS.some(s => path.startsWith(s.route!)));
         this.heroPage.set(HERO_PAGES[path] ?? HERO_PAGES['/']);
+        this.showHero.set(!NO_HERO_PATHS.includes(path));
       });
   }
 

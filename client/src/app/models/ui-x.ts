@@ -97,12 +97,15 @@ export interface DRVRouteInterface {
   title?: string;
     redirectTo?: string;
     loadChildren?: any;
+    loadComponent?: any;
     pathMatch?: any;
     path: string;
     component?: any;
     data?: {
         /** Meta description for search results and link previews. */
         description?: string;
+        /** Which legal document a LegalPage route shows. */
+        doc?: 'privacy' | 'terms';
         state?: string;
         animation?: string;
         mobile?: any;
