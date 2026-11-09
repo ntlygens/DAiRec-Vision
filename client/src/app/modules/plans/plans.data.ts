@@ -68,7 +68,7 @@ export const PLAN_TIERS: PlanTier[] = [
     features: [
       'Up to 16 4K & long-range cameras',
       'Gate, door & biometric access control',
-      'Drone patrol add-on available (by quote)',
+      'Drone patrol add-on where permitted (by quote)',
       '60 days of on-site recording + cloud backup for 4 key cameras',
       '24/7 monitoring with priority response',
     ],
@@ -106,6 +106,7 @@ export const PLAN_TIERS: PlanTier[] = [
     forWho: 'Industrial yards, construction, energy & large sites',
     price: 'By quote', per: '', install: 'per site · site survey required',
     features: [
+      'Available where federal, state & local rules permit',
       'Drone, docking station & maintenance',
       'Scheduled & alarm-triggered flights',
       'HD + thermal live streaming',
@@ -120,7 +121,7 @@ export const PLAN_ADDONS: PlanAddOn[] = [
   { name: 'Extra camera (home plans)', detail: 'Additional IP camera: $50 camera + $25 installation, configured to your plan', price: '$75 one-time' },
   { name: 'Cloud backup', detail: 'Off-site cloud recording per camera: 7 / 14 / 30 days', price: '$5.40 / $9 / $13.50 per camera/mo' },
   { name: 'Extra access point', detail: 'Additional door, gate, or elevator reader', price: '$20/mo' },
-  { name: 'On-demand drone patrol', detail: 'Scheduled patrol flights for events or short-term needs', price: 'By quote' },
+  { name: 'On-demand drone patrol', detail: 'Scheduled patrol flights for events or short-term needs, where permitted', price: 'By quote' },
 ];
 
 export const PLAN_FAQS: PlanFaq[] = [
@@ -128,7 +129,7 @@ export const PLAN_FAQS: PlanFaq[] = [
   { q: 'Do I own the equipment?', a: 'All equipment is leased as part of your plan. We maintain, update and replace it at no extra cost for as long as you are a customer.' },
   { q: "What's included in the free assessment?", a: 'A certified technician visits your property, reviews coverage, entry points and risks, and you receive a written recommendation and quote within 3–5 business days. See the assessment terms below.' },
   { q: 'Can I upgrade later?', a: 'Yes. Add cameras, doors, or drone coverage any time; your plan is adjusted from the next billing cycle.' },
-  { q: 'Is drone surveillance legal on my property?', a: 'In most cases, yes, with the right setup. We review airspace, local rules, and privacy considerations during your site survey and handle FAA requirements before any drone flies.' },
+  { q: 'Is drone surveillance legal on my property?', a: 'It depends on where your property is. Drone patrols are offered wherever federal, state and local rules permit them; many suburban, industrial and private sites qualify, while some areas, including much of New York City, restrict drone takeoff and landing. Your site survey reviews airspace, local rules and privacy, and we handle FAA requirements before any drone flies.' },
 ];
 
 /** Free assessment terms, confirmed with the owner 2026-11-08. Shown on the Plans page (#assessment-terms). */

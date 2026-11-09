@@ -2015,7 +2015,7 @@ export const HERO_PAGES: Record<string, HeroPage> = {
     "eyebrow": "Drone Surveillance",
     "titleLead": "Eyes in the Sky.",
     "titleAccent": "Always on Patrol.",
-    "text": "Docked drones that launch on schedule or on alarm and stream live aerial video to your team.",
+    "text": "Docked drones that launch on schedule or on alarm and stream live aerial video to your team, wherever local rules permit.",
     "chip": "PATROL READY · DOCK CHARGED",
     "secondary": {
       "label": "See Drone Plans",

@@ -86,7 +86,7 @@ import { DRONE_FALLBACK_DATA } from './drone.data';
     <div class="dTextData">
       <h1 style="border-left: 0; padding-left: 0; text-align: center;">See Your Property From Above.</h1>
       <p style="text-align: center;">
-        We assess your site, airspace, and coverage needs, then design a patrol plan that fits.
+        We assess your site, airspace and local rules, then design a patrol plan that fits, wherever drone patrols are permitted.
       </p>
     </div>
     <div class="cta-row">
@@ -225,6 +225,7 @@ export class Drone {
   ];
 
   protected readonly compliance = [
+    { title: 'Where the law allows.', text: 'Drone patrols operate wherever federal, state and local rules permit them. Many suburban, industrial and private sites qualify; some areas, including much of New York City, restrict drone takeoff and landing. Your site survey confirms exactly what is permitted at your property before any drone flies.' },
     { title: 'FAA-compliant operations.', text: 'Flights are managed by FAA Part 107 certified remote pilots, with Remote ID and any required waivers or airspace authorizations in place before launch.' },
     { title: 'Your property only.', text: 'Geofences keep patrols over areas you own or control, and we respect local airspace and no-fly restrictions.' },
     { title: 'Privacy by design.', text: 'Routes and camera angles are planned to avoid neighboring homes and private spaces, in line with state and local privacy laws.' },
