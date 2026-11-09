@@ -70,25 +70,6 @@ import { Component } from '@angular/core';
       }
       
 
-      // .whyUsData windows for about and service display
-      .whyUsData {
-        display: flex;
-        justify-content: space-between;
-        .article-card:first-child {
-            // background-color: green;
-            text-align: left;
-            font-size: 18px;
-            flex: 2;
-            line-height: 1rem;
-        }
-        .article-card:not(:first-child) {
-            // background-color: orange;
-            margin-left: 10px;
-            text-align: right;
-            flex: 1;
-        }
-      }
-
       .accsSrvcs {
           display: flex;
           justify-content: space-between;

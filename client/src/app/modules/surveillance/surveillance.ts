@@ -17,19 +17,24 @@ import { GuiDataService } from '../../services/gui-data-service';
             View live feeds, review footage and respond to incidents from your phone, wherever you are.
         </p>
     </div>
-    <div class="whyUsData">
-      @for (srvl of srvlPrdcts$; track srvl._id; let idx = $index; let e = $even){
-        @if (srvl.compType?.toString() === "article") {
-            <drv-custom-card
-              [id]="srvl._id"
-              class="article-card"
-              [elevated]=false
-              [cardData]=srvl>
-            </drv-custom-card>
-            
+    <section class="whyUsData" aria-label="Why DaiRec Vision surveillance">
+      @for (srvl of articles; track srvl._id; let idx = $index) {
+        @if (idx < 2) {
+          <article class="svc-card" [class.svc-card--dark]="idx === 1">
+            <h3>{{ srvl.title }}</h3>
+            @if (srvl.subtitle) {
+              <p class="svc-sub">{{ srvl.subtitle }}</p>
+            }
+            @if (srvl.content) {
+              <p class="svc-body">{{ srvl.content }}</p>
+            }
+            <a class="svc-link" [routerLink]="links[idx].route">
+              {{ links[idx].label }} <span aria-hidden="true">→</span>
+            </a>
+          </article>
         }
       }
-    </div>
+    </section>
     <div class="srvlSrvcs">
       @for(srvc of srvlPrdcts$; track srvc._id; let idx = $index; let e = $even) {
         @if (srvc.compType?.toString() === "product") {
@@ -123,25 +128,6 @@ import { GuiDataService } from '../../services/gui-data-service';
       }
       
 
-      // .whyUsData windows for about and service display
-      .whyUsData {
-        display: flex;
-        justify-content: space-between;
-        .article-card:first-child {
-            // background-color: green;
-            text-align: left;
-            font-size: 18px;
-            flex: 2;
-            line-height: 1rem;
-        }
-        .article-card:not(:first-child) {
-            // background-color: orange;
-            margin-left: 10px;
-            text-align: right;
-            flex: 1;
-        }
-      }
-
       .srvlSrvcs {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -204,6 +190,17 @@ import { GuiDataService } from '../../services/gui-data-service';
 })
 export class Surveillance {
   constructor(private uis: GuiDataService) {}
+
+  /** "Why us" panel links, in card order. */
+  readonly links = [
+    { label: 'See plans & pricing', route: '/plans' },
+    { label: 'Explore remote monitoring', route: '/monitor' },
+  ];
+
+  /** Article records for the "why us" panels. */
+  get articles(): CardItemInterface[] {
+    return this.srvlPrdcts$.filter(a => a.compType?.toString() === 'article');
+  }
 
   /** Surveillance page content, read live from the data service. */
   get srvlPrdcts$(): CardItemInterface[] {

@@ -53,7 +53,7 @@ const CHANGES = [
   // ===== Surveillance page (drvdata.surveilPgData) =====
   { db: 'drvdata', coll: 'surveilPgData', id: '69cda80c27fba9fa6182ae5d', label: 'Surveillance article: Live Streaming Access',
     set: { subtitle: 'Your property, live, on any screen', name: 'Live streaming', desc: 'Live camera streaming on any device',
-           content: "View multiple camera feeds at once from your smartphone, tablet or computer. Check in while you're on vacation, see who's at the door before you answer, or respond to an alert in real time, with smooth, encrypted streaming wherever you are." } },
+           content: "View multiple camera feeds at once from your smartphone, tablet or computer. Check in while you're on vacation, see who's at the door before you answer, or respond to an alert in real time, with smooth, encrypted streaming wherever you are.\n\nSmart motion detection tells people and vehicles apart from swaying trees and passing headlights, so the alerts you get are the ones that matter. Every clip is saved on-site and backed up to the cloud, ready to search by time or camera and share with police or insurers in a few taps." } },
   { db: 'drvdata', coll: 'surveilPgData', id: '69cda80e27fba9fa6182ae5e', label: 'Surveillance article: (was "title here 2")',
     set: { title: '24/7 Professional Monitoring', subtitle: "We watch so you don't have to",
            name: 'Professional monitoring', desc: 'Round-the-clock monitoring and dispatch',
