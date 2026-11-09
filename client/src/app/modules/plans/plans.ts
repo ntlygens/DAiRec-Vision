@@ -124,25 +124,25 @@ import {
       text-align: left;
       margin-bottom: 2rem;
       h1 {
-        color: #2c3e50;
+        color: var(--drv-navy);
         font-size: 4.5rem;
         margin: 4rem 0 1.5rem 0.5rem;
-        border-left: 15px double #2ecc71;
+        border-left: 15px double var(--drv-green);
         padding-left: 0.5rem;
         line-height: initial;
       }
       h2 {
-        color: #2c3e50;
+        color: var(--drv-navy);
         font-size: 2.5rem;
         margin: 0 0 1.5rem 0.5rem;
-        border-left: 15px double #2ecc71;
+        border-left: 15px double var(--drv-green);
         padding-left: 0.5rem;
         line-height: initial;
       }
       p {
         font-size: 1.2rem;
         margin: 0 2rem 1rem;
-        color: #1c1818;
+        color: var(--drv-text);
         line-height: 1.75rem;
       }
     }
@@ -167,42 +167,42 @@ import {
       border: 2px solid transparent;
       border-radius: 12px;
       overflow: visible;
-      &.featured { border-color: #2ecc71; }
-      h3 { color: #2c3e50; font-size: 1.5rem; margin: 0 0 0.25rem; }
-      .plan-for { color: #777; margin: 0 0 1.25rem; }
+      &.featured { border-color: var(--drv-green); }
+      h3 { color: var(--drv-navy); font-size: 1.5rem; margin: 0 0 0.25rem; }
+      .plan-for { color: var(--drv-muted); margin: 0 0 1.25rem; }
       .plan-price {
-        color: #2c3e50; font-size: 2.6rem; font-weight: 700; line-height: 1.1; margin: 0;
-        small { font-size: 1rem; font-weight: 500; color: #777; }
+        color: var(--drv-navy); font-size: 2.6rem; font-weight: 700; line-height: 1.1; margin: 0;
+        small { font-size: 1rem; font-weight: 500; color: var(--drv-muted); }
       }
-      .plan-install { color: #777; font-size: 0.9rem; margin: 0.35rem 0 1.25rem; }
+      .plan-install { color: var(--drv-muted); font-size: 0.9rem; margin: 0.35rem 0 1.25rem; }
       ul { list-style: none; padding: 0; margin: 0 0 1.75rem; flex: 1; }
       li {
         display: flex; align-items: center; gap: 0.5rem;
-        padding: 0.45rem 0; color: #555; border-bottom: 1px solid #f0f0f0;
-        mat-icon { color: #2ecc71; font-size: 20px; width: 20px; height: 20px; flex: none; }
+        padding: 0.45rem 0; color: var(--drv-text); border-bottom: 1px solid var(--drv-line);
+        mat-icon { color: var(--drv-green); font-size: 20px; width: 20px; height: 20px; flex: none; }
       }
       a { width: 100%; }
     }
     .plan-nudge {
       margin: -1rem 0 1.25rem; padding: 0; border: none; background: none; cursor: pointer;
-      text-align: left; font: inherit; font-size: 0.85rem; font-style: italic; color: #8a94a3;
+      text-align: left; font: inherit; font-size: 0.85rem; font-style: italic; color: var(--drv-muted);
     }
-    .plan-nudge:hover { color: #2c3e50; text-decoration: underline; }
+    .plan-nudge:hover { color: var(--drv-navy); text-decoration: underline; }
     .plan-card.pulse { animation: planPulse 1.6s ease-out; }
     @keyframes planPulse { 0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, .55); } 100% { box-shadow: 0 0 0 18px rgba(46, 204, 113, 0); } }
     .plan-badge {
       position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
-      background: #2ecc71; color: #fff; font-size: 0.8rem; font-weight: 700;
+      background: var(--drv-green); color: var(--drv-on-green); font-size: 0.8rem; font-weight: 700;
       padding: 0.3rem 0.9rem; border-radius: 999px; text-transform: uppercase;
       letter-spacing: 0.03em; white-space: nowrap;
     }
-    .plan-note { color: #777; font-size: 0.95rem; margin-top: 2rem; }
+    .plan-note { color: var(--drv-muted); font-size: 0.95rem; margin-top: 2rem; }
     .referral-note {
       display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.4rem;
-      margin: -0.5rem 0 1rem; color: #8a94a3; font-size: 0.88rem;
-      mat-icon { font-size: 16px; width: 16px; height: 16px; color: #2ecc71; }
-      a { color: #2c3e50; text-decoration: underline; text-underline-offset: 2px; }
-      a:hover { color: #2ecc71; }
+      margin: -0.5rem 0 1rem; color: var(--drv-muted); font-size: 0.88rem;
+      mat-icon { font-size: 16px; width: 16px; height: 16px; color: var(--drv-green); }
+      a { color: var(--drv-navy); text-decoration: underline; text-underline-offset: 2px; }
+      a:hover { color: var(--drv-green); }
     }
 
     .addon-table {
@@ -212,27 +212,27 @@ import {
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      th, td { padding: 1rem 1.25rem; border-bottom: 1px solid #eee; }
-      th { background: #2c3e50; color: #fff; font-weight: 600; }
+      th, td { padding: 1rem 1.25rem; border-bottom: 1px solid var(--drv-line); }
+      th { background: var(--drv-navy); color: #fff; font-weight: 600; }
       td:last-child, th:last-child { text-align: right; white-space: nowrap; }
     }
 
-    .faq { text-align: left; p { color: #555; } }
+    .faq { text-align: left; p { color: var(--drv-text); } }
 
     .terms {
       scroll-margin-top: 90px;   /* clear the sticky header when linked to */
       margin: 2.5rem 0 1rem;
       padding: 1.75rem 2rem;
       text-align: left;
-      background: #f8f9fa;
-      border-left: 4px solid #2ecc71;
+      background: var(--drv-cloud);
+      border-left: 4px solid var(--drv-green);
       border-radius: 10px;
-      h2 { display: flex; align-items: center; gap: 0.5rem; margin: 0 0 1rem; color: #2c3e50; font-size: 1.35rem; }
-      h2 mat-icon { color: #2ecc71; }
+      h2 { display: flex; align-items: center; gap: 0.5rem; margin: 0 0 1rem; color: var(--drv-navy); font-size: 1.35rem; }
+      h2 mat-icon { color: var(--drv-green); }
       dl { margin: 0; display: grid; gap: 0.6rem; }
       .term { display: grid; grid-template-columns: 170px 1fr; gap: 1rem; margin: 0; }
-      dt { font-weight: 600; color: #2c3e50; }
-      dd { margin: 0; color: #555; line-height: 1.5; }
+      dt { font-weight: 600; color: var(--drv-navy); }
+      dd { margin: 0; color: var(--drv-text); line-height: 1.5; }
     }
     @media (max-width: 600px) {
       .terms { padding: 1.25rem; }

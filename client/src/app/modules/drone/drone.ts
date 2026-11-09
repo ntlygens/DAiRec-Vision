@@ -109,25 +109,25 @@ import { DRONE_FALLBACK_DATA } from './drone.data';
       text-align: left;
       margin-bottom: 3rem;
       h1 {
-        color: #2c3e50;
+        color: var(--drv-navy);
         font-size: 4.5rem;
         margin: 4rem 0 1.5rem 0.5rem;
-        border-left: 15px double #2ecc71;
+        border-left: 15px double var(--drv-green);
         padding-left: 0.5rem;
         line-height: initial;
       }
       h2 {
-        color: #2c3e50;
+        color: var(--drv-navy);
         font-size: 2.5rem;
         margin: 0 0 1.5rem 0.5rem;
-        border-left: 15px double #2ecc71;
+        border-left: 15px double var(--drv-green);
         padding-left: 0.5rem;
         line-height: initial;
       }
       p {
         font-size: 1.2rem;
         margin: 0 2rem 1rem;
-        color: #1c1818;
+        color: var(--drv-text);
         line-height: 1.75rem;
       }
     }
@@ -139,20 +139,20 @@ import { DRONE_FALLBACK_DATA } from './drone.data';
       text-align: left;
       .step {
         position: relative;
-        background: #f8f9fa;
-        border-top: 4px solid #2ecc71;
+        background: var(--drv-cloud);
+        border-top: 4px solid var(--drv-green);
         border-radius: 10px;
         padding: 2rem 1.5rem 1.25rem;
         margin: 0;
-        h3 { color: #2c3e50; margin: 0.25rem 0 0.5rem; }
-        p { color: #555; margin: 0; line-height: 1.5rem; }
+        h3 { color: var(--drv-navy); margin: 0.25rem 0 0.5rem; }
+        p { color: var(--drv-text); margin: 0; line-height: 1.5rem; }
       }
       .step-num {
         position: absolute;
         top: -18px; left: 1.5rem;
         width: 34px; height: 34px;
         border-radius: 50%;
-        background: #2c3e50; color: #fff;
+        background: var(--drv-navy); color: #fff;
         display: flex; align-items: center; justify-content: center;
         font-weight: bold;
       }
@@ -177,12 +177,12 @@ import { DRONE_FALLBACK_DATA } from './drone.data';
 
     .compliance {
       text-align: left;
-      border: 2px solid #2ecc71;
+      border: 2px solid var(--drv-green);
       border-radius: 10px;
       padding: 2rem 2.5rem;
       background: #fff;
-      h2 { color: #2c3e50; margin-top: 0; }
-      p { color: #555; font-size: 1.1rem; }
+      h2 { color: var(--drv-navy); margin-top: 0; }
+      p { color: var(--drv-text); font-size: 1.1rem; }
       ul {
         list-style: none;
         padding: 0;
@@ -190,9 +190,9 @@ import { DRONE_FALLBACK_DATA } from './drone.data';
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 1rem 2rem;
       }
-      li { display: flex; gap: 0.6rem; color: #555; line-height: 1.5rem; }
-      mat-icon { color: #2ecc71; flex: none; }
-      strong { color: #2c3e50; }
+      li { display: flex; gap: 0.6rem; color: var(--drv-text); line-height: 1.5rem; }
+      mat-icon { color: var(--drv-green); flex: none; }
+      strong { color: var(--drv-navy); }
     }
 
     .cta-row {

@@ -149,7 +149,7 @@ interface Breadcrumb {
       letter-spacing: 0.01em;
       white-space: nowrap;
       img { height: 40px; width: auto; }
-      strong { color: #2ecc71; font-weight: 700; }
+      strong { color: var(--drv-green); font-weight: 700; }
     }
 
     .links {
@@ -182,20 +182,20 @@ interface Breadcrumb {
       left: 0.9rem; right: 0.9rem; bottom: 2px;
       height: 2px;
       border-radius: 2px;
-      background: #2ecc71;
+      background: var(--drv-green);
     }
 
     .cta {
       padding: 0.6rem 1.15rem;
-      background: #2ecc71;
-      color: #fff;
+      background: var(--drv-green);
+      color: var(--drv-on-green);
       text-decoration: none;
       font-weight: 600;
       border-radius: 999px;
       white-space: nowrap;
       transition: background 0.2s, transform 0.2s;
     }
-    .cta:hover { background: #27ae60; transform: translateY(-1px); }
+    .cta:hover { background: var(--drv-green-hover); transform: translateY(-1px); }
 
     .burger { display: none; color: #fff; margin-left: auto; }
 
@@ -216,8 +216,8 @@ interface Breadcrumb {
         border-radius: 8px;
       }
       a.sub { padding-left: 1.5rem; font-size: 1rem; }
-      a.active { color: #2ecc71; background: rgba(46, 204, 113, 0.08); }
-      mat-icon { color: #2ecc71; }
+      a.active { color: var(--drv-green); background: rgba(46, 204, 113, 0.08); }
+      mat-icon { color: var(--drv-green); }
     }
     .mobile-group {
       margin: 0.75rem 0.5rem 0.25rem;
@@ -226,7 +226,7 @@ interface Breadcrumb {
       text-transform: uppercase;
       letter-spacing: 0.08em;
     }
-    .mobile .mobile-cta { justify-content: center; margin-top: 0.75rem; color: #fff; }
+    .mobile .mobile-cta { justify-content: center; margin-top: 0.75rem; color: var(--drv-on-green); }
     @keyframes slideDown { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
 
     @media (max-width: 960px) {

@@ -50,10 +50,10 @@ import { CONTACT_EMAIL, CONTACT_PHONE, MAIN_LINKS, SERVICE_LINKS } from './nav-l
   styles: [`
     :host { display: block; }
     .site-footer {
-      background: #1a2332;
+      background: var(--drv-midnight);
       color: rgba(255, 255, 255, 0.75);
       padding: 3.5rem 20px 1.5rem;
-      border-top: 3px solid #2ecc71;
+      border-top: 3px solid var(--drv-green);
     }
     .footer-grid {
       max-width: 1280px;
@@ -77,14 +77,14 @@ import { CONTACT_EMAIL, CONTACT_PHONE, MAIN_LINKS, SERVICE_LINKS } from './nav-l
       color: rgba(255, 255, 255, 0.75);
       text-decoration: none;
       transition: color 0.2s;
-      mat-icon { font-size: 18px; width: 18px; height: 18px; color: #2ecc71; }
+      mat-icon { font-size: 18px; width: 18px; height: 18px; color: var(--drv-green); }
     }
-    a:hover { color: #2ecc71; }
+    a:hover { color: var(--drv-green); }
     .brand {
       color: #fff;
       font-size: 1.35rem;
       img { height: 36px; width: auto; }
-      strong { color: #2ecc71; }
+      strong { color: var(--drv-green); }
     }
     .brand-col p { line-height: 1.6; margin: 0.25rem 0 0; max-width: 34ch; }
     .footer-bottom {

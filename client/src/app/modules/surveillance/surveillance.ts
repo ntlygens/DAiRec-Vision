@@ -125,20 +125,20 @@ import { Subscription } from 'rxjs';
         text-align: left;
         margin-bottom: 3rem;
         h1 { 
-            color: #2c3e50;
+            color: var(--drv-navy);
             font-size: 4.5rem;
             margin: 4rem 0 1.5rem 0.5rem;
-            border-left: 15px double #2ecc71;
+            border-left: 15px double var(--drv-green);
             padding-left: 0.5rem;
             line-height: initial;
             
         }
         
         h2 { 
-            color: #2c3e50;
+            color: var(--drv-navy);
             font-size: 2.5rem;
             margin: 0 0 1.5rem 0.5rem;
-            border-left: 15px double #2ecc71;
+            border-left: 15px double var(--drv-green);
             padding-left: 0.5rem;
             line-height: initial;
             
@@ -147,7 +147,7 @@ import { Subscription } from 'rxjs';
         p {
             font-size: 1.2rem;
             margin:0 2rem 1rem;
-            color: #1c1818;
+            color: var(--drv-text);
             line-height: 1.75rem;            
         }
         p:not(:last-child ){ text-indent: 14px };
@@ -192,9 +192,9 @@ import { Subscription } from 'rxjs';
         text-align: left;
         text-decoration: none;
         color: #fff;
-        background: linear-gradient(135deg, #1a2332, #2c3e50);
+        background: linear-gradient(135deg, var(--drv-midnight), var(--drv-navy));
         border-radius: 14px;
-        border-left: 6px solid #2ecc71;
+        border-left: 6px solid var(--drv-green);
         box-shadow: 0 8px 24px rgba(26, 35, 50, 0.25);
         transition: transform 0.2s, box-shadow 0.2s;
         .monitor-icon {
@@ -203,7 +203,7 @@ import { Subscription } from 'rxjs';
           width: 56px; height: 56px;
           border-radius: 50%;
           background: rgba(46, 204, 113, 0.15);
-          mat-icon { color: #2ecc71; font-size: 30px; width: 30px; height: 30px; }
+          mat-icon { color: var(--drv-green); font-size: 30px; width: 30px; height: 30px; }
         }
         .monitor-text {
           flex: 1;
@@ -216,7 +216,8 @@ import { Subscription } from 'rxjs';
           display: inline-flex; align-items: center; gap: 0.35rem;
           padding: 0.65rem 1.2rem;
           border-radius: 999px;
-          background: #2ecc71;
+          background: var(--drv-green);
+          color: var(--drv-on-green);
           font-weight: 600;
           mat-icon { font-size: 20px; width: 20px; height: 20px; transition: transform 0.2s; }
         }

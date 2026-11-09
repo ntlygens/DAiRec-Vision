@@ -231,26 +231,26 @@ export class CardActionsComponent {}
     }
     
     .custom-card.isProduct {
-      background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+      background: linear-gradient(135deg, var(--drv-white) 0%, var(--drv-cloud) 100%);
     }
     
     .custom-card.isFeature {
-      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+      background: linear-gradient(135deg, var(--drv-white) 0%, var(--drv-mint-mist) 100%);
     }
     
     .custom-card.isTestimonial {
-      background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+      background: linear-gradient(135deg, var(--drv-mint-mist) 0%, var(--drv-cloud) 100%);
     }
     
     .custom-card.isBanner {
       /* background: linear-gradient(135deg, #ede7f6 0%, #d1c4e9 100%); */
-      background: linear-gradient( 135deg, #d0e5bb 0%, #2ecc71 100%);
-      color: #fefefe;
-      h3 { font-size: x-large; color: #fefefe}
+      background: linear-gradient(135deg, var(--drv-green) 0%, #27c26a 100%);
+      color: var(--drv-on-green);
+      h3 { font-size: x-large; color: var(--drv-midnight); }
     }
     
     .custom-card.isButton {
-      background: linear-gradient(135deg, #d3bcf5 0%, #70b0f5 100%);
+      background: linear-gradient(135deg, var(--drv-midnight) 0%, var(--drv-navy) 100%);
       font-weight: bold;
       font-size: 21px;
       color: #fefefe;
@@ -396,14 +396,14 @@ export class CardActionsComponent {}
       margin: 0 0 8px;
       font-size: 18px;
       font-weight: 500;
-      color: #1a237e;
+      color: var(--drv-navy);
       letter-spacing: 0.15px;
     }
 
     .card-subtitle {
       display: block;
       font-size: 14px;
-      color: #5c6bc0;
+      color: var(--drv-muted);
       margin-bottom: 8px;
       font-weight: 400;
     }

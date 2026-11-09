@@ -9,8 +9,8 @@
 html {
   @include mat.theme((
     color: (
-      primary: mat.$cyan-palette,
-      tertiary: mat.$orange-palette,
+      primary: mat.$green-palette,
+      tertiary: mat.$cyan-palette,
     ),
     typography: Roboto,
     density: 0,
@@ -33,6 +33,43 @@ body {
   // Reset the user agent margin.
   margin: 0;
 }
+
+/* =====================================================================
+   DaiRec Vision color palette
+   Trust (navy) · Vibrance (Signal Green) · Easy & uncomplicated (few neutrals)
+   Contrast-checked: every text pairing below meets WCAG AA (4.5:1+).
+   Use these variables instead of hard-coded colors.
+   ===================================================================== */
+:root {
+  /* Brand */
+  --drv-midnight:    #1a2332;  /* dark surfaces: header, footer, dark cards */
+  --drv-navy:        #2c3e50;  /* headings, primary text on light */
+  --drv-green:       #2ecc71;  /* Signal Green: buttons, accents, icons, borders */
+  --drv-green-hover: #29b765;  /* hover state for green fills */
+  --drv-green-deep:  #1a7a43;  /* green text & links on light backgrounds (5.4:1) */
+  --drv-mint:        #9fffc9;  /* green highlights on dark backgrounds */
+  --drv-sky:         #38c8ff;  /* secondary accent / info on dark (HUD) */
+  --drv-on-green:    #1a2332;  /* text on Signal Green (7.5:1); white fails at 2.1:1 */
+
+  /* Neutrals */
+  --drv-text:        #4a5563;  /* body text */
+  --drv-muted:       #5f6b7a;  /* secondary text, captions (5.4:1) */
+  --drv-line:        #e3e8ee;  /* borders, dividers */
+  --drv-cloud:       #f8f9fa;  /* light section backgrounds */
+  --drv-mint-mist:   #f1faf4;  /* green-tinted surfaces */
+  --drv-white:       #ffffff;
+
+  /* Status */
+  --drv-alert:       #d93a4a;  /* errors / alerts (text-safe) */
+  --drv-alert-glow:  #ff4d5e;  /* REC lights, alert dots on dark */
+  --drv-warning:     #ff9a3c;  /* warning indicators */
+  --drv-warning-text:#b45309;  /* warning text on light */
+
+  /* Material components follow the brand: Signal Green with Midnight text */
+  --mat-sys-primary: var(--drv-green);
+  --mat-sys-on-primary: var(--drv-on-green);
+}
+
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
@@ -44,9 +81,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   border-radius: 12px;
   padding: 6px 0;
   .mat-mdc-menu-item { min-height: 60px; }
-  .mat-mdc-menu-item .mat-icon { color: #2ecc71; }
+  .mat-mdc-menu-item .mat-icon { color: var(--drv-green); }
   .menu-text { display: flex; flex-direction: column; line-height: 1.25; }
-  .menu-label { font-weight: 600; color: #2c3e50; }
-  .menu-desc { font-size: 0.82rem; color: #6b7785; }
+  .menu-label { font-weight: 600; color: var(--drv-navy); }
+  .menu-desc { font-size: 0.82rem; color: var(--drv-muted); }
   .menu-active { background: rgba(46, 204, 113, 0.08); }
 }

@@ -43,20 +43,20 @@ import { Subscription } from 'rxjs';
         text-align: left;
         margin-bottom: 3rem;
         h1 { 
-            color: #2c3e50;
+            color: var(--drv-navy);
             font-size: 4.5rem;
             margin: 4rem 0 1.5rem 0.5rem;
-            border-left: 15px double #2ecc71;
+            border-left: 15px double var(--drv-green);
             padding-left: 0.5rem;
             line-height: initial;
             
         }
         
         h2 { 
-            color: #2c3e50;
+            color: var(--drv-navy);
             font-size: 2.5rem;
             margin: 0 0 1.5rem 0.5rem;
-            border-left: 15px double #2ecc71;
+            border-left: 15px double var(--drv-green);
             padding-left: 0.5rem;
             line-height: initial;
             
@@ -65,7 +65,7 @@ import { Subscription } from 'rxjs';
         p {
             font-size: 1.2rem;
             margin:0 2rem 1rem;
-            color: #1c1818;
+            color: var(--drv-text);
             line-height: 1.75rem;            
         }
         p:not(:last-child ){ text-indent: 14px };

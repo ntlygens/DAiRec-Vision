@@ -254,23 +254,23 @@ export class JumbotronActionsComponent {}
 
     /* Theme Styles */
     .theme-primary {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, var(--drv-midnight) 0%, var(--drv-navy) 100%);
       color: white;
     }
 
     .theme-accent {
-      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      background: linear-gradient(135deg, var(--drv-green) 0%, #27c26a 100%);
       color: white;
     }
 
     .theme-warn {
-      background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+      background: linear-gradient(135deg, var(--drv-warning) 0%, #ffc857 100%);
       color: white;
     }
 
     .theme-light {
       background: #f5f5f5;
-      color: #333;
+      color: var(--drv-text);
     }
 
     .theme-dark {
@@ -540,7 +540,7 @@ export class JumboTronComponent {
     }
 
     h1 {
-      color: #333;
+      color: var(--drv-text);
       margin-bottom: 32px;
     }
 
@@ -584,7 +584,7 @@ export class JumboTronComponent {
 
     .output h3 {
       margin-top: 0;
-      color: #333;
+      color: var(--drv-text);
     }
 
     .output pre {

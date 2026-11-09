@@ -163,26 +163,26 @@ import { CardItem } from '../../models/comp-faces';
         margin: 0;
         padding: 2rem 2.25rem;
         border-radius: 14px;
-        background: linear-gradient(135deg, #ffffff 0%, #f1faf4 100%);
-        border-left: 5px solid #2ecc71;
+        background: linear-gradient(135deg, #ffffff 0%, var(--drv-mint-mist) 100%);
+        border-left: 5px solid var(--drv-green);
         box-shadow: 0 4px 14px rgba(26, 35, 50, 0.08);
         h3 {
           margin: 0 0 0.6rem;
-          color: #2c3e50;
+          color: var(--drv-navy);
           font-size: 1.6rem;
           font-weight: 700;
           line-height: 1.25;
         }
         .svc-sub {
           margin: 0 0 1rem;
-          color: #6b7785;
+          color: var(--drv-muted);
           font-size: 1rem;
           font-style: italic;
           line-height: 1.5;
         }
         .svc-body {
           margin: 0 0 1.25rem;
-          color: #444;
+          color: var(--drv-text);
           font-size: 1.05rem;
           line-height: 1.7;
           white-space: pre-line;   /* keep the paragraph breaks from the content */
@@ -191,7 +191,7 @@ import { CardItem } from '../../models/comp-faces';
         .svc-link {
           margin-top: auto;
           align-self: flex-start;
-          color: #27ae60;
+          color: var(--drv-green-deep);
           font-weight: 600;
           text-decoration: none;
           span { display: inline-block; transition: transform 0.2s; }
@@ -199,12 +199,12 @@ import { CardItem } from '../../models/comp-faces';
         }
       }
       .svc-card--dark {
-        background: linear-gradient(135deg, #1a2332 0%, #2c3e50 100%);
-        border-left-color: #2ecc71;
+        background: linear-gradient(135deg, var(--drv-midnight) 0%, var(--drv-navy) 100%);
+        border-left-color: var(--drv-green);
         h3 { color: #ffffff; font-size: 1.35rem; }
-        .svc-sub { color: #9fffc9; font-style: normal; }
+        .svc-sub { color: var(--drv-mint); font-style: normal; }
         .svc-body { color: rgba(255, 255, 255, 0.82); font-size: 1rem; }
-        .svc-link { color: #2ecc71; }
+        .svc-link { color: var(--drv-green); }
       }
       @media (max-width: 900px) {
         .whyUsData { grid-template-columns: 1fr; }
