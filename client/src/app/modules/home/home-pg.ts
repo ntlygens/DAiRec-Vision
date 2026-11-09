@@ -12,16 +12,16 @@ import { CardItem } from '../../models/comp-faces';
 
 
     <div class="dTextData">
-        <h2>DAiRec Vision Security</h2>
+        <h2>DaiRec Vision Security</h2>
         <p>
-            Dairec Vision Security delivers comprehensive security system integration for residential and commercial 
+            DaiRec Vision Security delivers comprehensive security system integration for residential and commercial 
             properties. Specializing in advanced surveillance infrastructure, access control solutions, and 24/7 alarm 
             monitoring, we provide end-to-end installation and maintenance services tailored to each client's risk profile.
         </p>
         <p>
             Our expertise spans IP-based camera systems, CCTV networks, biometric and card-based access control, intrusion 
             detection, and remote monitoring platforms. From single-location deployments to multi-site enterprise installations, 
-                we engineer scalable security architectures that protect assets, personnel, and property.
+            we engineer scalable security architectures that protect assets, personnel, and property.
         </p>
     </div>
     <section class="whyUsData" aria-label="Our services">
@@ -65,7 +65,7 @@ import { CardItem } from '../../models/comp-faces';
                             title: dsjntData.title,
                             subtitle: dsjntData.subtitle,
                             description: dsjntData.desc,
-                            content: dsjntData.content || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                            content: dsjntData.content || 'Professional security design, installation and monitoring for homes and businesses across the Tri-State area.',
                             img: dsjntData.img || '/assets/backgrounds/collage-image-1.jpg',
                             imageAlt: dsjntData.name || 'Service Display Illustration',
                             backgroundColor: '#66f2ee',

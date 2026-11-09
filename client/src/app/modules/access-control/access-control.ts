@@ -10,15 +10,18 @@ import { Subscription } from 'rxjs';
   standalone: false,
   template: `
    <div class="dTextData">
-        <h2>Why Choose Professional Installation?</h2>
+        <h2>Smarter Access, Total Control.</h2>
         <p>
-            Your property deserves eyes that never blink. DaiRec Vision Security transforms blind spots into complete visibility 
-            with state-of-the-art CCTV installation and IP camera systems engineered for crystal-clear surveillance, day or night.
+            Keys get copied, lost and never returned. DaiRec Vision Security replaces them with keycards, mobile
+            credentials, PINs and biometric readers that you manage from one simple dashboard.
         </p>
         <p>
-            Our expertise spans IP-based camera systems, CCTV networks, biometric and card-based access control, intrusion 
-            detection, and remote monitoring platforms. From single-location deployments to multi-site enterprise installations, 
-            we engineer scalable security architectures that protect assets, personnel, and property.
+            Grant or revoke access instantly, schedule entry by person, door and time, and see every entry in a
+            real-time audit log. Paired with your cameras, every door event comes with video verification.
+        </p>
+        <p>
+            From a single front door to gates, elevators and multi-site campuses, we design, install and maintain
+            access systems that grow with your property.
         </p>
     </div>
   `,

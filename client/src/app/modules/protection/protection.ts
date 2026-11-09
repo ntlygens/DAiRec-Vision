@@ -11,13 +11,12 @@ import { Subscription } from 'rxjs';
     <div class="dTextData">
         <h2>Why Choose Professional Installation?</h2>
         <p>
-            Your property deserves eyes that never blink. DaiRec Vision Security transforms blind spots into complete visibility 
-            with state-of-the-art CCTV installation and IP camera systems engineered for crystal-clear surveillance, day or night.
+            Your property deserves eyes that never blink. DaiRec Vision Security designs and installs 4K CCTV and
+            IP camera systems that eliminate blind spots and deliver crystal-clear video, day or night.
         </p>
         <p>
-            Our expertise spans IP-based camera systems, CCTV networks, biometric and card-based access control, intrusion 
-            detection, and remote monitoring platforms. From single-location deployments to multi-site enterprise installations, 
-            we engineer scalable security architectures that protect assets, personnel, and property.
+            Every system is planned around your property's layout and risks, installed by certified technicians,
+            and set up so you can watch live and review footage from any device.
         </p>
     </div>
     <mat-grid-list cols="2">
@@ -36,6 +35,7 @@ import { Subscription } from 'rxjs';
         }
       }
     </mat-grid-list>
+    @if (showPromo) {
     <div #promoBnr id=promoBnr class=promoBanner>
         <drv-custom-card
             title="Ready to Secure Your Property?"
@@ -46,6 +46,7 @@ import { Subscription } from 'rxjs';
             compType="banner">
         </drv-custom-card>
     </div>
+    }
     <div class="whyUsData">
       @for(pArtcl of protectedPrdcts$; track pArtcl._id; let idx = $index; let e = $even; let last = $last){
         @if(pArtcl.compType?.toString() === "article"){
@@ -63,8 +64,8 @@ import { Subscription } from 'rxjs';
     <div class=promoBanner>
         <drv-custom-card
             title="Stop Wondering. Start Watching."
-            subtitle=""
-            content="Get a free security assessment today!!!"
+            subtitle="Free on-site security assessment"
+            content="A certified technician maps your coverage, entry points and blind spots, and you receive a written camera plan and quote within 3–5 business days."
             imageAlt="Promotion Banner"
             compSize="medium"
             compType="banner">
@@ -131,6 +132,8 @@ import { Subscription } from 'rxjs';
   `,
 })
 export class Protection implements OnInit {
+  /** Promotional banners stay hidden until there is a real, dated offer. */
+  showPromo = false;
   private subscription: Subscription = new Subscription();
 
   data2bDsplyd$: string | null = null;

@@ -48,7 +48,7 @@ import { CardItem } from '../../models/comp-faces';
                             title: dsjntData.title,
                             subtitle: dsjntData.subtitle,
                             description: dsjntData.desc,
-                            content: dsjntData.content || 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                            content: dsjntData.content || 'Professional security design, installation and monitoring for homes and businesses across the Tri-State area.',
                             img: dsjntData.img || '/assets/backgrounds/collage-image-11.jpg',
                             imageAlt: dsjntData.name || 'Service Display Illustration',
                             backgroundColor: '#424040',
@@ -69,6 +69,7 @@ import { CardItem } from '../../models/comp-faces';
             }
         }
       </div>
+      @if (showPromo) {
       <div class=promoBanner>
         <drv-custom-card
             title="Special Promotion"
@@ -79,7 +80,9 @@ import { CardItem } from '../../models/comp-faces';
             compType="banner">
         </drv-custom-card>
       </div>
+      }
       
+      @if (showTestimonials) {
       <div class="testimonialsData">
         @for (i of generateArray(8); track i; let idx = $index, e = $even, last = $last, first = $first) {
             @if (i < virtualLimit) {
@@ -96,6 +99,8 @@ import { CardItem } from '../../models/comp-faces';
             }
         }
       </div>
+      }
+      @if (showPromo) {
       <div class=promoBanner>
         <drv-custom-card
             title="Special Promotion"
@@ -106,6 +111,7 @@ import { CardItem } from '../../models/comp-faces';
             compType="banner">
         </drv-custom-card>
       </div>
+      }
   `,
   styles: [`
     :host {
@@ -229,6 +235,9 @@ export class LandingPg implements OnInit {
     // data2bDsplyd$ = {} as WritableSignal<string | null>;
     data2bDsplyd$: string | null = null;
     virtualLimit = 4;
+    /** Hidden until there is a real, dated offer / real client reviews. */
+    showPromo = false;
+    showTestimonials = false;
     call2ActionBtns$ = {} as WritableSignal<CardItem[]>
     srvcDataDsplys$ = {} as WritableSignal<ServiceScreenInterface[]>
     // slctdSrvcCards$ = {} as WritableSignal<ServiceScreenInterface[]>;

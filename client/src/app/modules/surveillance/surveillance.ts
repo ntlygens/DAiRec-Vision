@@ -11,19 +11,12 @@ import { Subscription } from 'rxjs';
     <div class="dTextData">
       <h2>Real-Time Protection, Real Results.</h2>
         <p>
-            The world doesn’t stop when you leave, business continues, families move about their day 
-            and valuable assets remain in place. Your security shouldn’t pause either. 
-            DaiRec Vision Security delivers advanced 24/7 video surveillance and remote monitoring solutions 
-            designed to keep you constantly connected to what matters most.
+            Business continues, families move through their day, and valuable assets stay in place while you're
+            away. Your security shouldn't pause either.
         </p>
         <p>
-            Through cutting-edge camera systems, intelligent motion detection, and real-time alerts, 
-            we transform passive security into active protection, giving you confidence 
-            whether you're across town or across the globe. With DaiRec Vision Security, 
-            complete situational awareness lives in the palm of your hand with our mobile integration, 
-            allowing you to view live feeds, review recorded footage, receive instant notifications, 
-            and respond to incidents the moment they occur, anytime, anywhere.
-
+            DaiRec Vision delivers 24/7 video surveillance with intelligent motion detection and instant alerts.
+            View live feeds, review footage and respond to incidents from your phone, wherever you are.
         </p>
     </div>
     <div class="whyUsData">
@@ -59,7 +52,7 @@ import { Subscription } from 'rxjs';
     <!-- </mat-grid-list> -->
     </div>
     <div class="dTextData">
-      <h1>For Every Property TYPE</h1>
+      <h1>For Every Property Type</h1>
     </div>
     <div class="srvlSrvcType">
       @for (srvcT of srvlPrdcts$; track srvcT._id; let idx = $index;) {
@@ -87,12 +80,11 @@ import { Subscription } from 'rxjs';
     </div>
     <div class="dTextData">
       <h1 style="border-left: 0; padding-left: 0; text-align: center;">Experience True Peace of Mind.</h1>
-      <h2>Schedule your remote monitoring consultation NOW!!!</h2>
+      <h2>Schedule Your Free Monitoring Consultation.</h2>
         <p>
-            The world doesn’t stop when you leave, business continues, families move about their day 
-            and valuable assets remain in place. Your security shouldn’t pause either. 
-            DaiRec Vision Security delivers advanced 24/7 video surveillance and remote monitoring solutions 
-            designed to keep you constantly connected to what matters most.
+            Tell us about your property and we'll recommend the right mix of cameras, smart alerts and
+            professional monitoring, starting with a free on-site assessment and a written quote within
+            3–5 business days.
         </p>
     </div>
     <a class="monitor-cta" routerLink="monitor">
