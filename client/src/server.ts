@@ -12,17 +12,37 @@ const browserDistFolder = join(import.meta.dirname, '../browser');
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
+app.disable('x-powered-by');
+
 /**
- * Example Express Rest API endpoints can be defined here.
- * Uncomment and define endpoints as necessary.
- *
- * Example:
- * ```ts
- * app.get('/api/{*splat}', (req, res) => {
- *   // Handle API request
- * });
- * ```
+ * Read-only pass-through to the private content API.
+ * Browsers (and server-side rendering) fetch /api/* from this server; only GET is forwarded,
+ * so the public site can read content but never change it.
+ * API_ORIGIN: where the content API runs (default http://127.0.0.1:5200).
  */
+const API_ORIGIN = (process.env['API_ORIGIN'] || 'http://127.0.0.1:5200').replace(/\/$/, '');
+
+app.all('/api/{*path}', async (req, res) => {
+  if (req.method !== 'GET' && req.method !== 'HEAD') {
+    res.status(405).set('Allow', 'GET, HEAD').send('Method not allowed');
+    return;
+  }
+  try {
+    const upstream = await fetch(API_ORIGIN + req.originalUrl, {
+      method: req.method,
+      headers: { accept: 'application/json' },
+      signal: AbortSignal.timeout(10_000),
+    });
+    res.status(upstream.status);
+    const type = upstream.headers.get('content-type');
+    if (type) res.type(type);
+    res.set('Cache-Control', upstream.ok ? 'public, max-age=60' : 'no-store');
+    res.send(Buffer.from(await upstream.arrayBuffer()));
+  } catch (error) {
+    console.error('[api proxy]', error instanceof Error ? error.message : error);
+    res.status(502).send('Content service unavailable');
+  }
+});
 
 /**
  * Serve static files from /browser

@@ -101,6 +101,8 @@ export interface DRVRouteInterface {
     path: string;
     component?: any;
     data?: {
+        /** Meta description for search results and link previews. */
+        description?: string;
         state?: string;
         animation?: string;
         mobile?: any;

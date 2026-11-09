@@ -1,5 +1,6 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
-import { provideRouter, withInMemoryScrolling } from '@angular/router';
+import { provideRouter, withInMemoryScrolling, TitleStrategy } from '@angular/router';
+import { DrvTitleStrategy } from './core-comps/seo';
 
 import { MAINROUTES } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
@@ -11,6 +12,7 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideHttpClient(withFetch()),
     provideRouter(MAINROUTES, withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' })),
+    { provide: TitleStrategy, useClass: DrvTitleStrategy },
     provideClientHydration(withEventReplay())
   ]
 };

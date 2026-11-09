@@ -8,10 +8,23 @@ import { ObjectId, type Collection } from "mongodb";
  * POST /       create
  * PUT /:id     update (partial, $set)
  * DELETE /:id  delete
+ *
+ * Writes (POST/PUT/DELETE) need the x-api-key header to match ADMIN_API_KEY.
+ * With no ADMIN_API_KEY set, the API is read-only.
  */
+import { timingSafeEqual } from "node:crypto";
+
+function requireAdminKey(req: express.Request, res: express.Response, next: express.NextFunction) {
+    const expected = process.env.ADMIN_API_KEY;
+    if (!expected) return void res.status(403).send("Content API is read-only");
+    const given = req.get("x-api-key") ?? "";
+    const a = Buffer.from(given), b = Buffer.from(expected);
+    if (a.length !== b.length || !timingSafeEqual(a, b)) return void res.status(401).send("Unauthorized");
+    next();
+}
 export function createContentRouter(label: string, getCollection: () => Collection<any> | undefined) {
     const router = express.Router();
-    router.use(express.json());
+    router.use(express.json({ limit: "100kb" }));
 
     const fail = (res: express.Response, status: number, action: string, error: unknown) => {
         const message = error instanceof Error ? error.message : "unknown error";
@@ -37,7 +50,7 @@ export function createContentRouter(label: string, getCollection: () => Collecti
         }
     });
 
-    router.post("/", async (req, res) => {
+    router.post("/", requireAdminKey, async (req, res) => {
         try {
             const result = await getCollection()?.insertOne(req.body);
             if (result?.acknowledged) res.status(201).send({ ...req.body, _id: result.insertedId });
@@ -47,7 +60,7 @@ export function createContentRouter(label: string, getCollection: () => Collecti
         }
     });
 
-    router.put("/:id", async (req, res) => {
+    router.put("/:id", requireAdminKey, async (req, res) => {
         try {
             const result = await getCollection()?.updateOne({ _id: new ObjectId(req.params.id) }, { $set: req.body });
             if (result?.matchedCount) res.status(200).send(`Updated ${label} ${req.params.id}`);
@@ -57,7 +70,7 @@ export function createContentRouter(label: string, getCollection: () => Collecti
         }
     });
 
-    router.delete("/:id", async (req, res) => {
+    router.delete("/:id", requireAdminKey, async (req, res) => {
         try {
             const result = await getCollection()?.deleteOne({ _id: new ObjectId(req.params.id) });
             if (result?.deletedCount) res.status(202).send(`Deleted ${label} ${req.params.id}`);

@@ -10,7 +10,8 @@ import { UserInterface, ServiceScreenInterface, CardItemInterface } from '../mod
   providedIn: 'root',
 })
 export class GuiDataService {
-  private apiUrl = 'http://localhost:5200';
+  /** Same-origin API path: proxied to the content server (see server.ts and proxy.conf.json). */
+  private apiUrl = '/api';
 
   /** Home service buttons (ODM.userInterface) */
   readonly allUserData$ = signal<UserInterface[]>([]);
