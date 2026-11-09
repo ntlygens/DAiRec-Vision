@@ -1,0 +1,26 @@
+{
+  // DaiRec Vision: Angular SSR + content API on Cloudflare Workers, content in D1.
+  // Build first (npm run build), then: npx wrangler dev  |  npx wrangler deploy
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dairec-vision",
+  "main": "worker/index.mjs",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "dist/client/browser",
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "dairec-content",
+      // Paste the id printed by: npx wrangler d1 create dairec-content
+      "database_id": "REPLACE_WITH_D1_DATABASE_ID"
+    }
+  ],
+  "routes": [
+    { "pattern": "dairecvision.com", "custom_domain": true },
+    { "pattern": "www.dairecvision.com", "custom_domain": true }
+  ],
+  "observability": { "enabled": true }
+}
