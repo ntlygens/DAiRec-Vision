@@ -8,7 +8,10 @@
     "banners:check": "node scripts/update-banner-refs.mjs",
     "banners:update": "node scripts/update-banner-refs.mjs --apply",
     "copy:home:check": "node scripts/update-home-copy.mjs",
-    "copy:home:update": "node scripts/update-home-copy.mjs --apply"
+    "copy:home:update": "node scripts/update-home-copy.mjs --apply",
+    "copy:pages:check": "node scripts/update-page-copy.mjs",
+    "copy:pages:update": "node scripts/update-page-copy.mjs --apply",
+    "copy:export": "node scripts/update-page-copy.mjs --export"
   },
   "keywords": [],
   "author": "",
