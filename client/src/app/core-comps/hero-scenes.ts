@@ -1983,10 +1983,10 @@ export const HERO_PAGES: Record<string, HeroPage> = {
     "chip": "4 FEEDS LIVE · CLOUD SYNCED",
     "secondary": {
       "label": "Remote Monitoring",
-      "route": "/surveil/monitor"
+      "route": "/monitor"
     }
   },
-  "/surveil/monitor": {
+  "/monitor": {
     "scene": "surveil",
     "eyebrow": "Remote Monitoring",
     "titleLead": "Your Property, Live.",

@@ -3,13 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { Plans } from './plans';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: Plans,
-    data: {
-      breadcrumb: 'Plans & Pricing',
-    }
-  },
+  { path: '', component: Plans },
 ];
 
 @NgModule({

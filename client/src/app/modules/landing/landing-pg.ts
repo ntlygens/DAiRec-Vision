@@ -1,9 +1,6 @@
-import { Component, OnInit, WritableSignal } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component } from '@angular/core';
 import { GuiDataService } from '../../services/gui-data-service';
-import { Router } from '@angular/router';
-import { ServiceScreenInterface, CompSize } from '../../models/ui-x';
-import { CardItem } from '../../models/comp-faces';
+import { ServiceScreenInterface } from '../../models/ui-x';
 
 @Component({
   selector: 'dvz-landing-pg',
@@ -230,68 +227,22 @@ import { CardItem } from '../../models/comp-faces';
 
   `],
 })
-export class LandingPg implements OnInit {
-    private subscription: Subscription = new Subscription();
-    // data2bDsplyd$ = {} as WritableSignal<string | null>;
-    data2bDsplyd$: string | null = null;
+export class LandingPg {
+    /** Which service panel is shown (the landing page shows the first). */
+    data2bDsplyd$ = 'data0';
     virtualLimit = 4;
     /** Hidden until there is a real, dated offer / real client reviews. */
     showPromo = false;
     showTestimonials = false;
-    call2ActionBtns$ = {} as WritableSignal<CardItem[]>
-    srvcDataDsplys$ = {} as WritableSignal<ServiceScreenInterface[]>
-    // slctdSrvcCards$ = {} as WritableSignal<ServiceScreenInterface[]>;
 
-    c2a_btns$: CardItem[] = [];
-    srvcDsplys$: ServiceScreenInterface[] = [];
+    constructor(private uis: GuiDataService) {}
 
-    constructor(
-        private router: Router,
-        private uis: GuiDataService,
-    ) {
-        // this.getAllSrvcScrnData();
-        // this.cards$ = this.call2ActionCards$();
-    }
-
-
-    ngOnInit(): void {
-        this.subscription = this.uis.currentDisjointedData$.subscribe(data => {
-           data = data ? data : 'data0'; // Default to 'data0' if null
-           this.data2bDsplyd$ = data;
-       
-           console.log('Received disjointed data in LandingPg:', data);
-        });
-
-        this.getAllSrvcScrnData();
+    /** Service panels, read live from the data service. */
+    get srvcDsplys$(): ServiceScreenInterface[] {
+        return this.uis.allSrvcScrnData$();
     }
 
     generateArray(n: number): number[] {
         return [...Array(n).keys()];
     }
-
-    goHome(data?: any) {
-        // Navigate to the home page
-        // window.location.href = 'home';
-        this.router.navigate([`${data}`]);
-    }
-
-    showDisjointedData(dataName: string) {
-        console.log('Button clicked, showing disjointed data:', dataName);
-        this.uis.updateDisjointedData(dataName);
-    }
-    
-    private getAllSrvcScrnData() {
-        // this.srvcScrnInterface$ = this.uis.allSrvcScrnData$;
-        this.call2ActionBtns$ = this.uis.allUserData$;
-        this.srvcDataDsplys$ = this.uis.allSrvcScrnData$;
-        this.uis.getAllSrvcScrnData();
-        this.uis.getAllUserData();
-        // this.tiles$ = this.srvcScrnInterface$();
-        this.c2a_btns$ = this.call2ActionBtns$();
-        this.srvcDsplys$ = this.srvcDataDsplys$();
-
-        // this.sntzeBackgroundImgs(this.srvcScrnInterface$());
-    } 
-    
-
 }

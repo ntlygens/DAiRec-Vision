@@ -3,13 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AccessControl } from './access-control';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: AccessControl,
-    data: {
-      breadcrumb: 'Access',
-    }
-  },
+  { path: '', component: AccessControl },
 ];
 
 @NgModule({

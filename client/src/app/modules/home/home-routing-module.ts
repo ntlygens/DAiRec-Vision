@@ -1,19 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePg } from './home-pg';
-import { DRVRouteInterface } from '../../models/ui-x';
 
-export const routes: DRVRouteInterface[] = [
-  {
-    path: '',
-    component: HomePg,
-    data: {
-      breadcrumb: 'Home'
-    }
-    // loadChildren: () => import('../home/home-module')
-    //   .then(m => m.HomeModule)
-
-  }
+const routes: Routes = [
+  { path: '', component: HomePg },
 ];
 
 @NgModule({

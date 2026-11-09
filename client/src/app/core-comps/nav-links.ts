@@ -15,7 +15,7 @@ export const ASSESSMENT_HREF =
 export const SERVICE_LINKS: NavLink[] = [
   { label: 'CCTV & IP Cameras',        route: '/protect', icon: 'videocam',        desc: '4K cameras, NVR systems & installation' },
   { label: 'Video Surveillance',       route: '/surveil', icon: 'monitor',         desc: 'AI analytics, night vision & alerts' },
-  { label: 'Remote Monitoring',        route: '/surveil/monitor', icon: 'live_tv', desc: 'Live feeds, cloud video & 24/7 pros' },
+  { label: 'Remote Monitoring',        route: '/monitor', icon: 'live_tv', desc: 'Live feeds, cloud video & 24/7 pros' },
   { label: 'Access Control',           route: '/access',  icon: 'key',             desc: 'Keyless, biometric & gate access' },
   { label: 'Drone Surveillance',       route: '/drone',   icon: 'flight',          desc: 'Automated aerial patrols' },
 ];

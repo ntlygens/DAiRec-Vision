@@ -1,8 +1,6 @@
-import { Component, OnInit, WritableSignal } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component } from '@angular/core';
 import { GuiDataService } from '../../services/gui-data-service';
-import { Router } from '@angular/router';
-import { ServiceScreenInterface, CompSize } from '../../models/ui-x';
+import { ServiceScreenInterface } from '../../models/ui-x';
 import { CardItem } from '../../models/comp-faces';
 
 @Component({
@@ -340,10 +338,9 @@ import { CardItem } from '../../models/comp-faces';
 `],
 })
 
-export class HomePg implements OnInit {
-    private subscription: Subscription = new Subscription();
-  
-    data2bDsplyd$: string | null = null;
+export class HomePg {
+    /** Which service panel is shown under the service buttons. */
+    data2bDsplyd$ = 'data0';
     virtualLimit = 4;
     /** Promotional banners are hidden until there is a real, dated offer. Set true to show. */
     showPromo = false;
@@ -358,42 +355,15 @@ export class HomePg implements OnInit {
       { icon: 'support_agent', title: '24/7 Professional Monitoring', text: 'Round-the-clock monitoring and dispatch with a monitoring plan.' },
       { icon: 'flight', title: 'FAA-Certified Drone Pilots', text: 'Aerial patrols managed by FAA Part 107 certified remote pilots.' },
     ];
-    call2ActionBtns$ = {} as WritableSignal<CardItem[]>
-    srvcDataDsplys$ = {} as WritableSignal<ServiceScreenInterface[]>
-      // slctdSrvcCards$ = {} as WritableSignal<ServiceScreenInterface[]>;
 
-    c2a_btns$: CardItem[] = [];
-    srvcDsplys$: ServiceScreenInterface[] = [];
+    constructor(private uis: GuiDataService) {}
 
-    constructor(
-      private router: Router,
-      private uis: GuiDataService
-    ) { 
-      this.getAllSrvcScrnData();
-      this.getDisjointedData();
+    /** Service buttons and panels, read live from the data service. */
+    get c2a_btns$(): CardItem[] {
+        return this.uis.allUserData$() as unknown as CardItem[];
     }
-
-    ngOnInit() {
-    //   this.subscription = this.uis.currentDisjointedData$.subscribe(data => {
-    //     data = data ? data : 'data0'; // Default to 'data0' if null
-    //     this.data2bDsplyd$ = data;
-    //   });
-
-        // this.uis.getAllSrvcScrnData().subscribe(data => {
-        //     this.srvcDataDsplys$.set(data);
-        //     this.srvcDsplys$ = data;
-        // });
-        // this.uis.getAllUserData().subscribe(data => {
-        //     this.call2ActionBtns$.set(data);
-        //     this.c2a_btns$ = data;
-        // });
-    }
-
-    getDisjointedData() {
-        this.subscription = this.uis.currentDisjointedData$.subscribe(data => {
-            data = data ? data : 'data0'; // Default to 'data0' if null
-            this.data2bDsplyd$ = data;
-        });
+    get srvcDsplys$(): ServiceScreenInterface[] {
+        return this.uis.allSrvcScrnData$();
     }
 
     showDisjointedData(dataId: string) {
@@ -403,22 +373,4 @@ export class HomePg implements OnInit {
     generateArray(n: number): number[] {
         return [...Array(n).keys()];
     }
-
-    onButtonClick() {
-      this.router.navigate(['/']);
-      console.log('Button clicked!');
-    }
-
-    private getAllSrvcScrnData() {
-        // this.srvcScrnInterface$ = this.uis.allSrvcScrnData$;
-        this.call2ActionBtns$ = this.uis.allUserData$;
-        this.srvcDataDsplys$ = this.uis.allSrvcScrnData$;
-        this.uis.getAllSrvcScrnData();
-        this.uis.getAllUserData();
-        // this.tiles$ = this.srvcScrnInterface$();
-        this.c2a_btns$ = this.call2ActionBtns$();
-        this.srvcDsplys$ = this.srvcDataDsplys$();
-
-        // this.sntzeBackgroundImgs(this.srvcScrnInterface$());
-    } 
 }

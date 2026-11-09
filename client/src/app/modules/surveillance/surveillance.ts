@@ -1,8 +1,6 @@
-import { Component, OnInit, WritableSignal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 import { CardItemInterface } from '../../models/ui-x';
 import { GuiDataService } from '../../services/gui-data-service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'drv-surveillance',
@@ -71,9 +69,7 @@ import { Subscription } from 'rxjs';
                 compType: srvcT.compType,
                 backgroundColor: srvcT.backgroundColor,
                 overlay: false,
-              }"
-              (buttonClick)="handleJumbotronButtonClick($event)"
-              (imageLoad)="handleJumbotronImageLoad()">
+              }">
           </drv-jumbotron-component>
         }
       }
@@ -87,7 +83,7 @@ import { Subscription } from 'rxjs';
             3–5 business days.
         </p>
     </div>
-    <a class="monitor-cta" routerLink="monitor">
+    <a class="monitor-cta" routerLink="/monitor">
       <span class="monitor-icon"><mat-icon>live_tv</mat-icon></span>
       <span class="monitor-text">
         <strong>Remote Monitoring</strong>
@@ -236,51 +232,11 @@ import { Subscription } from 'rxjs';
       }
   `,
 })
-export class Surveillance implements OnInit {
-  private subscription: Subscription = new Subscription();
-  data2bDsplyd$: string | null = null;
-  srvlSrvcData$ = {} as WritableSignal<CardItemInterface[]>;
-  srvlPrdctData$ = {} as WritableSignal<CardItemInterface[]>;
+export class Surveillance {
+  constructor(private uis: GuiDataService) {}
 
-  srvlSrvcs$: CardItemInterface[] = [];
-  srvlPrdcts$: CardItemInterface[] = [];
-
-  constructor (
-    private router: Router,
-    private uis: GuiDataService,
-  ) {
+  /** Surveillance page content, read live from the data service. */
+  get srvlPrdcts$(): CardItemInterface[] {
+    return this.uis.allSurveilPrdctsData$();
   }
-
-  ngOnInit(): void {
-    this.subscription = this.uis.currentDisjointedData$.subscribe(data => {
-      data = data ? data : 'data0';
-      this.data2bDsplyd$ = data;
-
-      console.log('prtct data: ', data);
-    })
-
-    this.getAllSrvlData();
-  }
-
-  private getAllSrvlData() {
-    // this.srvlSrvcData$ = this.uis.allSurveilSrvcsData$;
-    this.srvlPrdctData$ = this.uis.allSurveilPrdctsData$;
-
-    // this.srvlSrvcs$ = this.srvlSrvcData$();
-    this.srvlPrdcts$ = this.srvlPrdctData$();
-  }
-
-  
-  handleJumbotronButtonClick(event: any) {
-    console.log('Jumbotron button clicked:', event);
-    // Implement your logic here, e.g., navigate to a different page or show a modal
-  }
-
-  handleJumbotronImageLoad() {
-    console.log('Jumbotron image loaded successfully.');
-    // You can perform additional actions here if needed, such as hiding a loading spinner
-  } 
-
-
-
 }

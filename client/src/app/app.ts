@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CoreCompsModule } from './core-comps/core-comps-module';
 
@@ -9,7 +9,6 @@ import { CoreCompsModule } from './core-comps/core-comps-module';
   template: `
   <main class="app">
     <drv-header-bar />
-    <drv-breadcrumbs />
     <router-outlet></router-outlet>
     <drv-footer-bar />
   </main>
@@ -34,12 +33,6 @@ import { CoreCompsModule } from './core-comps/core-comps-module';
       margin: 3rem -20px 0;
     }
 
-    router-outlet {
-      width: 100%;
-      padding: 10px 20px;
-    }
   `]
 })
-export class App {
-  // protected readonly title = signal('d-client');
-}
+export class App {}

@@ -1,5 +1,5 @@
 // custom-card.component.ts
-import { Component, Input, ContentChild, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, Input, ContentChild, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServiceScreenInterface } from '../models/ui-x';
 import { CompType, CompSize } from '../models/comp-faces';
@@ -434,7 +434,7 @@ export class CardActionsComponent {}
     }
   `]
 })
-export class CustomCardComponent implements OnInit {
+export class CustomCardComponent {
   CompType = CompType;
   CompSize = CompSize;
 
@@ -465,16 +465,10 @@ export class CustomCardComponent implements OnInit {
 
   constructor(private router: Router ){  }
 
-  ngOnInit(): void {
-    console.log('cards: ', this.cardData?.buttons!);
-
-  }
-
   onButtonClick(button: CardButtonModel): void {
       this.buttonClick.emit(button);
     
-      this.router.navigate([button.url])
-      console.log('thisi: ', button);
+      this.router.navigate([button.url]);
     }
 }
 

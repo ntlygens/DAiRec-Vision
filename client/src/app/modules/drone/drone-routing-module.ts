@@ -3,13 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { Drone } from './drone';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: Drone,
-    data: {
-      breadcrumb: 'Drone Surveillance',
-    }
-  },
+  { path: '', component: Drone },
 ];
 
 @NgModule({

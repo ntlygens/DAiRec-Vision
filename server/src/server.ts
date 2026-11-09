@@ -1,13 +1,12 @@
 import * as dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
-import { connectToDatabase } from "./database.ts";
-import { uiRouter } from "./ui-interface.routes.ts";
-import { ssiRouter } from "./ss-interface.routes.ts";
-import { prtctRouter } from "./prtct-interface.routes.ts";
-import { srvlRouter } from "./srvl-interface.routes.ts";
-import { accsRouter } from "./accs-interface.routes.ts";
-import { droneRouter } from "./drone-interface.routes.ts";
+import {
+    connectToDatabase,
+    uiDataCollections, ssiDataCollections, prtctDataCollections,
+    srvlDataCollections, accsDataCollections, droneDataCollections,
+} from "./database.ts";
+import { createContentRouter } from "./content-router.ts";
 
 dotenv.config();
 
@@ -23,17 +22,16 @@ await connectToDatabase(MONGODB_URI)
         const app = express();
         app.use(cors());
 
-        app.use("/userInterface", uiRouter);
-        app.use("/srvcscrnInterface", ssiRouter);
-        app.use("/protectPgData", prtctRouter);
-        app.use("/surveilPgData", srvlRouter);
-        app.use("/accessPgData", accsRouter);
-        app.use("/dronePgData", droneRouter);
+        app.use("/userInterface", createContentRouter("userInterface", () => uiDataCollections.userInterface));
+        app.use("/srvcscrnInterface", createContentRouter("srvcscrnInterface", () => ssiDataCollections.srvcscrnInterface));
+        app.use("/protectPgData", createContentRouter("protectPgData", () => prtctDataCollections.prtctSrvcsInterface));
+        app.use("/surveilPgData", createContentRouter("surveilPgData", () => srvlDataCollections.srvlSrvcsInterface));
+        app.use("/accessPgData", createContentRouter("accessPgData", () => accsDataCollections.accsSrvcsInterface));
+        app.use("/dronePgData", createContentRouter("dronePgData", () => droneDataCollections.droneSrvcsInterface));
 
         app.listen(5200, () => {
             console.log("Server is running on port 5200");
         });
-        // console.log("Database connection established");
     })
     .catch((error) => {
         console.error("Failed to connect to the database.", error);

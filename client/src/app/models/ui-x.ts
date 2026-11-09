@@ -102,7 +102,6 @@ export interface DRVRouteInterface {
         state?: string;
         animation?: string;
         mobile?: any;
-        breadcrumb?: string;
     };
     children?: any;
     outlets?: any;

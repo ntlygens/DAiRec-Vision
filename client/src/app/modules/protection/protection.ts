@@ -1,8 +1,6 @@
-import { Component, OnInit, WritableSignal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 import { CardItemInterface } from '../../models/ui-x';
 import { GuiDataService } from '../../services/gui-data-service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'drv-protection',
@@ -131,43 +129,14 @@ import { Subscription } from 'rxjs';
       }
   `,
 })
-export class Protection implements OnInit {
+export class Protection {
   /** Promotional banners stay hidden until there is a real, dated offer. */
   showPromo = false;
-  private subscription: Subscription = new Subscription();
 
-  data2bDsplyd$: string | null = null;
+  constructor(private uis: GuiDataService) {}
 
-  protectSrvcsData$ = {} as WritableSignal<CardItemInterface[]>
-  protectPrdctsData$ = {} as WritableSignal<CardItemInterface[]>
-  
-  protectedSrvcs$: CardItemInterface[] = [];
-  protectedPrdcts$: CardItemInterface[] = [];
-
-  constructor(
-    private router: Router,
-    private uis: GuiDataService
-  ) {
-    
-  }
-
-  ngOnInit(): void {
-    this.subscription = this.uis.currentDisjointedData$.subscribe(data => {
-      data = data ? data : 'data0';
-      this.data2bDsplyd$ = data;
-
-      console.log('prtct data: ', data);
-    })
-
-    this.getAllSrvcsData();
-  }
-
-  private getAllSrvcsData() {
-    this.protectSrvcsData$ = this.uis.allProtectedSrvcsData$;
-    this.protectPrdctsData$ = this.uis.allProtectedPrdctsData$;
-    // this.protectedSrvcs$ = this.protectSrvcsData$();
-    this.protectedPrdcts$ = this.protectPrdctsData$();
-    // console.log('amt: ', this.protectedSrvcs$.length);
-    // console.log('amt: ', this.protectedPrdcts$.length);
+  /** CCTV page content, read live from the data service. */
+  get protectedPrdcts$(): CardItemInterface[] {
+    return this.uis.allProtectedPrdctsData$();
   }
 }

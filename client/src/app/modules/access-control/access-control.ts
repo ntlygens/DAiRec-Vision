@@ -1,9 +1,4 @@
-import { Component, OnInit, WritableSignal } from '@angular/core';
-import { Router } from '@angular/router';
-import { CardItemInterface } from '../../models/ui-x';
-import { GuiDataService } from '../../services/gui-data-service'; 
-import { Subscription } from 'rxjs';
-
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'drv-access-control',
@@ -120,49 +115,4 @@ import { Subscription } from 'rxjs';
       }
   `,
 })
-export class AccessControl implements OnInit {
-  private subscription: Subscription = new Subscription();
-  data2bDsplyd$: string | null = null;
-  accsSrvcData$ = {} as WritableSignal<CardItemInterface[]>;
-  accsPrdctData$ = {} as WritableSignal<CardItemInterface[]>;
-
-  accsSrvcs$: CardItemInterface[] = [];
-  accsPrdcts$: CardItemInterface[] = [];
-
-  constructor (
-    private router: Router,
-    private uis: GuiDataService,
-  ) {
-  }
-
-  ngOnInit(): void {
-    this.subscription = this.uis.currentDisjointedData$.subscribe(data => {
-      data = data ? data : 'data0';
-      this.data2bDsplyd$ = data;
-
-      console.log('accs data: ', data);
-    })
-
-    this.getAllAccsData();
-  }
-
-  private getAllAccsData() {
-    // this.accsSrvcData$ = this.uis.allAccessSrvcsData$;
-    this.accsPrdctData$ = this.uis.allAccessPrdctsData$;
-
-    // this.accsSrvcs$ = this.accsSrvcData$();
-    this.accsPrdcts$ = this.accsPrdctData$();
-  }
-
-  
-  handleJumbotronButtonClick(event: any) {
-    console.log('Jumbotron button clicked:', event);
-    // Implement your logic here, e.g., navigate to a different page or show a modal
-  }
-
-  handleJumbotronImageLoad() {
-    console.log('Jumbotron image loaded successfully.');
-    // You can perform additional actions here if needed, such as hiding a loading spinner
-  } 
-
-}
+export class AccessControl {}

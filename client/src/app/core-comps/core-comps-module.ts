@@ -7,7 +7,6 @@ import { CustomCardComponent } from './custom_card_component';
 import { HeaderBar } from './header-bar';
 import { FooterBar } from './footer-bar';
 import { JumboTronComponent } from './jumbo-tron';
-import { BreadcrumbComponent } from './breadcrumbs';
 import { HeroBanner } from './hero-banner';
 
 
@@ -17,7 +16,6 @@ import { HeroBanner } from './hero-banner';
     CustomCardComponent,
     HeaderBar,
     FooterBar,
-    BreadcrumbComponent,
   ],
   imports: [
     CommonModule,
@@ -31,7 +29,6 @@ import { HeroBanner } from './hero-banner';
     HeaderBar,
     FooterBar,
     JumboTronComponent,
-    BreadcrumbComponent,
     HeroBanner,
   ]
 })

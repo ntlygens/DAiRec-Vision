@@ -1,14 +1,9 @@
-import { Component, signal, OnInit, HostListener } from '@angular/core';
-import { BreadcrumbService } from '../services/breadcrumb.service';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs/internal/operators/filter';
+import { Component, signal, OnInit, HostListener, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { ASSESSMENT_HREF, MAIN_LINKS, SERVICE_LINKS } from './nav-links';
 import { HERO_PAGES, HeroPage } from './hero-scenes';
-
-interface Breadcrumb {
-  label: string;
-  url: string;
-}
 
 @Component({
   selector: 'drv-header-bar',
@@ -84,32 +79,12 @@ interface Breadcrumb {
       }
     </header>
 
-    @if (heroPage(); as hp) {
-      <drv-hero-banner [page]="hp" />
-    } @else {
-    <drv-jumbotron-component
-      class="jumbo-tron"
-      [data]="{
-        title: title(),
-        subtitle: subtitle(),
-        img: img(),
-        imageAlt: 'AI Vision Illustration',
-        backgroundColor: '#d1eeff',
-        imagePosition: 'background',
-        compSize: 'medium',
-        compType: 'feature',
-        overlay: true,
-      }"
-      (buttonClick)="handleJumbotronButtonClick($event)"
-      (imageLoad)="handleJumbotronImageLoad()">
-    </drv-jumbotron-component>
-    }
+    <drv-hero-banner [page]="heroPage()" />
   `,
   styles: [`
     /* contents: lets .site-nav stick relative to the whole page, not just this host */
     :host { display: contents; }
 
-    .jumbo-tron { width: 100%; }
 
     .site-nav {
       /* full-bleed: cancel .app padding */
@@ -237,39 +212,27 @@ interface Breadcrumb {
 })
 export class HeaderBar implements OnInit {
 
-  protected readonly title = signal('DAiRec-Vision Client');
-  protected readonly subtitle = signal('our gateway to AI-driven insights');
-  protected readonly img = signal('');
   protected readonly menuOpen = signal(false);
   protected readonly scrolled = signal(false);
   protected readonly servicesActive = signal(false);
-  /** Pages listed in HERO_PAGES get the animated photo banner; others keep the image jumbotron. */
-  protected readonly heroPage = signal<HeroPage | null>(HERO_PAGES['/']);
+  /** Animated banner for the current page (falls back to the landing banner). */
+  protected readonly heroPage = signal<HeroPage>(HERO_PAGES['/']);
 
   protected readonly mainLinks = MAIN_LINKS;
   protected readonly serviceLinks = SERVICE_LINKS;
   protected readonly assessmentHref = ASSESSMENT_HREF;
 
-  protected brdCrumb: Breadcrumb[] = [];
-  protected brdCrumbLabel: string = '';
-
-  constructor(
-    private bCrumbSrvc: BreadcrumbService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-  ) {}
+  private readonly router = inject(Router);
+  private readonly destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
     this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
+      .pipe(filter(event => event instanceof NavigationEnd), takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
         this.closeMenu();
-        this.brdCrumb = this.bCrumbSrvc.createBreadcrumbs(this.activatedRoute.root);
-        this.brdCrumbLabel = this.brdCrumb[0]?.url || '';
-        this.servicesActive.set(SERVICE_LINKS.some(s => this.router.url.startsWith(s.route!)));
-        const path = this.router.url.split(/[?#]/)[0];
-        this.heroPage.set(HERO_PAGES[path || '/'] ?? null);
-        this.setPgBnrImg(path === '/surveil/monitor' ? path : this.brdCrumbLabel);
+        const path = this.router.url.split(/[?#]/)[0] || '/';
+        this.servicesActive.set(SERVICE_LINKS.some(s => path.startsWith(s.route!)));
+        this.heroPage.set(HERO_PAGES[path] ?? HERO_PAGES['/']);
       });
   }
 
@@ -281,60 +244,5 @@ export class HeaderBar implements OnInit {
   @HostListener('document:keydown.escape')
   closeMenu() {
     this.menuOpen.set(false);
-  }
-
-  setPgBnrImg(uri: string): void {
-    switch (uri) {
-      case '':
-        this.img.set('/assets/backgrounds/landing-Bnr.webp');
-        this.title.set('DAiRec-Vision Security');
-        this.subtitle.set('Your gateway to AI-driven insights!');
-        break;
-      case '/home':
-        this.img.set('/assets/backgrounds/home-Bnr.webp');
-        this.title.set('Protect What Matters Most');
-        this.subtitle.set('Advanced Security Solutions for Your Home & Business');
-        break;
-      case '/protect':
-        this.img.set('/assets/backgrounds/install-Bnr.webp');
-        this.title.set('CCTV & IP Camera Service');
-        this.subtitle.set('See Everything. Miss Nothing. Protect What Matters.');
-        break;
-      case '/surveil':
-        this.img.set('/assets/backgrounds/surveil-Bnr.webp');
-        this.title.set('Video Surveillance & Remote Monitoring');
-        this.subtitle.set('Never Be In The Dark. Always Be In Control.');
-        break;
-      case '/access':
-        this.img.set('/assets/backgrounds/access-Bnr.webp');
-        this.title.set('Access Control Systems');
-        this.subtitle.set('Control Who Enters. Track Who Leaves. Secure Every Access Point.');
-        break;
-      case '/surveil/monitor':
-        this.img.set('/assets/backgrounds/surveil-Bnr.webp');
-        this.title.set('Remote Monitoring');
-        this.subtitle.set('Your Property, Live. Anytime, Anywhere.');
-        break;
-      case '/drone':
-        this.img.set('/assets/backgrounds/surveil-Bnr.webp');
-        this.title.set('Automated Drone Surveillance');
-        this.subtitle.set('Eyes in the Sky. On Patrol Before You Ask.');
-        break;
-      case '/plans':
-        this.img.set('/assets/backgrounds/home-Bnr.webp');
-        this.title.set('Plans & Pricing');
-        this.subtitle.set('Security for Homes, Businesses & Enterprise Sites');
-        break;
-      default:
-        this.img.set('/assets/backgrounds/home-Bnr.webp');
-    }
-  }
-
-  handleJumbotronButtonClick(event: any) {
-    console.log('Jumbotron button clicked:', event);
-  }
-
-  handleJumbotronImageLoad() {
-    console.log('Jumbotron image loaded successfully.');
   }
 }
