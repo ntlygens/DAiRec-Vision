@@ -44,7 +44,7 @@ const CHANGES = [
   { db: 'drvdata', coll: 'protectPgData', id: '69c51e7f291ae0b3c3d8489b', label: 'CCTV article: eyes that never blink',
     set: { title: 'Your property deserves eyes that never blink.', subtitle: 'Complete visibility, day or night',
            name: 'Complete visibility', desc: 'Professionally installed CCTV and IP camera systems',
-           content: 'DaiRec Vision Security transforms blind spots into complete visibility with professionally installed CCTV and IP camera systems. We map every entrance, driveway and loading area, choose the right lens and night vision for each view, and connect it all to one app, so you get clear, usable footage day or night.' } },
+           content: 'DaiRec Vision Security transforms blind spots into complete visibility with professionally installed CCTV and IP camera systems. We map every entrance, driveway and loading area, choose the right lens and night vision for each view, and connect it all to one app, so you get clear, usable footage day or night.\n\nEvery system is sized to your property and budget, from a three-camera home setup to multi-building sites, with 4K resolution, smart motion alerts and secure on-site plus cloud recording. Because your equipment is leased and maintained by us, firmware updates, repairs and upgrades are handled for you, with no surprise bills.' } },
   { db: 'drvdata', coll: 'protectPgData', id: '69c51fa2291ae0b3c3d8489c', label: 'CCTV article: (was "title / content here")',
     set: { title: 'Installed Right the First Time', subtitle: 'Certified design and installation',
            name: 'Professional installation', desc: 'Certified camera installation', img: '',
