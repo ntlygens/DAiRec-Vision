@@ -21,6 +21,8 @@ export class GuiDataService {
   readonly allProtectedPrdctsData$ = signal<CardItemInterface[]>([]);
   /** Surveillance page content (drvdata.surveilPgData) */
   readonly allSurveilPrdctsData$ = signal<CardItemInterface[]>([]);
+  /** Access Control page content (drvdata.accessPgData); the page falls back to bundled content if empty */
+  readonly allAccessPrdctsData$ = signal<CardItemInterface[]>([]);
   /** Drone page content (drvdata.dronePgData); the page falls back to bundled content if empty */
   readonly allDronePrdctsData$ = signal<CardItemInterface[]>([]);
 
@@ -29,6 +31,7 @@ export class GuiDataService {
     this.load('srvcscrnInterface', this.allSrvcScrnData$);
     this.load('protectPgData', this.allProtectedPrdctsData$);
     this.load('surveilPgData', this.allSurveilPrdctsData$);
+    this.load('accessPgData', this.allAccessPrdctsData$);
     this.load('dronePgData', this.allDronePrdctsData$);
   }
 

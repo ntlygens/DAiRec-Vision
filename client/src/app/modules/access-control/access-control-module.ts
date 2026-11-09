@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { AccessControlRoutingModule } from './access-control-routing-module';
 import { AccessControl } from './access-control';
+import { NgMatModule } from '../../ng-mat/ng-mat.module';
+import { CoreCompsModule } from '../../core-comps/core-comps-module';
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { AccessControl } from './access-control';
   ],
   imports: [
     CommonModule,
-    AccessControlRoutingModule
+    AccessControlRoutingModule,
+    NgMatModule,
+    CoreCompsModule,
   ]
 })
 export class AccessControlModule { }
