@@ -1,5 +1,6 @@
 /**
- * Page copy for database-driven content (CCTV, Surveillance and Home pages).
+ * Page copy for database-driven content (CCTV, Surveillance, Home and Landing pages).
+ * Home/Landing service panels: wide card ~103 words, narrow card ~55 words, balanced for 1100-1920px screens.
  * Replaces template placeholders ("title here", "content here", "name here"), broken image paths
  * ("image here", "http://assets/...") and leftover test values with finished copy.
  *
@@ -85,9 +86,20 @@ const CHANGES = [
 
   // ===== Home service records (ODM.srvcscrnInterface): descriptions show when a service button is clicked =====
   { db: 'ODM', coll: 'srvcscrnInterface', id: '69105a4f29eadf85965e8a33', label: 'Home service: CCTV',
-    set: { name: 'CCTV & IP Cameras', desc: '4K CCTV and IP camera systems, professionally designed and installed.' }, unset: ['buttons'] },
+    set: { name: 'CCTV & IP Cameras', desc: '4K CCTV and IP camera systems, professionally designed and installed.',
+           subtitle: 'Professionally designed CCTV and IP camera systems',
+           content: 'Your property deserves security that never takes a moment off. Our 4K CCTV and IP camera systems eliminate blind spots with crystal-clear coverage, day or night, for homes, businesses and commercial facilities.' +
+             '\n\n' +
+             'Watch live from your phone, tablet or computer, get instant alerts the moment something moves, and count on smart analytics, night vision and professional installation that grows with you.' +
+             '\n\n' +
+             'Every system starts with a free on-site assessment. We map entrances, driveways and blind spots, recommend the right camera for each view, and deliver a written plan and quote within 3–5 business days, with leased equipment we maintain and update for you.' },
+    unset: ['buttons'] },
   { db: 'ODM', coll: 'srvcscrnInterface', id: '69107d9c1e38b009915e8a33', label: 'Home service: Surveillance',
-    set: { name: 'Video Surveillance', desc: 'Live video, smart alerts and optional 24/7 professional monitoring.' } },
+    set: { name: 'Video Surveillance', desc: 'Live video, smart alerts and optional 24/7 professional monitoring.',
+           subtitle: '24/7 remote monitoring with cloud storage and real-time alerts to keep you connected.',
+           content: 'See every camera live from your phone, tablet or computer, with encrypted cloud recording and instant alerts for motion or perimeter breaches.' +
+             '\n\n' +
+             'AI analytics tell people, vehicles and animals apart to cut false alarms, and optional 24/7 professional monitoring verifies threats and dispatches help. Start with the app and upgrade to professional monitoring anytime.' } },
   { db: 'ODM', coll: 'srvcscrnInterface', id: '69107dbb1e38b009915e8a34', label: 'Home service: Access Control',
     set: { name: 'Access Control', desc: 'Keycards, mobile credentials and biometrics with a real-time audit trail.' } },
   { db: 'ODM', coll: 'srvcscrnInterface', id: '69107ddf1e38b009915e8a35', label: 'Home service 4: (was untitled placeholder)',
