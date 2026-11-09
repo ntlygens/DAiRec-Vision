@@ -27,7 +27,7 @@ import {
 
     <div class="plan-grid">
       @for (plan of visiblePlans(); track plan.id) {
-        <mat-card class="plan-card" [class.featured]="!!plan.badge">
+        <mat-card class="plan-card" [class.featured]="!!plan.badge" [class.pulse]="highlighted() === plan.id">
           @if (plan.badge) {
             <span class="plan-badge">{{ plan.badge }}</span>
           }
@@ -40,6 +40,9 @@ import {
               <li><mat-icon>check_circle</mat-icon>{{ f }}</li>
             }
           </ul>
+          @if (plan.nudge) {
+            <button type="button" class="plan-nudge" (click)="setAudience('private'); highlight('home-pro')">{{ plan.nudge }}</button>
+          }
           @if (plan.badge) {
             <a mat-flat-button [href]="mailtoFor(plan)">{{ plan.cta }}</a>
           } @else {
@@ -50,8 +53,10 @@ import {
     </div>
     <p class="plan-note">
       Prices shown are starting prices. Final pricing depends on property size, equipment, and site survey.
+      Starter installation (3 cameras): $349 wireless / $499 wired with a 24-month Home Pro plan,
+      or $599 / $1,149 month-to-month.
       All equipment is leased, maintained and updated by DaiRec Vision as part of your plan.
-      Financing available with a plan (excludes drone programs). Prices exclude applicable sales tax.
+      Installation financing available with a plan (excludes drone programs). Prices exclude applicable sales tax.
     </p>
     <p class="referral-note">
       <mat-icon>favorite_border</mat-icon>
@@ -178,6 +183,13 @@ import {
       }
       a { width: 100%; }
     }
+    .plan-nudge {
+      margin: -1rem 0 1.25rem; padding: 0; border: none; background: none; cursor: pointer;
+      text-align: left; font: inherit; font-size: 0.85rem; font-style: italic; color: #8a94a3;
+    }
+    .plan-nudge:hover { color: #2c3e50; text-decoration: underline; }
+    .plan-card.pulse { animation: planPulse 1.6s ease-out; }
+    @keyframes planPulse { 0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, .55); } 100% { box-shadow: 0 0 0 18px rgba(46, 204, 113, 0); } }
     .plan-badge {
       position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
       background: #2ecc71; color: #fff; font-size: 0.8rem; font-weight: 700;
@@ -243,6 +255,7 @@ import {
 })
 export class Plans implements OnInit {
   protected readonly audience = signal<PlanAudience>('private');
+  protected readonly highlighted = signal<string | null>(null);
   protected readonly visiblePlans = computed(() =>
     PLAN_TIERS.filter(p => p.audience === this.audience()),
   );
@@ -270,6 +283,12 @@ export class Plans implements OnInit {
 
   setAudience(value: PlanAudience) {
     this.audience.set(value);
+  }
+
+  /** Briefly draw attention to a plan card (used by the Essentials upsell line). */
+  highlight(id: string) {
+    this.highlighted.set(id);
+    setTimeout(() => this.highlighted.set(null), 1600);
   }
 
   mailtoFor(plan: PlanTier): string {

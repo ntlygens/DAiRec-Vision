@@ -16,6 +16,8 @@ export interface PlanTier {
   features: string[];
   cta: string;
   badge?: string;
+  /** Optional low-key upsell line shown under the feature list. */
+  nudge?: string;
 }
 
 export interface PlanAddOn {
@@ -34,26 +36,28 @@ export const PLAN_TIERS: PlanTier[] = [
   {
     id: 'home-essentials', audience: 'private', name: 'Home Essentials',
     forWho: 'Apartments, condos & smaller homes',
-    price: '$24', per: '/mo', install: '+ installation from $499',
+    price: '$24', per: '/mo', install: '+ installation from $599 (month-to-month)',
     features: [
       '3 HD IP cameras included',
-      'Self-monitored: live view & alerts in the app',
+      'Self-monitored: you watch and respond to alerts in the app',
       'Motion alerts with person detection',
-      '7 days of cloud video storage',
+      '7 days of on-site recording; cloud backup +$5.40/camera',
       'Annual system health check',
     ],
+    nudge: 'Want us watching 24/7? Home Pro adds professional monitoring and $349 starter installation.',
     cta: 'Choose Home Essentials',
   },
   {
     id: 'home-pro', audience: 'private', name: 'Home Pro', badge: 'Most popular',
     forWho: 'Family homes that want full coverage',
-    price: '$49', per: '/mo', install: '+ installation from $1,199',
+    price: '$49', per: '/mo', install: '+ starter installation from $349 with a 24-month plan',
     features: [
       'Up to 8 4K cameras with night vision',
       'Smart lock & video doorbell access',
       'AI alerts for people, vehicles & packages',
-      '30 days of cloud video storage',
+      '30 days of on-site recording + cloud backup for 2 key cameras',
       '24/7 professional monitoring & dispatch',
+      'Price locked for 24 months on the starter offer',
     ],
     cta: 'Choose Home Pro',
   },
@@ -65,7 +69,7 @@ export const PLAN_TIERS: PlanTier[] = [
       'Up to 16 4K & long-range cameras',
       'Gate, door & biometric access control',
       'Drone patrol add-on available (by quote)',
-      '60 days of cloud video storage',
+      '60 days of on-site recording + cloud backup for 4 key cameras',
       '24/7 monitoring with priority response',
     ],
     cta: 'Choose Estate Guardian',
@@ -79,7 +83,7 @@ export const PLAN_TIERS: PlanTier[] = [
       'Includes 8 cameras with AI analytics + 2 access-controlled doors',
       '+$15/mo per extra camera · +$20/mo per extra door',
       'Employee & visitor access logs',
-      '30 days of cloud video storage',
+      '30 days of on-site recording + cloud backup for 2 key cameras',
       '24/7 monitoring & next-day service',
     ],
     cta: 'Choose Business Shield',
@@ -92,7 +96,7 @@ export const PLAN_TIERS: PlanTier[] = [
       'Volume pricing at 3+ sites; devices priced per unit',
       'One dashboard for every location',
       'Biometric, elevator & gate control',
-      '90-day storage with redundant backup',
+      '90 days of on-site recording with redundant cloud backup',
       'Dedicated account manager & 4-hour SLA',
     ],
     cta: 'Talk to Sales',
@@ -114,7 +118,7 @@ export const PLAN_TIERS: PlanTier[] = [
 
 export const PLAN_ADDONS: PlanAddOn[] = [
   { name: 'Extra camera (home plans)', detail: 'Additional IP camera: $50 camera + $25 installation, configured to your plan', price: '$75 one-time' },
-  { name: 'Extended storage', detail: 'Increase cloud retention by 30 days', price: '$10/mo' },
+  { name: 'Cloud backup', detail: 'Off-site cloud recording per camera: 7 / 14 / 30 days', price: '$5.40 / $9 / $13.50 per camera/mo' },
   { name: 'Extra access point', detail: 'Additional door, gate, or elevator reader', price: '$20/mo' },
   { name: 'On-demand drone patrol', detail: 'Scheduled patrol flights for events or short-term needs', price: 'By quote' },
 ];
