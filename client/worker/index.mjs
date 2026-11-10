@@ -107,7 +107,9 @@ export default {
 
     // Serve a cached copy of the rendered page when there is one.
     const cache = caches.default;
-    const cacheKey = new Request(`${url.origin}${path}`, { method: 'GET' });
+    // Keyed by deployment, so every deploy starts with fresh pages.
+    const version = env.CF_VERSION_METADATA?.id ?? 'dev';
+    const cacheKey = new Request(`${url.origin}${path}?__v=${version}`, { method: 'GET' });
     const cached = await cache.match(cacheKey);
     if (cached) return cached;
 
