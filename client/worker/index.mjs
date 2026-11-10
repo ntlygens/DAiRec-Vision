@@ -75,9 +75,13 @@ const SECURITY_HEADERS = {
   'permissions-policy': 'camera=(), microphone=(), geolocation=()',
 };
 
+let isPreviewHost = false;
+
 function withSecurityHeaders(response) {
   const out = new Response(response.body, response);
   for (const [k, v] of Object.entries(SECURITY_HEADERS)) out.headers.set(k, v);
+  // Keep the staging preview (workers.dev) out of search engines.
+  if (isPreviewHost) out.headers.set('x-robots-tag', 'noindex, nofollow');
   return out;
 }
 
@@ -86,6 +90,7 @@ export default {
     apiEnv = env;
     const url = new URL(request.url);
     siteHosts.add(url.host);
+    isPreviewHost = url.hostname.endsWith('.workers.dev');
 
     // One canonical host: www.dairecvision.com -> dairecvision.com
     if (url.hostname.startsWith('www.')) {

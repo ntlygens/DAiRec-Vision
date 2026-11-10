@@ -8,11 +8,12 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "preview": "ng build && wrangler dev",
-    "deploy": "ng build && wrangler deploy",
+    "deploy": "node ../scripts/require-branch.mjs main && ng build && wrangler deploy",
     "content:seed": "node ../scripts/content-to-sql.mjs && wrangler d1 execute dairec-content --remote --file=d1/seed.sql",
     "content:seed:local": "node ../scripts/content-to-sql.mjs && wrangler d1 execute dairec-content --local --file=d1/seed.sql",
     "db:schema": "wrangler d1 execute dairec-content --remote --file=d1/schema.sql",
-    "db:schema:local": "wrangler d1 execute dairec-content --local --file=d1/schema.sql"
+    "db:schema:local": "wrangler d1 execute dairec-content --local --file=d1/schema.sql",
+    "deploy:staging": "node ../scripts/require-branch.mjs staging && ng build && wrangler deploy --env staging"
   },
   "prettier": {
     "printWidth": 100,

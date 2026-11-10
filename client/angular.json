@@ -67,7 +67,7 @@
               "experimentalPlatform": "neutral"
             },
             "security": {
-              "allowedHosts": ["dairecvision.com", "www.dairecvision.com", "localhost", "127.0.0.1"]
+              "allowedHosts": ["dairecvision.com", "www.dairecvision.com", "dairec-vision-staging.ntlygens.workers.dev", "localhost", "127.0.0.1"]
             }
           },
           "configurations": {

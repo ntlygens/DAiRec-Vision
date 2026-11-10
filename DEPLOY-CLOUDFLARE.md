@@ -52,6 +52,16 @@ All commands run on your Mac. Commands marked *(client)* run in `client/`.
    ```
    Wrangler attaches dairecvision.com and www.dairecvision.com (www redirects to the bare domain).
 
+## Environments
+
+| Branch | Environment | Command *(client)* | Address |
+|---|---|---|---|
+| `main` | Production | `npm run deploy` | https://dairecvision.com |
+| `staging` | Preview | `npm run deploy:staging` | https://dairec-vision-staging.ntlygens.workers.dev |
+
+Each command refuses to run from the wrong branch. Work on `staging`, preview it, then merge into `main`
+and deploy production from `main`. Both environments read the same content database.
+
 ## Everyday use
 
 - **Change page content:** edit `content/content.json`, then `npm run content:seed` *(client)*. No redeploy needed; pages are cached for up to an hour, so run `npm run deploy` too if you need the change live immediately.
