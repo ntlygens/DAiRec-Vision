@@ -61,6 +61,12 @@ globalThis.fetch = async (input, init) => {
   return networkFetch(input, init);
 };
 
+/** Paths the Angular app serves. Anything else redirects home without rendering (saves CPU on bot scans). */
+const PAGE_PATHS = new Set(['/', '/home', '/protect', '/surveil', '/monitor', '/access', '/drone', '/plans', '/privacy', '/terms']);
+
+/** Rendered pages are cached at Cloudflare's edge for this long (seconds). Content edits show within this window. */
+const PAGE_CACHE_SECONDS = 300;
+
 const SECURITY_HEADERS = {
   'x-content-type-options': 'nosniff',
   'referrer-policy': 'strict-origin-when-cross-origin',
@@ -75,13 +81,10 @@ function withSecurityHeaders(response) {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     apiEnv = env;
     const url = new URL(request.url);
     siteHosts.add(url.host);
-
-    const api = await handleApi(request, env);
-    if (api) return withSecurityHeaders(api);
 
     // One canonical host: www.dairecvision.com -> dairecvision.com
     if (url.hostname.startsWith('www.')) {
@@ -89,8 +92,32 @@ export default {
       return Response.redirect(url.toString(), 301);
     }
 
-    const page = await renderPage(request);
-    if (page) return withSecurityHeaders(page);
-    return new Response('Not found', { status: 404 });
+    const api = await handleApi(request, env);
+    if (api) return withSecurityHeaders(api);
+
+    // Unknown paths (including bot probes for .env, wp-admin, etc.) go home without rendering.
+    const path = url.pathname.length > 1 ? url.pathname.replace(/\/+$/, '') : '/';
+    if (!PAGE_PATHS.has(path)) {
+      return withSecurityHeaders(Response.redirect(`${url.origin}/`, 301));
+    }
+    if (request.method !== 'GET' && request.method !== 'HEAD') {
+      return new Response('Method not allowed', { status: 405, headers: { allow: 'GET, HEAD' } });
+    }
+
+    // Serve a cached copy of the rendered page when there is one.
+    const cache = caches.default;
+    const cacheKey = new Request(`${url.origin}${path}`, { method: 'GET' });
+    const cached = await cache.match(cacheKey);
+    if (cached) return cached;
+
+    const page = await renderPage(new Request(`${url.origin}${path}${url.search}`, request));
+    if (!page) return new Response('Not found', { status: 404 });
+
+    const response = withSecurityHeaders(page);
+    if (response.status === 200 && (response.headers.get('content-type') || '').includes('text/html')) {
+      response.headers.set('cache-control', `public, max-age=0, s-maxage=${PAGE_CACHE_SECONDS}`);
+      if (!url.search) ctx.waitUntil(cache.put(cacheKey, response.clone()));
+    }
+    return response;
   },
 };

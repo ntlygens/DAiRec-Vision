@@ -40,13 +40,13 @@ import { GuiDataService } from '../../services/gui-data-service';
         @if (srvc.compType?.toString() === "product") {
             <drv-custom-card 
               class="srvlSrvcs-card"
-              [id]=srvc._id
+              [id]="srvc._id"
               [clickable]="true"
               [elevated]="true"
-              [compSize]?=srvc.compSize
-              [compType]?=srvc.compType
-              [cardData]=srvc
-              ></drv-custom-card>
+              [compSize]="srvc.compSize?.toString()"
+              [compType]="srvc.compType?.toString()"
+              [cardData]="srvc">
+            </drv-custom-card>
         }
       }
     </div>
