@@ -15,7 +15,9 @@
       "binding": "DB",
       "database_name": "dairec-content",
       // Created 2026-11-09 (region: eastern North America)
-      "database_id": "b0b98394-ffc0-4a43-9386-a1a7b0e8ab0f"
+      "database_id": "b0b98394-ffc0-4a43-9386-a1a7b0e8ab0f",
+      // Local dev (wrangler dev / npm run preview) reads the real Cloudflare database, read-only API.
+      "remote": true
     }
   ],
   "routes": [
