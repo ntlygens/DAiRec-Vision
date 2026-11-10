@@ -54,7 +54,7 @@ All commands run on your Mac. Commands marked *(client)* run in `client/`.
 
 ## Everyday use
 
-- **Change page content:** edit `content/content.json`, then `npm run content:seed` *(client)*. No redeploy needed.
+- **Change page content:** edit `content/content.json`, then `npm run content:seed` *(client)*. No redeploy needed; pages are cached for up to an hour, so run `npm run deploy` too if you need the change live immediately.
 - **Change code or design:** `npm run deploy` *(client)*.
 - **Fast front-end work:** run `npx wrangler dev` (after one `npm run build`) in one terminal and `npm start` in another;
   `ng serve` forwards `/api` to the Wrangler server on port 8787.
